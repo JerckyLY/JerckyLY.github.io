@@ -69,6 +69,13 @@ time_format: HH:mm:ss
 per_page: 10
 pagination_dir: page
 
+
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+  exclude_codeblock: false
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
