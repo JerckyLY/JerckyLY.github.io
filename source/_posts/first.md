@@ -4,5 +4,6 @@ tags: 开心时刻
 categories: 生活
 ---
 
-<center>荣儿宝宝</center>
+<center>最重要的当然是荣儿宝宝啦!</center>
+
 <!--more-->
