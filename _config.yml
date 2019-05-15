@@ -79,7 +79,7 @@ symbols_count_time:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: nextnew
+theme: next
 search:
   path: search.xml
   field: post
