@@ -91,3 +91,9 @@ deploy:
   type: git
   repository: git@github.com:JerckyLY/JerckyLY.github.io.git
   branch: master
+
+# 自动生成sitemap
+sitemap: 
+  path: sitemap.xml
+baidusitemap: 
+  path: baidusitemap.xml
