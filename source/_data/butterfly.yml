@@ -96,29 +96,29 @@ katex:
 
 # Post info settings
 # ---------------
-avatar: /img/avatar.jpg
+avatar: /uploads/avatar.jpg
 
 # the banner image of index
-index_img: /img/bg.jpg
+index_img: /uploads/bg.jpg
 
 # if the banner of page not setting,it will show the top_img
-default_top_img: /img/top.jpeg
+default_top_img: /uploads/top.jpg
 
 # the default cover of the post
 default_cover:
-  - /img/cover.jpg
-  - /img/cover1.jpg
-  - /img/cover2.jpg
-  - /img/cover3.jpg
+  - /uploads/cover.jpg
+  - /uploads/cover1.jpg
+  - /uploads/cover2.jpg
+  - /uploads/cover3.jpg
 
 # the banner image of archive page
-archive_img: /img/archive.png
+archive_img: /uploads/archive.png
 
 # the banner image of tag page
-tag_img: /img/tag.png
+tag_img: /uploads/tag.png
 
 # the banner image of category page
-category_img: /img/category.png
+category_img: /uploads/category.png
 
 # 如果你有使用hexo-douban去生成movie界面，可配置這個
 movies_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/movie.jpg
@@ -293,10 +293,10 @@ reward:
   enable: true
   QR_code:
     - itemlist:
-        img: /img/wechat.jpg
+        img: /uploads/wechat.png
         text: 微信
     - itemlist:
-        img: /img/alipay.jpg
+        img: /uploads/alipay.jpg
         text: 支付宝
 
 # 推薦文章
