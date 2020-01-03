@@ -412,7 +412,7 @@ ClickShowText:
   fontSize: 15px
 
 # 頭像會一直轉圈
-avatar_effect: true
+avatar_effect: false
 
 # 網站顯示模式
 # light 默認模式
