@@ -4,7 +4,7 @@
 
 # Site
 title: Jercky
-subtitle: Giser
+subtitle: 三天打鱼两天晒网-Giser
 description:
 author: LiuYang
 language: zh-CN
@@ -79,7 +79,7 @@ symbols_count_time:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: Butterfly
 search:
   path: search.xml
   field: post
