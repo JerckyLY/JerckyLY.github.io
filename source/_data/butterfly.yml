@@ -17,7 +17,7 @@ menu:
 
 # Favicon
 # ---------------
-favicon: /img/favicon.ico
+favicon: /uploads/favicon.ico
 
 # PWA
 # See https://github.com/JLHwung/hexo-offline
