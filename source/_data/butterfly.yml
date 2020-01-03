@@ -391,7 +391,7 @@ fireworks:
 
 # 點擊出現愛心
 click_heart:
-  enable: false
+  enable: true
 
 # 點擊出現文字，文字可自行修改
 ClickShowText:
@@ -412,7 +412,7 @@ ClickShowText:
   fontSize: 15px
 
 # 頭像會一直轉圈
-avatar_effect: false
+avatar_effect: true
 
 # 網站顯示模式
 # light 默認模式
