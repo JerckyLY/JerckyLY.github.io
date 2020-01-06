@@ -99,7 +99,7 @@ katex:
 avatar: /uploads/avatar.jpg
 
 # the banner image of index
-index_img: /uploads/bg.jpg
+index_img: /uploads/backgroud.jpg
 
 # if the banner of page not setting,it will show the top_img
 default_top_img: /uploads/top.jpg
@@ -454,10 +454,10 @@ subtitle:
   # source: 3  調用一句网（簡體） http://yijuzhan.com/
   # source: 4  調用今日詩詞（簡體） https://www.jinrishici.com/
   # subtitle 會先顯示 source , 再顯示 sub 的内容
-  source: false
+  source: 4
   # (如果有英文逗號' , '，請使用轉義字符 &#44;)
-  sub:
-    - 清风明月徐徐来
+  #sub:
+    #- 清风明月徐徐来
 
 ####    側邊欄    ####
 #-------------------------------------
