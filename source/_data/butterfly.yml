@@ -112,13 +112,13 @@ default_cover:
   - /uploads/cover3.jpg
 
 # the banner image of archive page
-archive_img: /uploads/archive.png
+archive_img: /uploads/archive.jpg
 
 # the banner image of tag page
-tag_img: /uploads/tag.png
+tag_img: /uploads/tag.jpg
 
 # the banner image of category page
-category_img: /uploads/category.png
+category_img: /uploads/category.jpg
 
 # 如果你有使用hexo-douban去生成movie界面，可配置這個
 movies_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/movie.jpg
