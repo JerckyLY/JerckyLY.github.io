@@ -110,6 +110,16 @@ default_cover:
   - /uploads/cover1.jpg
   - /uploads/cover2.jpg
   - /uploads/cover3.jpg
+  - /uploads/cover4.png
+  - /uploads/cover5.png
+  - /uploads/cover6.jpg
+  - /uploads/cover7.jpg
+  - /uploads/cover8.jpg
+  - /uploads/cover12.jpg
+  - /uploads/cover13.jpg
+  - /uploads/cover14.jpg
+  - /uploads/cover15.jpg
+  - /uploads/cover16.jpg
 
 # the banner image of archive page
 archive_img: /uploads/archive.jpg
