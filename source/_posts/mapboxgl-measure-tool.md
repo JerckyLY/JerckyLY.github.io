@@ -15,7 +15,12 @@ top_img: line.png
 ## 使用
  - CDN:
    ```js
-    <script src="https://cdn.jsdelivr.net/npm/mapboxgl-measure-tool@1.0.2/dist/mapMeasureTool.js"></script>
+    <!--依赖-->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js"></script>
+    <script src="https://cdn.bootcss.com/Turf.js/5.1.6/turf.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
+    <!--引用-->
+    <script src="https://cdn.jsdelivr.net/npm/mapboxgl-measure-tool@1.0.6/dist/index.js"></script>
    ```
     ``` js
     <script>
@@ -25,7 +30,7 @@ top_img: line.png
             style: 'mapbox://styles/mapbox/streets-v9'
         });
           // 为了使测量图层位于最高层，在添加其他业务图层之后，再引用控件
-        map.addControl(new mapMeasureTool(), 'top-right')
+        map.addControl(new MapMeasureTool(), 'top-right')
     </script>
    ```
    
@@ -41,7 +46,7 @@ top_img: line.png
           style: 'mapbox://styles/mapbox/streets-v9'
       });
       // 为了使测量图层位于最高层，在添加其他业务图层之后，再引用控件
-      map.addControl(new mapMeasureTool(), 'top-right')
+      map.addControl(new MapMeasureTool(), 'top-right')
 
     ```
     
