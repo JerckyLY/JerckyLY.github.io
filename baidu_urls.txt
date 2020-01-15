@@ -1,8 +1,1 @@
-https://jercky.top/2020/01/08/mapboxgl-print-tool/
-https://jercky.top/2020/01/07/mapboxgl-measure-tool/
-https://jercky.top/2019/09/10/mapbox-plot/
-https://jercky.top/2019/08/08/life-emotion/
-https://jercky.top/2019/07/15/postgisVectorTile/
-https://jercky.top/2019/06/01/mapdownload/
-https://jercky.top/2019/05/12/totms/
-https://jercky.top/2019/05/12/first/
+https://jercky.top/2020/01/10/mapboxgl-tool-summary/
