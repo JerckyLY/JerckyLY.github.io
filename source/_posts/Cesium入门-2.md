@@ -1,5 +1,5 @@
 ---
-title: Cesium入门-2--绘制图片文字标注
+title: Cesium系列(2)--绘制图片文字标注
 date: 2020-07-21 17:53:50
 tags: 
  - cesium 
