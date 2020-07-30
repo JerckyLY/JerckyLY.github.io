@@ -207,7 +207,7 @@ disqusjs:
   count: false # top_img顯示評論數
 
 laibili:
-  enable: true
+  enable: false
   uid: MTAyMC80NDIxNS8yMDc0OA==
 
 gitalk:
@@ -222,18 +222,18 @@ gitalk:
 
 # valine comment system. https://valine.js.org
 valine:
-  enable: false # if you want use valine,please set this value is true
-  appId: # leancloud application app id
-  appKey: # leancloud application app key
+  enable: true # if you want use valine,please set this value is true
+  appId: 0mytNM2PQPmXqDJmv75miM5w-gzGzoHsz # leancloud application app id
+  appKey: 0OuJIzhIDFOe1qlAQsIdJAdd  # leancloud application app key
   notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
   verify: false # valine verify code (true/false)
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
-  lang: en # i18n: zh-cn/en
-  placeholder: Please leave your footprints # valine comment input placeholder(like: Please leave your footprints )
-  guest_info: nick,mail,link #valine comment header info
+  lang: i18n # i18n: zh-cn/en
+  placeholder: 留下您的足迹！ # valine comment input placeholder(like: Please leave your footprints )
+  guest_info: 昵称,邮箱,网站 #valine comment header info
   bg: /img/comment_bg.png # valine background
-  count: false # top_img顯示評論數
+  count: true # top_img顯示評論數
 
 #####     Footer Settings    ####
 # ------------------------------------
@@ -623,7 +623,8 @@ CDN:
   blueimp_md5: https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js
   gitalk: https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js
   gitalk_css: https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css
-  valine: https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js
+  valine: https://unpkg.com/valine@1.4.14/dist/Valine.min.js
+  valine_av: https://unpkg.com/leancloud-storage@4.6.1/dist/av-min.js
 
   # share
   addtoany: https://static.addtoany.com/menu/page.js
