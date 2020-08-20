@@ -156,4 +156,6 @@ top_img: view1.png
 ## 后续
   > 后面会写项目中遇到的各种问题，再之后就开始写源码关于Cesium3DTiles调度的一点点研究成果  
 
+## 音乐小憩
+{% aplayer "我曾" "隔壁老樊" "//freetyst.nf.migu.cn/public/productBe/productB01/2019/08/0717/2019%E5%B9%B403%E6%9C%8801%E6%97%A516%E7%82%B937%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103405.mp3?key=f5f6bf49ae541152&Tim=1597915519527&channelid=00&msisdn=7189f4cfa3ba4332ab8ddd058a1fb038&CI=632541034052600913000002629846&F=000009" "https://cdnmusic.migu.cn/picture/2020/0801/0249/ASf1b833147de26840e610c45b96643885.jpg"  %}
     
