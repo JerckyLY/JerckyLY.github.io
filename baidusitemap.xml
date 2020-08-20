@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jercky.top/2020/07/21/Cesium%E5%85%A5%E9%97%A8-2/</loc>
-    <lastmod>2020-07-22</lastmod>
-  </url>  <url>
-    <loc>https://jercky.top/2020/07/01/Cesium%E5%85%A5%E9%97%A8-1/</loc>
-    <lastmod>2020-07-01</lastmod>
-  </url>  <url>
-    <loc>https://jercky.top/2020/01/08/mapboxgl-print-tool/</loc>
-    <lastmod>2020-07-01</lastmod>
-  </url>  <url>
-    <loc>https://jercky.top/2020/01/10/mapboxgl-tool-summary/</loc>
-    <lastmod>2020-01-15</lastmod>
-  </url>  <url>
-    <loc>https://jercky.top/2020/01/07/mapboxgl-measure-tool/</loc>
-    <lastmod>2020-01-10</lastmod>
-  </url>  <url>
-    <loc>https://jercky.top/2019/08/08/life-emotion/</loc>
-    <lastmod>2020-01-03</lastmod>
-  </url>  <url>
     <loc>https://jercky.top/2019/05/12/first/</loc>
-    <lastmod>2019-09-11</lastmod>
-  </url>  <url>
-    <loc>https://jercky.top/2019/09/10/mapbox-plot/</loc>
-    <lastmod>2019-09-10</lastmod>
-  </url>  <url>
-    <loc>https://jercky.top/2019/05/12/totms/</loc>
-    <lastmod>2019-07-24</lastmod>
+    <lastmod>2020-08-20</lastmod>
   </url>  <url>
     <loc>https://jercky.top/2019/07/15/postgisVectorTile/</loc>
-    <lastmod>2019-07-24</lastmod>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2019/05/12/totms/</loc>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2019/08/08/life-emotion/</loc>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2019/09/10/mapbox-plot/</loc>
+    <lastmod>2020-08-20</lastmod>
   </url>  <url>
     <loc>https://jercky.top/2019/06/01/mapdownload/</loc>
-    <lastmod>2019-07-24</lastmod>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2020/01/10/mapboxgl-tool-summary/</loc>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2020/01/08/mapboxgl-print-tool/</loc>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2020/01/07/mapboxgl-measure-tool/</loc>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/</loc>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2020/07/01/Cesium%E5%85%A5%E9%97%A8-1/</loc>
+    <lastmod>2020-08-20</lastmod>
+  </url>  <url>
+    <loc>https://jercky.top/2020/07/21/Cesium%E5%85%A5%E9%97%A8-2/</loc>
+    <lastmod>2020-08-20</lastmod>
   </url>
 </urlset>
