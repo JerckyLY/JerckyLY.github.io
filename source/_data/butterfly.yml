@@ -9,6 +9,7 @@ menu:
   时间轴: /archives/ || fa fa-archive
   标签: /tags/ || fa fa-tags
   分类: /categories/ || fa fa-folder-open
+  音乐: /music/ || fa fa-music
   #链接: /link/ || fa fa-link
   #关于: /about/ || fa fa-heart
   #列表||fa fa-list:
