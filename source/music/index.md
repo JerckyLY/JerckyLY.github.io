@@ -27,13 +27,13 @@ date: 2019-05-09 21:09:45
             {
                  "title": "等我先说",
                  "author": "夏天Alex",
-                 "url": "https://webfs.yun.kugou.com/202008201609/e2a6d8dfa837fed6b996fd9a4ac7696d/G200/M08/07/03/aIcBAF5uQoOAH9waADMPywD01TM990.mp3",
+                 "url": "//freetyst.nf.migu.cn/public/productBe/productB01/2019/08/0715/2013%E5%B9%B405%E6%9C%8814%E6%97%A5%E7%BE%8E%E5%8A%9B%E6%98%9F%E7%A9%BA%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A51%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60066801295.mp3?key=1d5649e633106758&Tim=1603352822023&channelid=00&msisdn=6adb56a5e32741a08e14c0776ca4bf9f&CI=600668012952600902000007984502&F=000009",
                  "pic": "https://p3fx.kgimg.com/stdmusic/20160907/20160907201949745191.jpg"
             },
             {
                   "title": "故梦",
                   "author": "双笙",
-                  "url": "https://webfs.yun.kugou.com/202008201944/de0f9bf4d6889727f0dc32bfe1364105/G034/M03/16/01/ApQEAFXkC-eATpXFAEVg1rztXQw354.mp3",
+                  "url": "https://win-web-rh01-sycdn.kuwo.cn/dcc504dfae02947d234a95bc6df89027/5f912aa1/resource/n2/38/3/590475682.mp3",
                   "pic": "https://p3fx.kgimg.com/stdmusic/20161031/20161031031155638803.jpg"
             },
             {
