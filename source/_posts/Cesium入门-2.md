@@ -75,7 +75,7 @@ top_img: 3.png
            canvas.style.width = width + 'px';
            canvas.style.height = height + 'px';
        
-           //然后将画布缩放，将图像放大ratio倍画到画布上 目的 是图片文字更加清晰
+           //然后将画布缩放，将图像放大ratio倍画到画布上 目的 使图片文字更加清晰
            ctx.scale(ratio, ratio);
            var image = new Image();
            image.src = img;
