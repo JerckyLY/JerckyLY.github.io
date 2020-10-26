@@ -1,925 +1,810 @@
+
+/**
+  * 當menu過多時，自動適配，避免UI錯亂
+  * @param {*} n
+  * 傳入 1 sidebar打開時
+  * 傳入 2 正常狀態下
+  */
+
 $(function () {
-  const isSnackbar = GLOBAL_CONFIG.Snackbar !== undefined
-  const isTocContent = $('#sidebar .sidebar-toc__content').children().length > 0
-  /**
-   * 當menu過多時，自動適配，避免UI錯亂
-   */
-  const searchWidth = $('#search_button').outerWidth() !== undefined ? $('#search_button').outerWidth() : 0
-  const blogNameWidth = $('#blog_name').width()
+  const blogNameWidth = $('#site-name').width()
+  const menusWidth = $('#menus').width()
+  const sidebarWidth = $('#sidebar').width() || 300
 
-  var mw = 0
-  for (var i = 0; i < $('#page-header .menus_item').length; i++) {
-    mw = mw + $('#page-header .menus_item').eq(i).outerWidth()
-  }
-
-  /**
-   * 傳入 1 sidebar打開時
-   * 傳入 2 正常狀態下
-   * 傳入 3 resize時使用
-   */
-  function isAdjust (n) {
-    var t
-    if (n === 1) {
-      t = blogNameWidth + searchWidth + mw > $('#page-header').width() - 300
-    } else if (n === 2) {
-      t = blogNameWidth + searchWidth + mw > $('#page-header').width()
-    }
+  const adjustMenu = function (n) {
+    const $nav = $('#nav')
+    let t
+    if (n === 0) t = true
+    else if (n === 1) t = blogNameWidth + menusWidth > $nav.width() - sidebarWidth - 30
+    else t = blogNameWidth + menusWidth > $nav.width() - 30
 
     if (t) {
-      headerAdjust()
+      $nav.addClass('hide-menu')
     } else {
-      headerAdjustBack()
+      $nav.removeClass('hide-menu')
     }
   }
 
   // 初始化header
-  isAdjust(2)
-  $('#page-header').css({ opacity: '1', animation: 'headerNoOpacity 1s' })
-
-  function headerAdjust () {
-    $('#page-header .toggle-menu').addClass('is_visible')
-    $('#page-header .menus,.search span').addClass('is_invisible')
-  }
-
-  function headerAdjustBack () {
-    $('#page-header .toggle-menu').removeClass('is_visible')
-    $('#page-header .menus,.search span').removeClass('is_invisible')
-  }
-
-  $(window).bind('resize', function () {
-    if (window.innerWidth > 768) {
-      isAdjust(2)
-    } else {
-      headerAdjust()
-    }
-  })
-
-  /**
-   * pc時 設置主頁top_img 為 fixed
-   */
-  if (GLOBAL_CONFIG.isHome) {
-    if (/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {} else {
-      $('.full_page').css('background-attachment', 'fixed')
-    }
+  const initAdjust = () => {
+    if (window.innerWidth < 768) adjustMenu(0)
+    else adjustMenu(2)
+    $('#nav').addClass('show')
   }
 
   /**
-   * 進入post頁sidebar處理
-   */
-  if (GLOBAL_CONFIG.isPost) {
-    // sidebar 自動打開
-    if ($('#sidebar').hasClass('auto_open') && isTocContent) {
-      $('#toggle-sidebar').addClass('on')
+ * 進入post頁sidebar處理
+ */
+  const OpenSidebarAuto = () => {
+    if (window.innerWidth > 1024 && $('#toggle-sidebar').hasClass('on')) {
       setTimeout(function () {
-        $('#toggle-sidebar').addClass('on')
         openSidebar()
       }, 400)
-      isAdjust(1)
-    }
-
-    // pc隱藏
-    if (isTocContent) {
-      $('#toggle-sidebar').css('opacity', '1')
-    } else {
-      $('#sidebar,#toggle-sidebar').css('display', 'none')
-    }
-    // mobile隱藏
-    if ($('#mobile-sidebar-toc .sidebar-toc__content').children().length === 0) {
-      $('#mobile-sidebar-toc,#mobile-toc-button').css('display', 'none')
     }
   }
 
   /**
-   * 點擊左下角箭頭,顯示sidebar
-   */
+ * 點擊左下角箭頭,顯示sidebar
+ */
 
-  function closeSidebar () {
-    $('#page-header').removeClass('open-sidebar')
-    $('body').animate({
+  const closeSidebar = () => {
+    $('#sidebar').removeClass('tocOpenPc').animate({
+      left: '-300px'
+    }, 400)
+    $('#menus').animate({
+      paddingRight: 0
+    }, 400)
+    $('#body-wrap').animate({
       paddingLeft: 0
     }, 400)
-    $('#sidebar').css('transform', 'translateX(0px)')
-    $('#toggle-sidebar').css({
-      transform: 'rotateZ(0deg)',
-      color: '#1F2D3D',
-      opacity: '1'
-    })
+    if ($('#nav').hasClass('hide-menu')) {
+      setTimeout(function () {
+        adjustMenu(2)
+      }, 400)
+    }
   }
 
-  function openSidebar () {
-    $('#page-header').addClass('open-sidebar')
-    $('body').animate({
+  const openSidebar = () => {
+    if (!$('#nav').hasClass('hide-menu')) {
+      adjustMenu(1)
+    }
+    $('#sidebar').addClass('tocOpenPc').animate({
+      left: 0
+    }, 400)
+    $('#menus').animate({
+      paddingRight: 300
+    }, 400)
+    $('#body-wrap').animate({
       paddingLeft: 300
     }, 400)
-    $('#sidebar').css('transform', 'translateX(300px)')
-    $('#toggle-sidebar').css({
-      transform: 'rotateZ(180deg)',
-      color: '#99a9bf',
-      opacity: '1'
-    })
   }
 
-  $('#toggle-sidebar').on('click', function () {
-    if (!isMobile() && $('#sidebar').is(':visible')) {
-      var isOpen = $(this).hasClass('on')
+  const toggleSidebar = function () {
+    $('#toggle-sidebar').on('click', function () {
+      const isOpen = $(this).hasClass('on')
       isOpen ? $(this).removeClass('on') : $(this).addClass('on')
       if (isOpen) {
         closeSidebar()
-        setTimeout(function () {
-          isAdjust(2)
-        }, 500)
       } else {
-        isAdjust(1)
         openSidebar()
       }
-    }
-  })
-
-  /**
-   * 首頁top_img底下的箭頭
-   */
-  $('.scroll-down').on('click', function () {
-    scrollTo('#content-outer')
-  })
-
-  /**
-   * BOOKMARK 書簽
-   */
-  $('#bookmark-it').on('click', function () {
-    if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark
-      window.sidebar.addPanel(document.title, window.location.href, '')
-    } else if (window.external && ('AddFavorite' in window.external)) { // IE Favorite
-      window.external.AddFavorite(location.href, document.title)
-    } else if (window.opera && window.print) { // Opera Hotlist
-      this.title = document.title
-      return true
-    } else { // webkit - safari/chrome
-      if (isSnackbar) {
-        var bookmarkText = GLOBAL_CONFIG.Snackbar.bookmark.message_prev + ' ' + (navigator.userAgent.toLowerCase().indexOf('mac') !== -1 ? 'Command/Cmd' : 'CTRL') + '+ D ' + GLOBAL_CONFIG.Snackbar.bookmark.message_next + '.'
-        snackbarShow(bookmarkText)
-      } else {
-        alert(GLOBAL_CONFIG.bookmark.message_prev + ' ' + (navigator.userAgent.toLowerCase().indexOf('mac') !== -1 ? 'Command/Cmd' : 'CTRL') + '+ D ' + GLOBAL_CONFIG.bookmark.message_next + '.')
-      }
-    }
-  })
-
-  /**
-   * 代碼copy
-   * copy function
-   */
-
-  function copy (text, ctx) {
-    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
-      try {
-        document.execCommand('copy') // Security exception may be thrown by some browsers.
-        if (isSnackbar) {
-          snackbarShow(GLOBAL_CONFIG.copy.success)
-        } else {
-          $(ctx).prev('.copy-notice')
-            .text(GLOBAL_CONFIG.copy.success)
-            .animate({
-              opacity: 1,
-              right: 30
-            }, 450, function () {
-              setTimeout(function () {
-                $(ctx).prev('.copy-notice').animate({
-                  opacity: 0,
-                  right: 0
-                }, 650)
-              }, 400)
-            })
-        }
-      } catch (ex) {
-        if (isSnackbar) {
-          snackbarShow(GLOBAL_CONFIG.copy.success)
-        } else {
-          $(ctx).prev('.copy-notice')
-            .text(GLOBAL_CONFIG.copy.error)
-            .animate({
-              opacity: 1,
-              right: 30
-            }, 650, function () {
-              setTimeout(function () {
-                $(ctx).prev('.copy-notice').animate({
-                  opacity: 0,
-                  right: 0
-                }, 650)
-              }, 400)
-            })
-          return false
-        }
-      }
-    } else {
-      if (isSnackbar) {
-        snackbarShow(GLOBAL_CONFIG.copy.noSupport)
-      } else {
-        $(ctx).prev('.copy-notice').text(GLOBAL_CONFIG.copy.noSupport)
-      }
-    }
-  }
-  // click events
-  $(document).on('click', '.code-area-wrap .fa-clipboard', function () {
-    var selection = window.getSelection()
-    var range = document.createRange()
-    range.selectNodeContents($(this).parent().siblings('figure').find('.code pre')[0])
-    selection.removeAllRanges()
-    selection.addRange(range)
-    var text = selection.toString()
-    copy(text, this)
-    selection.removeAllRanges()
-  })
-
-  /**
-   * 代碼收縮
-   */
-  $(document).on('click', '.code-area-wrap .code-expand', function () {
-    var $figure = $(this).parent().next()
-    if ($(this).hasClass('code-closed')) {
-      $figure.slideDown(300)
-      $(this).removeClass('code-closed')
-    } else {
-      $figure.slideUp(300)
-      $(this).addClass('code-closed')
-    }
-  })
-
-  /**
-   * fancybox和 mediumZoom
-   */
-
-  var isMediumZoom = GLOBAL_CONFIG.medium_zoom
-  var isFancybox = GLOBAL_CONFIG.fancybox
-  if (isFancybox) {
-    $().fancybox({
-      selector: '[data-fancybox]',
-      loop: true,
-      transitionEffect: 'slide',
-      protect: true,
-      buttons: ['slideShow', 'fullScreen', 'thumbs', 'close']
-    })
-  } else if (isMediumZoom) {
-    const zoom = mediumZoom(document.querySelectorAll(':not(a)>img'))
-    zoom.on('open', event => {
-      const photoBg = $(document.documentElement).attr('data-theme') === 'dark' ? '#121212' : '#fff'
-      zoom.update({
-        background: photoBg
-      })
     })
   }
 
   /**
-   * 手機menu和toc按鈕點擊
-   * 顯示menu和toc的sidebar
-   */
-  function openMobileSidebar (name) {
-    $('body').css('overflow', 'hidden')
-    $('#body-wrap').css('transform', 'translateX(-250px)')
-    $('#page-header').css('transform', 'translateX(-250px)')
-    $('#page-header.fixed.visible').css('transform', 'translate3d(-250px, 100%, 0)')
-    $('#rightside').css('transform', 'translateX(-288px)')
-    $('#menu_mask').fadeIn()
+ * 手機menu和toc按鈕點擊
+ * 顯示menu和toc的sidebar
+ */
 
-    if (name === 'menu') {
-      $('.toggle-menu').removeClass('close').addClass('open')
-      $('#mobile-sidebar-menus').css({ transform: 'translateX(-254px)' })
+  const sidebarFn = () => {
+    const $toggleMenu = $('#toggle-menu')
+    const $mobileSidebarMenus = $('#mobile-sidebar-menus')
+    const $mobileTocButton = $('#mobile-toc-button')
+    const $menuMask = $('#menu_mask')
+    const $body = $('body')
+    const $sidebar = $('#sidebar')
+
+    function openMobileSidebar (name) {
+      btf.sidebarPaddingR()
+      $body.css('overflow', 'hidden')
+      $menuMask.fadeIn()
+
+      if (name === 'menu') {
+        $toggleMenu.removeClass('close').addClass('open')
+        $mobileSidebarMenus.addClass('open')
+      }
+
+      if (name === 'toc') {
+        $mobileTocButton.removeClass('close').addClass('open')
+        $sidebar.addClass('tocOpenMobile').css({ transform: 'translate3d(-100%,0,0)', left: '' })
+      }
     }
 
-    if (name === 'toc') {
-      $('#mobile-toc-button').removeClass('close').addClass('open')
-      $('#mobile-sidebar-toc').css('transform', 'translateX(-254px)')
-    }
-  }
+    function closeMobileSidebar (name) {
+      $body.css({ overflow: '', 'padding-right': '' })
+      $menuMask.fadeOut()
 
-  function closeMobileSidebar (name) {
-    $('body').css('overflow', '')
-    $('#body-wrap').css('transform', '')
-    $('#page-header').css('transform', '')
-    $('#page-header.fixed.visible').css('transform', '')
-    $('#rightside').css('transform', 'translateX(-38px)')
-    $('#menu_mask').fadeOut()
+      if (name === 'menu') {
+        $toggleMenu.removeClass('open').addClass('close')
+        $mobileSidebarMenus.removeClass('open')
+      }
 
-    if (name === 'menu') {
-      $('.toggle-menu').removeClass('open').addClass('close')
-      $('#mobile-sidebar-menus').css({ transform: 'translateX(0)' })
+      if (name === 'toc') {
+        $mobileTocButton.removeClass('open').addClass('close')
+        $sidebar.removeClass('tocOpenMobile').css({ transform: '' })
+      }
     }
 
-    if (name === 'toc') {
-      $('#mobile-toc-button').removeClass('open').addClass('close')
-      $('#mobile-sidebar-toc').css('transform', '')
-    }
-  }
-
-  $('.toggle-menu').on('click', function () {
-    if ($('.toggle-menu').hasClass('close')) {
+    $toggleMenu.on('click', function () {
       openMobileSidebar('menu')
-      if ($('#toggle-sidebar').hasClass('on')) {
-        $('body').css('padding-left', '0')
-        $('#sidebar').css('transform', '')
+    })
+
+    $mobileTocButton.on('click', function () {
+      openMobileSidebar('toc')
+    })
+
+    $menuMask.on('click touchstart', function (e) {
+      if ($toggleMenu.hasClass('open')) {
+        closeMobileSidebar('menu')
+      }
+      if ($mobileTocButton.hasClass('open')) {
+        closeMobileSidebar('toc')
+      }
+    })
+
+    $(window).on('resize', function (e) {
+      if (!$toggleMenu.is(':visible')) {
+        if ($toggleMenu.hasClass('open')) closeMobileSidebar('menu')
+      }
+    })
+
+    const mql = window.matchMedia('(max-width: 1024px)')
+    const $toggleSidebar = $('#toggle-sidebar')
+    const matchFn = (ev) => {
+      if (ev.matches) {
+        if ($sidebar.hasClass('tocOpenPc')) closeSidebar()
+      } else {
+        if ($toggleSidebar.hasClass('on')) openSidebar()
+        if ($mobileTocButton.hasClass('open')) closeMobileSidebar('toc')
       }
     }
-  })
 
-  $('#mobile-toc-button').on('click', function () {
-    if ($('#mobile-toc-button').hasClass('close')) openMobileSidebar('toc')
-  })
+    mql.addListener(matchFn)
+    document.addEventListener('pjax:send', () => { mql.removeListener(matchFn) })
 
-  $('#menu_mask').on('click touchstart', function (e) {
-    if ($('.toggle-menu').hasClass('open')) {
-      closeMobileSidebar('menu')
-      if ($('#toggle-sidebar').hasClass('on')) {
-        setTimeout(function () {
-          openSidebar()
-        }, 600)
+    // toc元素點擊
+    $sidebar.find('.toc-link').on('click', function (e) {
+      e.preventDefault()
+      btf.scrollToDest(decodeURI($(this).attr('href')))
+      if (window.innerWidth < 1024) {
+        closeMobileSidebar('toc')
       }
-    }
-    if ($('#mobile-toc-button').hasClass('open')) {
-      closeMobileSidebar('toc')
-    }
-  })
-
-  $(window).on('resize', function (e) {
-    if (!$('.toggle-menu').is(':visible')) {
-      if ($('.toggle-menu').hasClass('open')) closeMobileSidebar('menu')
-    }
-    if (!$('#mobile-toc-button').is(':visible')) {
-      if ($('#mobile-toc-button').hasClass('open')) closeMobileSidebar('toc')
-    }
-  })
-
-  // 點擊toc，收起sidebar
-  $('#mobile-sidebar-toc a').on('click', function () {
-    closeMobileSidebar('toc')
-  })
+    })
+  }
 
   /**
-   *  scroll 滚动 toc
-   */
-  var initTop = 0
-  $('.toc-child').hide()
+ * 首頁top_img底下的箭頭
+ */
+  const scrollDownInIndex = () => {
+    $('#scroll-down').on('click', function () {
+      btf.scrollToDest('#content-inner')
+    })
+  }
 
-  // main of scroll
-  $(window).scroll(throttle(function (event) {
-    var currentTop = $(this).scrollTop()
-    if (!isMobile() && isTocContent) {
-      // percentage inspired by hexo-theme-next
-      scrollPercent(currentTop)
-      // head position
-      findHeadPosition(currentTop)
-      autoScrollToc(currentTop)
-    }
-    var isUp = scrollDirection(currentTop)
+  /**
+ * 代碼
+ * 只適用於Hexo默認的代碼渲染
+ */
+  const addHighlightTool = function () {
+    const isHighlightCopy = GLOBAL_CONFIG.highlight.highlightCopy
+    const isHighlightLang = GLOBAL_CONFIG.highlight.highlightLang
+    const isHighlightShrink = GLOBAL_CONFIG_SITE.isHighlightShrink
+    const isShowTool = isHighlightCopy || isHighlightLang || isHighlightShrink !== undefined
+    const $figureHighlight = GLOBAL_CONFIG.highlight.plugin === 'highlighjs' ? $('figure.highlight') : $('pre[class*="language-"]')
 
-    if (currentTop > 56) {
-      if (isUp) {
-        if ($('#page-header').hasClass('visible')) $('#page-header').removeClass('visible')
-      } else {
-        if (!$('#page-header').hasClass('visible')) $('#page-header').addClass('visible')
+    if (isShowTool && $figureHighlight.length) {
+      const isPrismjs = GLOBAL_CONFIG.highlight.plugin === 'prismjs'
+
+      let highlightShrinkEle = ''
+      let highlightCopyEle = ''
+      const highlightShrinkClass = isHighlightShrink === true ? 'closed' : ''
+
+      if (isHighlightShrink !== undefined) {
+        highlightShrinkEle = `<i class="fas fa-angle-down expand ${highlightShrinkClass}"></i>`
       }
-      $('#page-header').addClass('fixed')
 
-      if ($('#rightside').css('opacity') === '0') {
-        $('#rightside').animate({}, function () {
-          $(this).css({
-            opacity: '1',
-            transform: 'translateX(-38px)'
+      if (isHighlightCopy) {
+        highlightCopyEle = '<div class="copy-notice"></div><i class="fas fa-paste copy-button"></i>'
+      }
+
+      if (isHighlightLang) {
+        if (isPrismjs) {
+          $figureHighlight.each(function () {
+            const $this = $(this)
+            const langName = $this.attr('data-language') !== undefined ? $this.attr('data-language') : 'Code'
+            const highlightLangEle = `<div class="code-lang">${langName}</div>`
+            $this.wrap('<figure class="highlight"></figure>').before(`<div class="highlight-tools ${highlightShrinkClass}">${highlightShrinkEle + highlightLangEle + highlightCopyEle}</div>`)
           })
+        } else {
+          $figureHighlight.each(function (i, o) {
+            const $this = $(this)
+            let langName = $this.attr('class').split(' ')[1]
+            if (langName === 'plain' || langName === undefined) langName = 'Code'
+            const highlightLangEle = `<div class="code-lang">${langName}</div>`
+            $this.prepend(`<div class="highlight-tools ${highlightShrinkClass}">${highlightShrinkEle + highlightLangEle + highlightCopyEle}</div>`)
+          })
+        }
+      } else {
+        const ele = `<div class="highlight-tools ${highlightShrinkClass}">${highlightShrinkEle + highlightCopyEle}</div>`
+        if (isPrismjs) $figureHighlight.wrap('<figure class="highlight"></figure>').before(ele)
+        else $figureHighlight.prepend(ele)
+      }
+
+      /**
+     * 代碼收縮
+     */
+
+      if (isHighlightShrink !== undefined) {
+        $('.highlight-tools >.expand').on('click', function () {
+          const $this = $(this)
+          const $table = $this.parent().nextAll()
+          $this.toggleClass('closed')
+          $table.is(':visible') ? $table.css('display', 'none') : $table.css('display', 'block')
         })
       }
-    } else {
-      if (currentTop === 0) {
-        $('#page-header').removeClass('fixed').removeClass('visible')
+
+      /**
+     * 代碼copy
+     */
+      if (isHighlightCopy) {
+        const copy = function (text, ctx) {
+          if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+            document.execCommand('copy')
+            if (GLOBAL_CONFIG.Snackbar !== undefined) {
+              btf.snackbarShow(GLOBAL_CONFIG.copy.success)
+            } else {
+              $(ctx).prev('.copy-notice')
+                .text(GLOBAL_CONFIG.copy.success)
+                .animate({
+                  opacity: 1
+                }, 450, function () {
+                  setTimeout(function () {
+                    $(ctx).prev('.copy-notice').animate({
+                      opacity: 0
+                    }, 650)
+                  }, 400)
+                })
+            }
+          } else {
+            if (GLOBAL_CONFIG.Snackbar !== undefined) {
+              btf.snackbarShow(GLOBAL_CONFIG.copy.noSupport)
+            } else {
+              $(ctx).prev('.copy-notice').text(GLOBAL_CONFIG.copy.noSupport)
+            }
+          }
+        }
+
+        // click events
+        $('.highlight-tools >.copy-button').on('click', function () {
+          const $buttonParent = $(this).parents('figure.highlight')
+          $buttonParent.addClass('copy-true')
+          const selection = window.getSelection()
+          const range = document.createRange()
+          if (isPrismjs) range.selectNodeContents($buttonParent.find('> pre code')[0])
+          else range.selectNodeContents($buttonParent.find('table .code pre')[0])
+          selection.removeAllRanges()
+          selection.addRange(range)
+          const text = selection.toString()
+          copy(text, this)
+          selection.removeAllRanges()
+          $buttonParent.removeClass('copy-true')
+        })
+      }
+    }
+  }
+
+  /**
+ * PhotoFigcaption
+ */
+  function addPhotoFigcaption () {
+    const images = $('#article-container img').not('.justified-gallery img')
+    images.each(function (i, o) {
+      const $this = $(o)
+      if ($this.attr('alt')) {
+        const t = $('<div class="img-alt is-center">' + $this.attr('alt') + '</div>')
+        $this.after(t)
+      }
+    })
+  }
+
+  /**
+ * justified-gallery 圖庫排版
+ */
+
+  let detectJgJsLoad = false
+  const runJustifiedGallery = function () {
+    const $justifiedGallery = $('.justified-gallery')
+    if ($justifiedGallery.length) {
+      const $imgList = $justifiedGallery.find('img')
+      $imgList.unwrap()
+      if ($imgList.length) {
+        $imgList.each(function (i, o) {
+          if ($(o).attr('data-lazy-src')) $(o).attr('src', $(o).attr('data-lazy-src'))
+          $(o).wrap('<div></div>')
+        })
       }
 
-      $('#rightside').animate({}, function () {
-        $('#rightside').css({
-          opacity: '',
-          transform: ''
+      if (detectJgJsLoad) btf.initJustifiedGallery($justifiedGallery)
+      else {
+        $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.justifiedGallery.css}">`)
+        $.getScript(`${GLOBAL_CONFIG.justifiedGallery.js}`, function () {
+          btf.initJustifiedGallery($justifiedGallery)
+        })
+        detectJgJsLoad = true
+      }
+    }
+  }
+
+  /**
+ * fancybox和 mediumZoom
+ */
+  const addLightBox = function () {
+    if (GLOBAL_CONFIG.lightbox === 'fancybox') {
+      const images = $('#article-container img:not(.gallery-group-img)').not($('a>img'))
+      images.each(function (i, o) {
+        const lazyloadSrc = $(o).attr('data-lazy-src') ? $(o).attr('data-lazy-src') : $(o).attr('src')
+        const dataCaption = $(o).attr('alt') ? $(o).attr('alt') : ''
+        $(o).wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${dataCaption}" class="fancybox"></a>`)
+      })
+
+      $().fancybox({
+        selector: '[data-fancybox]',
+        loop: true,
+        transitionEffect: 'slide',
+        protect: true,
+        buttons: ['slideShow', 'fullScreen', 'thumbs', 'close'],
+        hash: false
+      })
+    } else {
+      const zoom = mediumZoom(document.querySelectorAll('#article-container :not(a)>img'))
+      zoom.on('open', function (event) {
+        const photoBg = $(document.documentElement).attr('data-theme') === 'dark' ? '#121212' : '#fff'
+        zoom.update({
+          background: photoBg
         })
       })
     }
-  }, 300))
-
-  // go up smooth scroll
-  $('#go-up').on('click', function () {
-    scrollTo('body')
-  })
-
-  // head scroll
-  // $('#post-content').find('h1,h2,h3,h4,h5,h6').on('click', function (e) {
-  //   scrollToHead('#' + $(this).attr('id'))
-  // })
-
-  // head scroll
-  $('.toc-link').on('click', function (e) {
-    e.preventDefault()
-    scrollToHead($(this).attr('href'))
-  })
-
-  // find the scroll direction
-  function scrollDirection (currentTop) {
-    var result = currentTop > initTop // true is down & false is up
-    initTop = currentTop
-    return result
   }
 
-  // scroll to a head(anchor)
-  function scrollToHead (anchor) {
-    scrollTo(anchor)
-  }
+  /**
+ * 滾動處理
+ */
+  const scrollFn = function () {
+    let initTop = 0
+    let isChatShow = true
+    const $rightside = $('#rightside')
+    const $nav = $('#nav')
+    const isChatBtnHide = typeof chatBtnHide === 'function'
+    const isChatBtnShow = typeof chatBtnShow === 'function'
+    $(window).scroll(btf.throttle(function (event) {
+      const currentTop = $(this).scrollTop()
+      const isDown = scrollDirection(currentTop)
+      if (currentTop > 56) {
+        if (isDown) {
+          if ($nav.hasClass('visible')) $nav.removeClass('visible')
+          if (isChatBtnShow && isChatShow === true) {
+            chatBtnHide()
+            isChatShow = false
+          }
+        } else {
+          if (!$nav.hasClass('visible')) $nav.addClass('visible')
+          if (isChatBtnHide && isChatShow === false) {
+            window.chatBtnShow()
+            isChatShow = true
+          }
+        }
+        $nav.addClass('fixed')
+        if ($rightside.css('opacity') === '0') {
+          $rightside.css({ opacity: '1', transform: 'translateX(-38px)' })
+        }
+      } else {
+        if (currentTop === 0) {
+          $nav.removeClass('fixed').removeClass('visible')
+        }
+        $rightside.css({ opacity: '', transform: '' })
+      }
+    }, 200))
 
-  // expand toc-item
-  function expandToc ($item) {
-    if ($item.is(':visible')) {
-      return
-    }
-    $item.fadeIn(400)
-  }
-
-  function scrollPercent (currentTop) {
-    var docHeight = $('#content-outer').height()
-    var winHeight = $(window).height()
-    var contentMath = (docHeight > winHeight) ? (docHeight - winHeight) : ($(document).height() - winHeight)
-    var scrollPercent = (currentTop) / (contentMath)
-    var scrollPercentRounded = Math.round(scrollPercent * 100)
-    var percentage = (scrollPercentRounded > 100) ? 100 : scrollPercentRounded
-    $('.progress-num').text(percentage)
-    $('.sidebar-toc__progress-bar').animate({
-      width: percentage + '%'
-    }, 100)
-  }
-
-  function updateAnchor (anchor) {
-    if (window.history.replaceState && anchor !== window.location.hash) {
-      window.history.replaceState(undefined, undefined, anchor)
+    // find the scroll direction
+    function scrollDirection (currentTop) {
+      const result = currentTop > initTop // true is down & false is up
+      initTop = currentTop
+      return result
     }
   }
 
-  // find head position & add active class
-  // DOM Hierarchy:
-  // ol.toc > (li.toc-item, ...)
-  // li.toc-item > (a.toc-link, ol.toc-child > (li.toc-item, ...))
-  function findHeadPosition (top) {
+  /**
+ *  toc
+ */
+  const tocFn = function () {
+    const $sidebar = $('#sidebar')
+    const $tocChild = $sidebar.find('.toc-child')
+    const $tocLink = $sidebar.find('.toc-link')
+    const $article = $('#article-container')
+
+    $tocChild.hide()
+
+    // main of scroll
+    $(window).scroll(btf.throttle(function (event) {
+      const currentTop = $(this).scrollTop()
+      scrollPercent(currentTop)
+      findHeadPosition(currentTop)
+    }, 100))
+
+    // expand toc-item
+    const expandToc = function ($item) {
+      if ($item.is(':visible')) {
+        return
+      }
+      $item.fadeIn(400)
+    }
+
+    const scrollPercent = function (currentTop) {
+      const docHeight = $article.height()
+      const winHeight = $(window).height()
+      const headerHeight = $article.offset().top
+      const contentMath = (docHeight > winHeight) ? (docHeight - winHeight) : ($(document).height() - winHeight)
+      const scrollPercent = (currentTop - headerHeight) / (contentMath)
+      const scrollPercentRounded = Math.round(scrollPercent * 100)
+      const percentage = (scrollPercentRounded > 100) ? 100
+        : (scrollPercentRounded <= 0) ? 0
+          : scrollPercentRounded
+      $sidebar.find('.progress-num').text(percentage)
+      $sidebar.find('.sidebar-toc__progress-bar').animate({
+        width: percentage + '%'
+      }, 100)
+    }
+
+    // anchor
+    const isAnchor = GLOBAL_CONFIG.isanchor
+    const updateAnchor = function (anchor) {
+      if (window.history.replaceState && anchor !== window.location.hash) {
+        window.history.replaceState(undefined, undefined, anchor)
+      }
+    }
+
+    const autoScrollToc = function (currentTop, item) {
+      const activePosition = item.offset().top
+      const $tocContent = $sidebar.find('.sidebar-toc__content')
+      const sidebarScrollTop = $tocContent.scrollTop()
+      if (activePosition > (currentTop + $(window).height() - 100)) {
+        $tocContent.scrollTop(sidebarScrollTop + 100)
+      }
+      if (activePosition < currentTop + 100) {
+        $tocContent.scrollTop(sidebarScrollTop - 100)
+      }
+    }
+
+    // find head position & add active class
+    // DOM Hierarchy:
+    // ol.toc > (li.toc-item, ...)
+    // li.toc-item > (a.toc-link, ol.toc-2child > (li.toc-item, ...))
+    const versionBiggerFive = GLOBAL_CONFIG.hexoversion.split('.')[0] >= 5
+    const list = $article.find('h1,h2,h3,h4,h5,h6')
+
+    const findHeadPosition = function (top) {
     // assume that we are not in the post page if no TOC link be found,
     // thus no need to update the status
-    if ($('.toc-link').length === 0) {
-      return false
-    }
-
-    var list = $('#post-content').find('h1,h2,h3,h4,h5,h6')
-    var currentId = ''
-    list.each(function () {
-      var head = $(this)
-      if (top > head.offset().top - 25) {
-        currentId = '#' + $(this).attr('id')
+      if ($tocLink.length === 0) {
+        return false
       }
-    })
 
-    if (currentId === '') {
-      $('.toc-link').removeClass('active')
-      $('.toc-child').hide()
-    }
+      let currentId = ''
+      list.each(function () {
+        const head = $(this)
+        if (top > head.offset().top - 70) {
+          if (versionBiggerFive) currentId = '#' + encodeURI($(this).attr('id'))
+          else currentId = '#' + $(this).attr('id')
+        }
+      })
 
-    var currentActive = $('.toc-link.active')
-    if (currentId && currentActive.attr('href') !== currentId) {
-      updateAnchor(currentId)
+      if (currentId === '') {
+        $tocLink.removeClass('active')
+        $tocChild.hide()
+      }
 
-      $('.toc-link').removeClass('active')
-      var _this = $('.toc-link[href="' + currentId + '"]')
-      _this.addClass('active')
+      const currentActive = $tocLink.filter('.active')
+      if (currentId && currentActive.attr('href') !== currentId) {
+        if (isAnchor) updateAnchor(currentId)
 
-      var parents = _this.parents('.toc-child')
-      // Returned list is in reverse order of the DOM elements
-      // Thus `parents.last()` is the outermost .toc-child container
-      // i.e. list of subsections
-      var topLink = (parents.length > 0) ? parents.last() : _this
-      expandToc(topLink.closest('.toc-item').find('.toc-child'))
-      topLink
+        $tocLink.removeClass('active')
+
+        const _this = $tocLink.filter('[href="' + currentId + '"]')
+        _this.addClass('active')
+        autoScrollToc(top, _this)
+
+        const parents = _this.parents('.toc-child')
+        // Returned list is in reverse order of the DOM elements
+        // Thus `parents.last()` is the outermost .toc-child container
+        // i.e. list of subsections
+        const topLink = (parents.length > 0) ? parents.last() : _this
+        expandToc(topLink.closest('.toc-item').find('.toc-child'))
+        topLink
         // Find all top-level .toc-item containers, i.e. sections
         // excluding the currently active one
-        .closest('.toc-item').siblings('.toc-item')
+          .closest('.toc-item').siblings('.toc-item')
         // Hide their respective list of subsections
-        .find('.toc-child').hide()
-    }
-  }
-
-  function autoScrollToc (currentTop) {
-    if ($('.toc-link').hasClass('active')) {
-      var activePosition = $('.active').offset().top
-      var sidebarScrolltop = $('#sidebar').scrollTop()
-      if (activePosition > (currentTop + $(window).height() - 50)) {
-        $('#sidebar').scrollTop(sidebarScrolltop + 100)
-      } else if (activePosition < currentTop + 50) {
-        $('#sidebar').scrollTop(sidebarScrolltop - 100)
+          .find('.toc-child').hide()
       }
     }
   }
 
   /**
-   * 閲讀模式
-   */
-  $('#readmode').click(function () {
-    var isDark = $(document.documentElement).attr('data-theme') === 'dark'
-    var isNull = $(document.documentElement).attr('data-theme') === ''
+ * Rightside
+ */
+
+  const $rightsideEle = $('#rightside')
+
+  // read-mode
+  $rightsideEle.on('click', '#readmode', function () {
     $('body').toggleClass('read-mode')
-    $('#to_comment').toggleClass('is_invisible')
-    if (isNull) $(document.documentElement).attr('data-theme', 'dark')
-    if (isDark) $(document.documentElement).attr('data-theme', '')
   })
 
-  /**
-   * 字體調整
-   */
-
-  function fontAdjust (name) {
-    var fontSizeRecord = parseFloat($('body').css('font-size'))
-    var preSizeRecord = parseFloat($('pre').css('font-size'))
-    var codeSizeRecord = parseFloat($('code').css('font-size'))
-    if (name === 'plus') {
-      $('body').css('font-size', fontSizeRecord + 1)
-      $('pre').css('font-size', preSizeRecord + 1)
-      $('code').css('font-size', codeSizeRecord + 1)
-    } else {
-      $('body').css('font-size', fontSizeRecord - 1)
-      $('pre').css('font-size', preSizeRecord - 1)
-      $('code').css('font-size', codeSizeRecord - 1)
+  // Switch Between Light And Dark Mode
+  if ($('#darkmode').length) {
+    const switchReadMode = function () {
+      const nowMode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+      if (nowMode === 'light') {
+        activateDarkMode()
+        saveToLocal.set('theme', 'dark', 2)
+        GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.day_to_night)
+      } else {
+        activateLightMode()
+        saveToLocal.set('theme', 'light', 2)
+        GLOBAL_CONFIG.Snackbar !== undefined && btf.snackbarShow(GLOBAL_CONFIG.Snackbar.night_to_day)
+      }
     }
+
+    $rightsideEle.on('click', '#darkmode', () => {
+      switchReadMode()
+      typeof utterancesTheme === 'function' && utterancesTheme()
+      typeof FB === 'object' && window.loadFBComment()
+      window.DISQUS && $('#disqus_thread').children().length && setTimeout(() => window.disqusReset(), 200)
+    })
   }
 
-  $('#font_plus').click(function () {
-    fontAdjust('plus')
-  })
+  // rightside 點擊設置 按鈕 展開
+  $rightsideEle.on('click', '#rightside_config', () => $('#rightside-config-hide').toggleClass('show'))
 
-  $('#font_minus').click(function () {
-    fontAdjust('minus')
-  })
+  // Back to top
+  $rightsideEle.on('click', '#go-up', () => btf.scrollToDest('body'))
 
   /**
-   * 手機端sub-menu 展開/收縮
-   */
-  $('.menus-expand').on('click', function () {
-    if ($(this).hasClass('menus-closed')) {
-      $(this).parents('.menus_item').find('.menus_item_child').slideDown()
-      $(this).removeClass('menus-closed')
-    } else {
-      $(this).parents('.menus_item').find('.menus_item_child').slideUp()
-      $(this).addClass('menus-closed')
-    }
-  })
+ * menu
+ * 側邊欄sub-menu 展開/收縮
+ * 解決menus在觸摸屏下，滑動屏幕menus_item_child不消失的問題（手機hover的bug)
+ */
+  const clickFnOfSubMenu = function () {
+    $('#mobile-sidebar-menus .expand').on('click', function () {
+      $(this).parents('.menus_item').find('> .menus_item_child').slideToggle()
+      $(this).toggleClass('hide')
+    })
+
+    $(window).on('touchmove', function (e) {
+      const $menusChild = $('#nav .menus_item_child')
+      if ($menusChild.is(':visible')) {
+        $menusChild.css('display', 'none')
+      }
+    })
+  }
 
   /**
-   * rightside 點擊設置 按鈕 展開
-   */
-  $('#rightside_config').on('click', function () {
-    if ($('#rightside-config-hide').hasClass('rightside-in')) {
-      $('#rightside-config-hide').removeClass('rightside-in').addClass('rightside-out')
-    } else {
-      $('#rightside-config-hide').removeClass('rightside-out').addClass('rightside-in')
-    }
-  })
-
-  /**
-   * 複製時加上版權信息
-   */
-  var copyright = GLOBAL_CONFIG.copyright
-  if (copyright !== undefined) {
-    document.body.oncopy = event => {
-      event.preventDefault()
+ * 複製時加上版權信息
+ */
+  const addCopyright = () => {
+    const copyright = GLOBAL_CONFIG.copyright
+    document.body.oncopy = (e) => {
+      e.preventDefault()
       let textFont; const copyFont = window.getSelection(0).toString()
-      if (copyFont.length > 45) {
+      if (copyFont.length > copyright.limitCount) {
         textFont = copyFont + '\n' + '\n' + '\n' +
-          copyright.languages.author + '\n' +
-          copyright.languages.link + '\n' +
-          copyright.languages.source + '\n' +
-          copyright.languages.info
+        copyright.languages.author + '\n' +
+        copyright.languages.link + window.location.href + '\n' +
+        copyright.languages.source + '\n' +
+        copyright.languages.info
       } else {
         textFont = copyFont
       }
-      if (event.clipboardData) {
-        return event.clipboardData.setData('text', textFont)
+      if (e.clipboardData) {
+        return e.clipboardData.setData('text', textFont)
       } else {
-        // 兼容IE
         return window.clipboardData.setData('text', textFont)
       }
     }
   }
 
   /**
-   * justified-gallery 圖庫排版
-   */
+ * 網頁運行時間
+ */
+  const addRuntime = () => {
+    const $runtimeCount = $('#runtimeshow')
+    if ($runtimeCount.length) {
+      const publishDate = $runtimeCount.attr('data-publishDate')
+      $runtimeCount.text(btf.diffDate(publishDate) + ' ' + GLOBAL_CONFIG.runtime)
+    }
+  }
 
-  if ($('.justified-gallery').length) {
-    $('.justified-gallery > p > .fancybox').unwrap()
-    $('head').append('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">')
-    loadScript('https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js', function () {
-      if (typeof ($.fn.justifiedGallery) === 'function') {
-        $('.justified-gallery').justifiedGallery({
-          rowHeight: 220,
-          margins: 4
-        })
-      }
+  /**
+ * 最後一次更新時間
+ */
+  const addLastPushDate = () => {
+    const $lastPushDateItem = $('#last-push-date')
+    if ($lastPushDateItem.length) {
+      const lastPushDate = $lastPushDateItem.attr('data-lastPushDate')
+      const diffDay = btf.diffDate(lastPushDate, true)
+      $lastPushDateItem.text(diffDay)
+    }
+  }
+
+  /**
+ * table overflow
+ */
+  const addTableWrap = function () {
+    const $table = $('#article-container table').not($('figure.highlight > table'))
+    $table.each(function () {
+      $(this).wrap('<div class="table-wrap"></div>')
     })
   }
 
   /**
-   * Darkmode
-   */
-
-  if (typeof autoChangeMode !== 'undefined') {
-    if (autoChangeMode === '1' || autoChangeMode === '2') {
-      if (Cookies.get('theme') === 'dark') {
-        changeLightIcon()
-      } else {
-        changeDarkIcon()
-      }
-    }
-  }
-
-  function changeLightIcon () {
-    $('#darkmode').removeClass('fa-moon-o').addClass('fa-sun-o')
-  }
-
-  function changeDarkIcon () {
-    $('#darkmode').removeClass('fa-sun-o').addClass('fa-moon-o')
-  }
-
-  function switchReadMode () {
-    var nowMode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
-    if (nowMode === 'light') {
-      changeLightIcon()
-      activateDarkMode()
-      Cookies.set('theme', 'dark', {
-        expires: 2
-      })
-      if (isSnackbar) snackbarShow(GLOBAL_CONFIG.Snackbar.day_to_night)
-    } else {
-      changeDarkIcon()
-      activateLightMode()
-      Cookies.set('theme', 'light', {
-        expires: 2
-      })
-      if (isSnackbar) snackbarShow(GLOBAL_CONFIG.Snackbar.night_to_day)
-    }
-  }
-
-  $('#darkmode').click(function () {
-    switchReadMode()
-  })
-
-  /**
-   * 網頁運行時間
-   */
-  if (GLOBAL_CONFIG.runtime) {
-    // get user config
-    var startDate = $('#webinfo-runtime-count').attr('start_date')
-    var showDateTime = function () {
-      var BirthDay = new Date(startDate)
-      var today = new Date()
-      var timeold = (today.getTime() - BirthDay.getTime())
-      var msPerDay = 24 * 60 * 60 * 1000
-      var eDaysold = timeold / msPerDay
-      var daysold = Math.floor(eDaysold)
-      $('.webinfo-runtime-count').text(daysold + ' ' + GLOBAL_CONFIG.runtime_unit)
-    }
-
-    var interval
-    showDateTime()
-    clearInterval(interval)
-    interval = setInterval(showDateTime, 10000)
-  }
-
-  /**
-   * 搜索
-   */
-
-  if (GLOBAL_CONFIG.localSearch === undefined && GLOBAL_CONFIG.algolia !== undefined) {
-    $('a.social-icon.search').on('click', function () {
-      openSearch()
-      $('.ais-search-box--input').focus()
-    })
-    $('.search-mask, .search-close-button').on('click', closeSearch)
-
-    var algolia = GLOBAL_CONFIG.algolia
-    var isAlgoliaValid = algolia.appId && algolia.apiKey && algolia.indexName
-    if (!isAlgoliaValid) {
-      return console.error('Algolia setting is invalid!')
-    }
-    var search = instantsearch({
-      appId: algolia.appId,
-      apiKey: algolia.apiKey,
-      indexName: algolia.indexName,
-      searchParameters: {
-        hitsPerPage: algolia.hits.per_page || 10
-      },
-      searchFunction: function (helper) {
-        var searchInput = $('#algolia-search-input').find('input')
-
-        if (searchInput.val()) {
-          helper.search()
-        }
-      }
-    })
-
-    search.addWidget(
-      instantsearch.widgets.searchBox({
-        container: '#algolia-search-input',
-        reset: false,
-        magnifier: false,
-        placeholder: GLOBAL_CONFIG.algolia.languages.input_placeholder
-      })
-    )
-    search.addWidget(
-      instantsearch.widgets.hits({
-        container: '#algolia-hits',
-        templates: {
-          item: function (data) {
-            var link = data.permalink ? data.permalink : (GLOBAL_CONFIG.root + data.path)
-            return (
-              '<a href="' + link + '" class="algolia-hit-item-link">' +
-              data._highlightResult.title.value +
-              '</a>'
-            )
-          },
-          empty: function (data) {
-            return (
-              '<div id="algolia-hits-empty">' +
-              GLOBAL_CONFIG.algolia.languages.hits_empty.replace(/\$\{query}/, data.query) +
-              '</div>'
-            )
-          }
-        },
-        cssClasses: {
-          item: 'algolia-hit-item'
-        }
-      })
-    )
-
-    search.addWidget(
-      instantsearch.widgets.stats({
-        container: '#algolia-stats',
-        templates: {
-          body: function (data) {
-            var stats = GLOBAL_CONFIG.algolia.languages.hits_stats
-              .replace(/\$\{hits}/, data.nbHits)
-              .replace(/\$\{time}/, data.processingTimeMS)
-            return (
-              '<hr>' +
-              stats +
-              '<span class="algolia-logo pull_right">' +
-              '  <img src="' + GLOBAL_CONFIG.root + 'img/algolia.svg" alt="Algolia" />' +
-              '</span>'
-            )
+ * tag-hide
+ */
+  const clickFnOfTagHide = function () {
+    const $hideInline = $('.hide-button')
+    if ($hideInline.length) {
+      $hideInline.on('click', function (e) {
+        const $this = $(this)
+        const $hideContent = $(this).next('.hide-content')
+        $this.toggleClass('open')
+        $hideContent.toggle()
+        if ($this.hasClass('open')) {
+          if ($hideContent.find('.justified-gallery').length > 0) {
+            btf.initJustifiedGallery($hideContent.find('.justified-gallery'))
           }
         }
       })
-    )
+    }
+  }
 
-    search.addWidget(
-      instantsearch.widgets.pagination({
-        container: '#algolia-pagination',
-        scrollTo: false,
-        showFirstLast: false,
-        labels: {
-          first: '<i class="fa fa-angle-double-left"></i>',
-          last: '<i class="fa fa-angle-double-right"></i>',
-          previous: '<i class="fa fa-angle-left"></i>',
-          next: '<i class="fa fa-angle-right"></i>'
-        },
-        cssClasses: {
-          root: 'pagination',
-          item: 'pagination-item',
-          link: 'page-number',
-          active: 'current',
-          disabled: 'disabled-item'
+  const tabsFn = {
+    clickFnOfTabs: function () {
+      const $tab = $('#article-container .tabs')
+      $tab.find('.tab > button:not(.tab-to-top)').on('click', function (e) {
+        const $this = $(this)
+        const $tabItem = $this.parent()
+
+        if (!$tabItem.hasClass('active')) {
+          const $tabContent = $this.parents('.nav-tabs').next()
+          $tabItem.siblings('.active').removeClass('active')
+          $tabItem.addClass('active')
+          const tabId = $this.attr('data-href')
+          $tabContent.find('> .tab-item-content').removeClass('active')
+          $tabContent.find(`> ${tabId}`).addClass('active')
+          const $isTabJustifiedGallery = $tabContent.find(tabId).find('.justified-gallery')
+          if ($isTabJustifiedGallery.length > 0) {
+            btf.initJustifiedGallery($isTabJustifiedGallery)
+          }
         }
       })
-    )
-    search.start()
+    },
+    backToTop: () => {
+      const backToTopBtn = $('#article-container .tabs .tab-to-top')
+      backToTopBtn.on('click', function () {
+        btf.scrollToDest($(this).parents('.tabs'))
+      })
+    }
   }
-  if (GLOBAL_CONFIG.localSearch !== undefined && GLOBAL_CONFIG.algolia === undefined) {
-    $('a.social-icon.search').on('click', function () {
-      var loadFlag = false
-      openSearch()
-      $('#local-search-input input').focus()
-      if (!loadFlag) {
-        localSearch(GLOBAL_CONFIG.localSearch.path)
-        loadFlag = true
-      }
+
+  const toggleCardCategory = function () {
+    const $cardCategory = $('#aside-cat-list .card-category-list-item.parent i')
+    $cardCategory.on('click', function (e) {
+      e.preventDefault()
+      $(this).toggleClass('expand').parents('.parent').next().slideToggle(300)
     })
+  }
 
-    $('.search-mask, .search-close-button').on('click', closeSearch)
-
-    var localSearch = function (path) {
-      $.ajax({
-        url: GLOBAL_CONFIG.root + path,
-        dataType: 'xml',
-        success: function (xmlResponse) {
-          // get the contents from search data
-          var datas = $('entry', xmlResponse).map(function () {
-            return {
-              title: $('title', this).text(),
-              content: $('content', this).text(),
-              url: $('url', this).text()
-            }
-          }).get()
-          var $input = $('#local-search-input input')[0]
-          var $resultContent = $('#local-hits')[0]
-          $input.addEventListener('input', function () {
-            var str = '<div class="search-result-list">'
-            var keywords = this.value.trim().toLowerCase().split(/[\s]+/)
-            $resultContent.innerHTML = ''
-            if (this.value.trim().length <= 0) {
-              $('.local-search-stats__hr').hide()
-              return
-            }
-            var count = 0
-            // perform local searching
-            datas.forEach(function (data) {
-              var isMatch = true
-              var dataTitle = data.title.trim().toLowerCase()
-              var dataContent = data.content.trim().replace(/<[^>]+>/g, '').toLowerCase()
-              var dataUrl = data.url
-              var indexTitle = -1
-              var indexContent = -1
-              // only match artiles with not empty titles and contents
-              if (dataTitle !== '' && dataContent !== '') {
-                keywords.forEach(function (keyword, i) {
-                  indexTitle = dataTitle.indexOf(keyword)
-                  indexContent = dataContent.indexOf(keyword)
-                  if (indexTitle < 0 && indexContent < 0) {
-                    isMatch = false
-                  } else {
-                    if (indexContent < 0) {
-                      indexContent = 0
-                    }
-                  }
-                })
-              }
-              // show search results
-              if (isMatch) {
-                str += '<div class="local-search__hit-item"><a href="' + dataUrl + '" class="search-result-title">' + dataTitle + '</a>' + '</div>'
-                count += 1
-                $('.local-search-stats__hr').show()
-              }
-            })
-            if (count === 0) {
-              str += '<div id="local-search__hits-empty">' + GLOBAL_CONFIG.localSearch.languages.hits_empty.replace(/\$\{query}/, this.value.trim()) +
-                '</div>'
-            }
-            $resultContent.innerHTML = str
+  const switchComments = function () {
+    let switchDone = false
+    $('#switch-comments-btn').on('click', function () {
+      $('#post-comment > .comment-wrap > div').each(function (i, o) {
+        const $this = $(o)
+        if ($this.is(':visible')) {
+          $this.hide()
+        } else {
+          $this.css({
+            display: 'block',
+            animation: 'tabshow .5s'
           })
         }
       })
+      if (!switchDone && typeof loadOtherComment === 'function') {
+        switchDone = true
+        loadOtherComment()
+      }
+    })
+  }
+
+  const addPostOutdateNotice = function () {
+    const data = GLOBAL_CONFIG.noticeOutdate
+    var diffDay = btf.diffDate(GLOBAL_CONFIG_SITE.postUpdate)
+    if (diffDay >= data.limitDay) {
+      const code = `<div class="post-outdate-notice">${data.messagePrev + ' ' + diffDay + ' ' + data.messageNext}</div>`
+      if (data.position === 'top') {
+        $('#article-container').prepend(code)
+      } else {
+        $('#article-container').append(code)
+      }
     }
   }
 
-  function openSearch () {
-    $('body').css('width', '100%')
-    $('body').css('overflow', 'hidden')
-
-    $('.search-dialog').css({
-      display: 'block'
-    })
-
-    $('.search-mask').fadeIn()
-
-    // shortcut: ESC
-    document.addEventListener('keydown', function f (event) {
-      if (event.code === 'Escape') {
-        closeSearch()
-        document.removeEventListener('keydown', f)
-      }
+  const lazyloadImg = () => {
+    window.lazyLoadInstance = new LazyLoad({
+      elements_selector: 'img',
+      threshold: 0,
+      data_src: 'lazy-src'
     })
   }
 
-  function closeSearch () {
-    $('body').css('width', '')
-    $('body').css('overflow', '')
-    $('.search-dialog').css({
-      animation: 'search_close .5s'
+  const relativeDate = function (selector) {
+    selector.each((i, o) => {
+      const $this = $(o)
+      const timeVal = $this.attr('datetime')
+      $this.text(btf.diffDate(timeVal, true)).css('display', 'inline')
     })
-    $('.search-dialog').animate({}, function () {
-      setTimeout(function () {
-        $('.search-dialog').css({
-          animation: '',
-          display: 'none'
-        })
-      }, 500)
-    })
-
-    $('.search-mask').fadeOut()
   }
 
-  if (GLOBAL_CONFIG.baiduPush) {
-    (function () {
-      var bp = document.createElement('script')
-      var curProtocol = window.location.protocol.split(':')[0]
-      if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
-      } else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js'
-      }
-      var s = document.getElementsByTagName('script')[0]
-      s.parentNode.insertBefore(bp, s)
-    })()
+  const unRefreshFn = function () {
+    $(window).on('resize', function () {
+      if (window.innerWidth < 768) adjustMenu(0)
+      else if ($('#sidebar').hasClass('tocOpenPc') && $('#nav').hasClass('fixed')) adjustMenu(1)
+      else adjustMenu(2)
+    })
+
+    clickFnOfSubMenu()
+    GLOBAL_CONFIG.islazyload && lazyloadImg()
+    GLOBAL_CONFIG.copyright !== undefined && addCopyright()
   }
+
+  window.refreshFn = function () {
+    initAdjust()
+
+    if (GLOBAL_CONFIG_SITE.isPost) {
+      OpenSidebarAuto()
+      toggleSidebar()
+      GLOBAL_CONFIG_SITE.isSidebar && tocFn()
+      GLOBAL_CONFIG.noticeOutdate !== undefined && addPostOutdateNotice()
+      GLOBAL_CONFIG.relativeDate.post && relativeDate($('#post-meta time'))
+    } else {
+      GLOBAL_CONFIG.relativeDate.homepage && relativeDate($('#recent-posts time'))
+      GLOBAL_CONFIG.runtime && addRuntime()
+      addLastPushDate()
+      toggleCardCategory()
+    }
+
+    sidebarFn()
+    GLOBAL_CONFIG_SITE.isHome && scrollDownInIndex()
+    GLOBAL_CONFIG.highlight && addHighlightTool()
+    GLOBAL_CONFIG.isPhotoFigcaption && addPhotoFigcaption()
+    runJustifiedGallery()
+    GLOBAL_CONFIG.lightbox !== 'null' && addLightBox()
+    scrollFn()
+    addTableWrap()
+    clickFnOfTagHide()
+    tabsFn.clickFnOfTabs()
+    tabsFn.backToTop()
+    switchComments()
+  }
+
+  refreshFn()
+  unRefreshFn()
 })
