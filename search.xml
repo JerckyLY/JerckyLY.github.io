@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Cesium系列(5)--源码编译和调试(ES6)</title>
+    <url>/2020/12/10/Cesium%E5%85%A5%E9%97%A8-5/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium源码编译和调试-ES6"><a href="#Cesium源码编译和调试-ES6" class="headerlink" title="Cesium源码编译和调试(ES6)"></a><center>Cesium源码编译和调试(ES6)<center/></h2><p>作为目前来说支持大场景，海量模型数据，LOD分级渲染的三维免费开源项目 <strong><code>Cesium</code></strong> 应该是最优选择了。 保持每个月更新一次的维护效率，加上各种社区的支持， <strong><code>Cesium</code></strong> 在未来很长一段时间内都会是最优的开源选择。   </p>
+<p>对于好的开源项目，大家都是会想了解它的原理是什么，它的代码是什么样的。哪些地方值我们学习。今天就详细介绍一下怎么编译和调试源码。</p>
+<h2 id="包的分类"><a href="#包的分类" class="headerlink" title="包的分类"></a>包的分类</h2><ul>
+<li><p><code>预编译包</code> 也就是我们在官网上看的js包 <a href='https://cesium.com/cesiumjs/' target="_blank" >下载地址</a></p>
+<p><img src= "/img/loading.gif" data-lazy-src="1.png"></p>
+<p>这里面提供了打包之后的js库和示例以及文档。在这里面调试，打包会编译失败。</p>
+</li>
+<li><p><code>源码包</code> 源码包打包之后是可以得到预编译包。如果想修改源码，就使用这个包。获取方式有两种。</p>
+<ul>
+<li><code>git</code> 安装<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/CesiumGS/cesium.git</span></span><br></pre></td></tr></table></figure></li>
+<li>zip包下载  <a href='https://github.com/CesiumGS/cesium/releases' target="_blank" >下载地址</a><br><img src= "/img/loading.gif" data-lazy-src="2.png"></li>
+</ul>
+</li>
+</ul>
+<h2 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h2><p>  下载解压源码包之后，找到根目录(package.json同级)，然后安装模块<br>   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">npm install </span><br><span class="line"><span class="comment">// 国内较慢的道友们， 用cnpm 也可以</span></span><br><span class="line">cnpm install </span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>编译命令<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    </span><br><span class="line">npm run release <span class="comment">// [最完整的打包]</span></span><br><span class="line"><span class="comment">// 打包到Build 目录下，包括上线的运行版本，调试版本 和API文档</span></span><br><span class="line"> </span><br><span class="line">npm run makeZipFile <span class="comment">// [生成分发zip包]</span></span><br><span class="line"><span class="comment">// 打包到根目录下的 Cesium-&lt;版本号&gt;.zip ,删除不必要的开发文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//打包到Build目录下的Cesium目录</span></span><br><span class="line">npm run minifyRelease <span class="comment">//[线上运行打包]</span></span><br><span class="line">npm run minify [线上运行留Debug信息打包]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打包到Build目录下的CesiumUnminified目录</span></span><br><span class="line">npm run combine <span class="comment">//[不压缩并留Debug信息打包]</span></span><br><span class="line">npm run combineRelease <span class="comment">// [不压缩且不保留Debug信息打包]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行本地帮助文档，示例代码服务</span></span><br><span class="line">npm start  &lt;--port 可选端口&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行局域网内帮助文档，示例代码服务</span></span><br><span class="line">npm startPublic</span><br></pre></td></tr></table></figure></li>
+<li>本地运行<br>在运行之前，需要先运行一下 <code>npm run minify</code> 或者上面的几个打包命令（都是比较慢3分钟左右）。因为源码包里面最初是没有 <code>Build</code> 目录的，运行这个目录是先生成一个 <code>Build</code> 目录。便于后续的本地启动。<br>然后运行 <code>npm run start</code> , 默认地址为<a href="http://localhost:8080/">http://localhost:8080/</a><br><img src= "/img/loading.gif" data-lazy-src="3.png"><br>点击 <code>Sandcastle</code> 就能看到内置的Demo了<br><img src= "/img/loading.gif" data-lazy-src="4.png"></li>
+</ul>
+<h2 id="调试运行"><a href="#调试运行" class="headerlink" title="调试运行"></a>调试运行</h2><p>  源码的文件都是在 <code>Source</code> 目录下的，所以我们在调试的时候，当然是引用 <code>Source</code> 目录下的文件来实时运行调试了。因为 <code>ES6</code> 很流行了，所以调试的方式基于 <code>ES6</code> import 导入</p>
+<ol>
+<li>准备<br>首先在源码的根目录下建立一个文件夹 <code>Demo</code> ，然后里面建立两个文件 <code>demo.html</code> 和 <code>demo.js</code><br><img src= "/img/loading.gif" data-lazy-src="5.png"></li>
+<li>编写<br><code>demo.html</code>的内容如下<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line"> * @Author: Jercky </span><br><span class="line"> * @Date: 2020-12-10 11:44:14 </span><br><span class="line"> * @Last Modified by:   Jercky </span><br><span class="line"> * @Last Modified time: 2020-12-10 11:44:14 </span><br><span class="line"> */</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Use correct character set. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Tell IE to use the latest, best version. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Make the application on mobile take up the full browser screen and disable user scaling. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>源码调试<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- &lt;link rel=&quot;stylesheet&quot; href=&quot;../Source/Widgets/widgets.css&quot;&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="keyword">@import</span> url(../Source/Widgets/widgets.css);</span></span><br><span class="line"><span class="css">    <span class="selector-tag">html</span>, <span class="selector-tag">body</span>, <span class="selector-id">#cesiumContainer</span> &#123;</span></span><br><span class="line">      width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;cesiumContainer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.CESIUM_BASE_URL = <span class="string">&#x27;../Source&#x27;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;demo.js&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<code>demo.js</code>的内容如下<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @Author: Jercky </span></span><br><span class="line"><span class="comment"> * @Date: 2020-12-10 11:44:14 </span></span><br><span class="line"><span class="comment"> * @Last Modified by: Jercky</span></span><br><span class="line"><span class="comment"> * @Last Modified time: 2020-12-10 11:45:09</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Cesium <span class="keyword">from</span> <span class="string">&#x27;../../Source/Cesium.js&#x27;</span></span><br><span class="line"><span class="keyword">const</span> viewer = <span class="keyword">new</span> Cesium.Viewer(<span class="string">&#x27;cesiumContainer&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>运行<br>我用的是 <code>VsCode</code> 调试工具，有个插件 <code>Live Server</code> 很好用。 用插件打开 <code>demo.html</code> 即可在浏览器查看了<br><img src= "/img/loading.gif" data-lazy-src="6.png"></li>
+<li>修改源码实时运行<br>这里面只是做一个简单的演示。在 <code>Source/Scene/View.js</code> 中 增加打印输出。<code>console.log(&#39;new Cesium View -------------Jercky&#39;)</code><br><img src= "/img/loading.gif" data-lazy-src="7.png"><br>运行结果：<br><img src= "/img/loading.gif" data-lazy-src="8.png"></li>
+</ol>
+<h2 id="打包使用"><a href="#打包使用" class="headerlink" title="打包使用"></a>打包使用</h2><p>  当自己的源码修改完成之后，运行 <code>npm run makeZipFile</code> 就能生成和官网一样的 预编译包了。这里就不再演示了。</p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-JPnFNwJe" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-JPnFNwJe"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "我很好(吉他版)",
+              author: "刘大壮",
+              url: "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/2615/2020%E5%B9%B411%E6%9C%8809%E6%97%A517%E7%82%B949%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%90%91%E5%8D%97%E9%87%8C1%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/69921000078150841.mp3?key=54728fc3313d849a&Tim=1607569228683&channelid=00&msisdn=ebaea03448fb4d1b8bb3f811e55e85e6&CI=699210000782600919000002105660&F=000009",
+              pic: "https://cdnmusic.migu.cn/picture/2020/1207/1049/ASc97eb9599afa7f95a65cf4b576a0ffbc.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>Cesium</category>
+      </categories>
+      <tags>
+        <tag>cesium</tag>
+        <tag>webgis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cesium系列(4)--自定义Popup框</title>
     <url>/2020/10/22/Cesium%E5%85%A5%E9%97%A8-4/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium自定义Popup框"><a href="#Cesium自定义Popup框" class="headerlink" title="Cesium自定义Popup框"></a><center>Cesium自定义Popup框<center/></h2><p>在习惯了二维的Popup框之后，也想在三维里面有个。但是Cesium并没有封装过Popup框，有的只是一个悬浮固定位置的信息框，就是这样的：</p>
@@ -51,12 +112,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-OPECppbw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ZjSKrEYy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-OPECppbw"),
+            element: document.getElementById("aplayer-ZjSKrEYy"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -124,12 +185,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ZGCpaxwd" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-xgMzJwQg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ZGCpaxwd"),
+            element: document.getElementById("aplayer-xgMzJwQg"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -221,12 +282,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-waoXtcVV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-asdQJhFl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-waoXtcVV"),
+            element: document.getElementById("aplayer-asdQJhFl"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -282,12 +343,12 @@
 <p>后面会写项目中遇到的各种问题，再之后就开始写源码关于Cesium3DTiles调度的一点点研究成果  </p>
 </blockquote>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-pYsSQgdB" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-MKwKlMgk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-pYsSQgdB"),
+            element: document.getElementById("aplayer-MKwKlMgk"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -431,12 +492,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-XyakzEJT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-LnRFxjiP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-XyakzEJT"),
+            element: document.getElementById("aplayer-LnRFxjiP"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -520,12 +581,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-print-tool' target="_blank" >mapboxgl-print-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-EivHQohW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ThEjPCFr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-EivHQohW"),
+            element: document.getElementById("aplayer-ThEjPCFr"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -546,8 +607,8 @@
       </categories>
       <tags>
         <tag>mapboxgl</tag>
-        <tag>printTool</tag>
         <tag>gis</tag>
+        <tag>printTool</tag>
       </tags>
   </entry>
   <entry>
@@ -578,12 +639,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-kIgoDIGv" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-odmimrLI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-kIgoDIGv"),
+            element: document.getElementById("aplayer-odmimrLI"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -604,8 +665,8 @@
       </categories>
       <tags>
         <tag>mapboxgl</tag>
-        <tag>gis</tag>
         <tag>measureIcontrol</tag>
+        <tag>gis</tag>
       </tags>
   </entry>
   <entry>
@@ -654,12 +715,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-jGfdjXfH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-rJOFmdIr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-jGfdjXfH"),
+            element: document.getElementById("aplayer-rJOFmdIr"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -710,12 +771,12 @@
 <li><strong><code>曾经有一份真诚的爱情摆在我面前，我没有珍惜，等到了失去才后悔莫及，人世间最大的痛苦，莫过于此。如果上天能我一次机会，我一定会对那个女生说三个字，我爱你，如果要在这个感情上加个期限，我希望是一万年！</code></strong></li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-puTTrCRR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-NWUBTopP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-puTTrCRR"),
+            element: document.getElementById("aplayer-NWUBTopP"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -785,12 +846,12 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-rcTDHXDC" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-BUqsPeok" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-rcTDHXDC"),
+            element: document.getElementById("aplayer-BUqsPeok"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -871,12 +932,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-wrfgKflC" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-MpNhnUyp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-wrfgKflC"),
+            element: document.getElementById("aplayer-MpNhnUyp"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -936,12 +997,12 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ksLZVcOh" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-QUUxXePO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ksLZVcOh"),
+            element: document.getElementById("aplayer-QUUxXePO"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -975,12 +1036,12 @@ target="_blank">arcgis</a></p>
 
 <a id="more"></a>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-mDayzYaZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-TMYmwrNf" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-mDayzYaZ"),
+            element: document.getElementById("aplayer-TMYmwrNf"),
             narrow: false,
             autoplay: false,
             showlrc: false,
