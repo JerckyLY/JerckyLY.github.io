@@ -33,7 +33,7 @@ date: 2019-05-09 21:09:45
             {
                   "title": "故梦",
                   "author": "双笙",
-                  "url": "http://isure.stream.qqmusic.qq.com/C400003wVlQx1DUiBC.m4a?guid=4185918592&vkey=DC5B6CCC3404C0B9CEDDE32AF8263E2BF3187B8049ED534578C91B13E6D22BB6548EDA4D6DC94DC7F2B95B8EF82998116FA2CAE5A2CABB22&uin=0&fromtag=66",
+                  "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/c37686f6927aa2efc686.mp3/%E5%8F%8C%E7%AC%99-%E6%95%85%E6%A2%A6.mp3",
                   "pic": "https://p3fx.kgimg.com/stdmusic/20161031/20161031031155638803.jpg"
             },
             {
@@ -95,7 +95,13 @@ date: 2019-05-09 21:09:45
               "author": "刘大壮",
               "url": "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/2615/2020%E5%B9%B411%E6%9C%8809%E6%97%A517%E7%82%B949%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%90%91%E5%8D%97%E9%87%8C1%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/69921000078150841.mp3?key=54728fc3313d849a&Tim=1607569228683&channelid=00&msisdn=ebaea03448fb4d1b8bb3f811e55e85e6&CI=699210000782600919000002105660&F=000009",
               "pic": "https://cdnmusic.migu.cn/picture/2020/1207/1049/ASc97eb9599afa7f95a65cf4b576a0ffbc.jpg"
-           }
+           },
+           {
+             "title": "暗里着迷",
+             "author": "吉他的天空",
+             "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/ee1dac131f1f1efe73c0.mp3/%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA-%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7.mp3",
+             "pic": "https://imgessl.kugou.com/stdmusic/20200605/20200605154230691765.jpg"
+          }
           
     ]
 }
