@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Vue响应式原理 Vue2--Vue3对比</title>
+    <url>/2020/12/15/Vue%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Vue响应式原理-Vue2和Vue3"><a href="#Vue响应式原理-Vue2和Vue3" class="headerlink" title="Vue响应式原理 Vue2和Vue3"></a><center>Vue响应式原理 Vue2和Vue3<center/></h2><p><code>Vue</code> 作为前端三大主流框架之一，它的数据驱动视图无疑是重大特点之一。9月18号尤大发布了 <code>Vue3</code>,它比上一版本运行更快，体积更小，也增加了 <code>Composition API</code> 组合式编程，支持 <code>typeScripte</code>，优化了 <code>DOM Diff</code> 算法等一系列的优化。更加的趋向于 <code>函数式编程</code>。<br><code>Vue</code> 的知识点不少，今天就主要介绍响应式原理，看看 <code>Vue2</code> 和 <code>Vue3</code> 在这方面的区别。</p>
+<h2 id="Vue2"><a href="#Vue2" class="headerlink" title="Vue2"></a>Vue2</h2><p> 响应式或者说数据驱动视图的关键点在于我们如何知道数据发生了变化，即数据什么时候被读取或者被修改了。而这些， <code>JavaSrcipt</code> 提供了 <a href='https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty' target="_blank" >Object.defineProperty</a>   方法，改方法能很轻松的达到观察数据变化的目的。</p>
+<h3 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h3><ul>
+<li>让 <code>Object</code> 类型数据变得可观测<br> 借助 <code>Object.defineProperty</code> 很容易实现，代码如下： <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> apple = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> val = <span class="number">5</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(apple, <span class="string">&#x27;price&#x27;</span>, &#123;</span><br><span class="line">  enumerable: <span class="literal">true</span>,</span><br><span class="line">  configurable: <span class="literal">true</span>,</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;price属性被读取了&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> val</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">newVal</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;price属性被修改了&#x27;</span>)</span><br><span class="line">    val = newVal</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;price属性修改后的值为&#x27;</span>,newVal)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(apple.price)  <span class="comment">// get 获取</span></span><br><span class="line">apple.price = <span class="number">8</span>           <span class="comment">// set 修改</span></span><br></pre></td></tr></table></figure>
+ 代码中定义了一个 <code>apple</code> 对象，通过 <code>Object.defineProperty</code> 定义了一个 <code>price</code> 属性，然后对该属性的 <code>get</code> , <code>set</code> 方法进行拦截。运行结果如下：<br> <img src= "/img/loading.gif" data-lazy-src="1.png"><br> 可以看到 <code>apple</code> 对象的读写操作都主动告知了我们，那这个 <code>apple</code> 对象就是可观测的，例如：</li>
+</ul>
+<ul>
+<li>不足<br>由于 Vue 会在初始化实例时对 property 执行 getter/setter 转化，所以 property 必须在 <code>data</code> 对象上存在才能让 Vue 将它转换为响应式的。    <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  data:&#123;</span><br><span class="line">    a:<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// `vm.a` 是响应式的</span></span><br><span class="line"></span><br><span class="line">vm.b = <span class="number">2</span></span><br><span class="line"><span class="comment">// `vm.b` 是非响应式的</span></span><br></pre></td></tr></table></figure>
+ 对于已经创建的实例，Vue 不允许动态添加根级别的响应式 property。但是，可以使用 <code>Vue.set(object, propertyName, value)</code> 方法向嵌套对象添加响应式 property。例如，对于： <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.set(vm.someObject, <span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="Array数据变化监测"><a href="#Array数据变化监测" class="headerlink" title="Array数据变化监测"></a>Array数据变化监测</h3><p>  由于 <code>Array</code> 类型是无法使用 <code>Object.defineProperty</code>, 因此对于 <code>Array</code> 数据类型，需要设计一套另外的变化检测机制。</p>
+<ul>
+<li><p>getter<br>由于我们在平常的 <code>Vue</code> 项目开发中，都是在组件中的 <code>data</code> 中定义数组的：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">data ()&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    arr:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以，对于 <code>getter</code> 我们想要获取 <code>arr</code> 必须是先在 <code>data</code> 这个 <code>Object</code>类型的数据获取，那就必定触发 <code>arr</code> 的 <code>getter</code> 。因此 <code>Array</code> 类型的数据读取操作还是从 <code>getter</code> 中发出。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">  arr: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> vals = data[<span class="string">&#x27;arr&#x27;</span>]</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(data, <span class="string">&#x27;arr&#x27;</span>, &#123;</span><br><span class="line">  enumerable: <span class="literal">true</span>,</span><br><span class="line">  configurable: <span class="literal">true</span>,</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;arr属性被读取了 data&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> vals</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">newVal</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;arr属性被修改了 data&#x27;</span>)</span><br><span class="line">    vals = newVal</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(data.arr[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="3.png"></p>
+</li>
+<li><p>setter<br>对于 <code>Object</code> 数据类型，数据的操作可以从 <code>setter</code> 中得知，但是 <code>Array</code> 是没有的。不过 <code>Array</code> 提供了一些方法来操作 <code>Array</code>。 操作了 <code>Array</code> 那数据就一定是发生了变化的，那我们可以把数组的几个操作方法都重新写一遍，在不改变原有功能的基础上，增加一些其他的操作，不就可以达到目的了。这个操作可以称为数组拦截器。 </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.push(<span class="number">5</span>)</span><br><span class="line"><span class="built_in">Array</span>.prototype.newPush = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;arr被修改了&#x27;</span>)</span><br><span class="line">  <span class="built_in">this</span>.push(val)</span><br><span class="line">&#125;</span><br><span class="line">arr.newPush(<span class="number">5</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这是尤大在 <code>Vue</code> 中处理数组监听修改操作的方式，是不是很厉害。数组修改拦截器：<br><img src= "/img/loading.gif" data-lazy-src="2.png"><br>在 <code>Array</code> 原型中能改变数组内容的方法有7个，分别是 <code>pop</code> , <code>push</code>, <code>shift</code>, <code>unshift</code>, <code>splice</code>, <code>sort</code>, <code>reverse</code>。源码中的拦截器：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arrayProto = <span class="built_in">Array</span>.prototype</span><br><span class="line"><span class="keyword">const</span> arrayMethods = <span class="built_in">Object</span>.create(arrayProto)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> methodsToPatch = [</span><br><span class="line">  <span class="string">&#x27;push&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;pop&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;shift&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;unshift&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;splice&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;sort&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;reverse&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Intercept mutating methods and emit events</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">methodsToPatch.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">method</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// cache original method</span></span><br><span class="line">  <span class="keyword">const</span> original = arrayProto[method]</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(arrayMethods, method, &#123;</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span> <span class="title">mutator</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> result = original.apply(<span class="built_in">this</span>, args)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;arr属性被修改了&#x27;</span>, method)</span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;,</span><br><span class="line">    enumerable: <span class="literal">false</span>,</span><br><span class="line">    configurable: <span class="literal">true</span>,</span><br><span class="line">    writable: <span class="literal">true</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>写好了操作拦截器之后，还需要在数组对象和 <code>Array.Prototype</code> 之间挂载，使拦截器生效。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">protoAugment</span> (<span class="params">target, src</span>) </span>&#123;</span><br><span class="line">  target.__proto__ = src</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Augment a target Object or Array by defining</span></span><br><span class="line"><span class="comment"> * hidden properties.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/* istanbul ignore next */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyAugment</span> (<span class="params">target, src, keys</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = keys.length; i &lt; l; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> key = keys[i]</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(target,key,&#123;</span><br><span class="line">      value:src[key],</span><br><span class="line">      enumerable: <span class="literal">false</span>,</span><br><span class="line">      configurable: <span class="literal">true</span>,</span><br><span class="line">      writable: <span class="literal">true</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="comment">//拦截器挂载</span></span><br><span class="line"><span class="keyword">const</span> arrayKeys = <span class="built_in">Object</span>.getOwnPropertyNames(arrayMethods)</span><br><span class="line"><span class="function"><span class="title">if</span>(<span class="params"><span class="string">&#x27;__proto__&#x27;</span> <span class="keyword">in</span> &#123;&#125;</span>)</span>&#123;  <span class="comment">// 浏览器是否支持 __proto__</span></span><br><span class="line">  protoAugment(arr, arrayMethods)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  copyAugment(arr, arrayMethods, arrayKeys)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr.push(<span class="number">0</span>)</span><br><span class="line">arr.pop(<span class="number">0</span>)</span><br><span class="line">arr.shift(-<span class="number">1</span>)</span><br><span class="line">arr.unshift(-<span class="number">1</span>)</span><br><span class="line">arr.splice(<span class="number">0</span>,<span class="number">3</span>)</span><br><span class="line">arr.sort()    </span><br><span class="line">arr.reverse()</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br></pre></td></tr></table></figure>
+<p>代码中 <code>&#39;__proto__&#39; in &#123;&#125;</code> 这个是用来判断浏览器是否支持 <code>__proto__</code> 属性，如果支持就直接使用，不支持就循环定义几种操作方法。<br><img src= "/img/loading.gif" data-lazy-src="4.png"></p>
+<p>这样我们就可以得知 <code>Array</code>数据在什么时候改变了。</p>
+</li>
+<li><p>不足<br> 当我们利用索引直接操作一个数组项 <code>vm.items[indexOfItem] = newValue</code> 或者 修改数组的长度时 <code>vm.items.length = newLength</code> 都是无法达到监测的。<br> 不过可以使用 <code>Vue.set</code> 和 <code>Array.splice</code> 实现监测功能。</p>
+</li>
+</ul>
+<h2 id="Vue3"><a href="#Vue3" class="headerlink" title="Vue3"></a>Vue3</h2><p>  在 <code>Vue3</code>中，引入了ES6中的 <a href='https://es6.ruanyifeng.com/?search=Object&x=0&y=0#docs/proxy' target="_blank" >Proxy</a> 来实现对数据的监听。<br>  <code>Proxy</code> 可以理解为在目标对象之前架设了一层拦截，即拦截器，通过拦截器，来得知<code>getter</code> 和 <code>setter</code> 在何时触发。<br>  区别于 <code>Object.defineProperty</code>针对于对象的属性操作，<code>Proxy</code> 是直接操作对象的。因此，不必像 <code>Vue2</code> 那种需要分 <code>Object</code> 和 <code>Array</code> 两种类型分别处理。直接使用 <code>Proxy</code>就可以达到对两种数据的监听。</p>
+<ul>
+<li><p><code>Object</code> 类型</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">let</span> data = &#123;</span><br><span class="line">   name: <span class="string">&#x27;小明&#x27;</span>,</span><br><span class="line">   age: <span class="number">20</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">let</span> state = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data,&#123;</span><br><span class="line">   <span class="function"><span class="title">get</span>(<span class="params">obj,key</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;data &#x27;</span>+key+<span class="string">&#x27;属性被获取了&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> obj[key]</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="function"><span class="title">set</span>(<span class="params">obj,key,newVal</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;data &#x27;</span>+key+<span class="string">&#x27;属性被修改了&#x27;</span>)</span><br><span class="line">     obj[key] = newVal</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(state.name)</span><br><span class="line">state.age = <span class="number">21</span> </span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="5.png"></p>
+</li>
+<li><p><code>Array</code> 类型</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [-<span class="number">1</span>,-<span class="number">2</span>,-<span class="number">3</span>,-<span class="number">4</span>,-<span class="number">5</span>]</span><br><span class="line"> <span class="keyword">let</span> state = <span class="keyword">new</span> <span class="built_in">Proxy</span>(arr,&#123;</span><br><span class="line">   <span class="function"><span class="title">get</span>(<span class="params">obj,key</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;arr &#x27;</span>+key+<span class="string">&#x27;被获取了&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> obj[key]</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="function"><span class="title">set</span>(<span class="params">obj,key,newVal</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;arr &#x27;</span>+key+<span class="string">&#x27;被修改了&#x27;</span>)</span><br><span class="line">     obj[key] = newVal</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(state[<span class="number">0</span>])</span><br><span class="line">state.push(-<span class="number">6</span>)</span><br><span class="line">state[<span class="number">7</span>] = <span class="number">0</span></span><br><span class="line">state.splice(-<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(state)</span><br></pre></td></tr></table></figure>
+<p><img src= "/img/loading.gif" data-lazy-src="6.png"><br>使用 <code>state[7] = 0</code> 这种方式也能直接变成响应式了。是不是很强！</p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-ESebXrYJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-ESebXrYJ"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "暗里着迷",
+              author: "吉他的天空",
+              url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/ee1dac131f1f1efe73c0.mp3/%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA-%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7.mp3",
+              pic: "https://imgessl.kugou.com/stdmusic/20200605/20200605154230691765.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Web前端</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cesium系列(5)--源码编译和调试(ES6)</title>
     <url>/2020/12/10/Cesium%E5%85%A5%E9%97%A8-5/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium源码编译和调试-ES6"><a href="#Cesium源码编译和调试-ES6" class="headerlink" title="Cesium源码编译和调试(ES6)"></a><center>Cesium源码编译和调试(ES6)<center/></h2><p>作为目前来说支持大场景，海量模型数据，LOD分级渲染的三维免费开源项目 <strong><code>Cesium</code></strong> 应该是最优选择了。 保持每个月更新一次的维护效率，加上各种社区的支持， <strong><code>Cesium</code></strong> 在未来很长一段时间内都会是最优的开源选择。   </p>
@@ -32,12 +113,12 @@
 </ol>
 <h2 id="打包使用"><a href="#打包使用" class="headerlink" title="打包使用"></a>打包使用</h2><p>  当自己的源码修改完成之后，运行 <code>npm run makeZipFile</code> 就能生成和官网一样的 预编译包了。这里就不再演示了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-JPnFNwJe" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-GydNkiLm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-JPnFNwJe"),
+            element: document.getElementById("aplayer-GydNkiLm"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -112,12 +193,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ZjSKrEYy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-hKPpdwtk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ZjSKrEYy"),
+            element: document.getElementById("aplayer-hKPpdwtk"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -185,12 +266,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-xgMzJwQg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-MXPMqFtV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-xgMzJwQg"),
+            element: document.getElementById("aplayer-MXPMqFtV"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -282,12 +363,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-asdQJhFl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-bNHjNYPk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-asdQJhFl"),
+            element: document.getElementById("aplayer-bNHjNYPk"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -343,12 +424,12 @@
 <p>后面会写项目中遇到的各种问题，再之后就开始写源码关于Cesium3DTiles调度的一点点研究成果  </p>
 </blockquote>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MKwKlMgk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-vdKFuGOj" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MKwKlMgk"),
+            element: document.getElementById("aplayer-vdKFuGOj"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -492,12 +573,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-LnRFxjiP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-RuHAygnI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-LnRFxjiP"),
+            element: document.getElementById("aplayer-RuHAygnI"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -581,12 +662,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-print-tool' target="_blank" >mapboxgl-print-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ThEjPCFr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-jMTuJnDt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ThEjPCFr"),
+            element: document.getElementById("aplayer-jMTuJnDt"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -639,12 +720,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-odmimrLI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-NlAwQXQR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-odmimrLI"),
+            element: document.getElementById("aplayer-NlAwQXQR"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -715,12 +796,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-rJOFmdIr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-MNKyfvgb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-rJOFmdIr"),
+            element: document.getElementById("aplayer-MNKyfvgb"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -771,12 +852,12 @@
 <li><strong><code>曾经有一份真诚的爱情摆在我面前，我没有珍惜，等到了失去才后悔莫及，人世间最大的痛苦，莫过于此。如果上天能我一次机会，我一定会对那个女生说三个字，我爱你，如果要在这个感情上加个期限，我希望是一万年！</code></strong></li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-NWUBTopP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-xnLRNAgT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-NWUBTopP"),
+            element: document.getElementById("aplayer-xnLRNAgT"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -846,12 +927,12 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-BUqsPeok" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-qQRHZiaL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-BUqsPeok"),
+            element: document.getElementById("aplayer-qQRHZiaL"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -932,12 +1013,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MpNhnUyp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-HZLCMIZG" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MpNhnUyp"),
+            element: document.getElementById("aplayer-HZLCMIZG"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -997,12 +1078,12 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-QUUxXePO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-QMKnXDwR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-QUUxXePO"),
+            element: document.getElementById("aplayer-QMKnXDwR"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1036,26 +1117,27 @@ target="_blank">arcgis</a></p>
 
 <a id="more"></a>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-TMYmwrNf" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-wnZrcCVS" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-TMYmwrNf"),
+            element: document.getElementById("aplayer-wnZrcCVS"),
             narrow: false,
             autoplay: false,
             showlrc: false,
             music: {
               title: "故梦",
               author: "双笙",
-              url: "http://isure.stream.qqmusic.qq.com/C400003wVlQx1DUiBC.m4a?guid=4185918592&vkey=DC5B6CCC3404C0B9CEDDE32AF8263E2BF3187B8049ED534578C91B13E6D22BB6548EDA4D6DC94DC7F2B95B8EF82998116FA2CAE5A2CABB22&uin=0&fromtag=66",
+              url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/c37686f6927aa2efc686.mp3/%E5%8F%8C%E7%AC%99-%E6%95%85%E6%A2%A6.mp3",
               pic: "https://p3fx.kgimg.com/stdmusic/20161031/20161031031155638803.jpg",
               lrc: ""
             }
           });
           window.aplayers || (window.aplayers = []);
           window.aplayers.push(ap);
-        </script>]]></content>
+        </script>
+]]></content>
       <categories>
         <category>生活</category>
       </categories>
