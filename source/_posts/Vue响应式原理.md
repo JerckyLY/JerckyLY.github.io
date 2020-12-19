@@ -40,7 +40,7 @@ description: Vue系列
     ```
     代码中定义了一个 `apple` 对象，通过 `Object.defineProperty` 定义了一个 `price` 属性，然后对该属性的 `get` , `set` 方法进行拦截。运行结果如下：
     ![](1.png)
-    可以看到 `apple` 对象的读写操作都主动告知了我们，那这个 `apple` 对象就是可观测的，例如：
+    可以看到 `apple` 对象的读写操作都主动告知了我们，那这个 `apple` 对象就是可观测的。
    
     
  - 不足    
@@ -57,7 +57,7 @@ description: Vue系列
         vm.b = 2
         // `vm.b` 是非响应式的
      ```
-    对于已经创建的实例，Vue 不允许动态添加根级别的响应式 property。但是，可以使用 `Vue.set(object, propertyName, value)` 方法向嵌套对象添加响应式 property。例如，对于：
+    对于已经创建的实例，Vue 不允许动态添加根级别的响应式 property。但是，可以使用 `Vue.set(object, propertyName, value)` 方法向嵌套对象添加响应式 property。例如：
     ```js
        Vue.set(vm.someObject, 'b', 2)
     ```

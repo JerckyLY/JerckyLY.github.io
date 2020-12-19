@@ -101,7 +101,13 @@ date: 2019-05-09 21:09:45
              "author": "吉他的天空",
              "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/ee1dac131f1f1efe73c0.mp3/%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA-%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7.mp3",
              "pic": "https://imgessl.kugou.com/stdmusic/20200605/20200605154230691765.jpg"
-          }
+          },
+          {
+              "title": "海底",
+              "author": "一支榴莲",
+              "url": "https:////freetyst.nf.migu.cn/public/product9th/product41/2020/08/1910/2020%E5%B9%B408%E6%9C%8818%E6%97%A512%E7%82%B945%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%92%8C%E8%A3%95%E7%BD%91%E7%BB%9C1%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/69535601315104001.mp3?key=c75dd0ba83980f82&Tim=1608360823894&channelid=00&msisdn=2d41260208a347d9a9f986db9a16f12f&CI=695356013152600919000000720371&F=000009",
+              "pic": "https://cdnmusic.migu.cn/picture/2020/0922/1821/AS49bf94679ae7c0d49ea304e7f18e4cf3.jpg"
+           }
           
     ]
 }
