@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Cesium工具封装展示</title>
+    <url>/2021/03/18/Cesium%E5%B7%A5%E5%85%B7%E5%B0%81%E8%A3%85%E5%B1%95%E7%A4%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium基本工具封装展示"><a href="#Cesium基本工具封装展示" class="headerlink" title="Cesium基本工具封装展示"></a><center>Cesium基本工具封装展示<center/></h2><p>很久没更新博客了，最近一段时间主要是忙着整理之前项目中实现的 Cesium 相关功能，结合 Vue 对这些工具进行封装，提供一个管理的工具条组件。能按照配置文件加载需要显示的工具，以及工具间的激活互斥。同时创建 <strong>Viewer</strong> 的时候，添加了一些辅助和美化。说了再多都没用，直接上链接 <a href='http://jerckly.gitee.io/cesium-view/#/' target="_blank" >演示地址</a></p>
+ <div class="note danger flat"><blockquote>
+<p>演示中的模型是在群文件里面下载的，如有侵权请联系我，及时修改！</p>
+</blockquote>
+</div> 
+
+<h2 id="功能总览"><a href="#功能总览" class="headerlink" title="功能总览"></a>功能总览</h2> <div class="note info flat"><blockquote>
+<p>先说一哈，视频很多，道友的流量记得备足！(视频的比gif还小，我用视频了)</p>
+</blockquote>
+</div> 
+
+<ul>
+<li>整体界面<br><img src= "/img/loading.gif" data-lazy-src="1.png"><br>界面上能到到，近地天空图我换成了蓝天白云（照片也是网上找的，很粗糙 O.o）。右下角添加了经纬度坐标以及当前的帧率显示。同时美化了鼠标操作以及修改了默认的操作按键顺序（右键《==》中键）。<br><video src='1.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>雪效果<br><video src='2.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>雨效果<br><video src='3.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>空间测距<br> <video src='4.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>贴地测距<br> <video src='5.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>空间测面<br> <video src='6.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>贴地测面<br> <video src='7.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>高程测量<br> <video src='8.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>方位角测量<br> <video src='9.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>土方量测量<br>   <video src='10.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>可视域分析<br>   <video src='11.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>通视分析<br>   <video src='12.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>缓冲区分析<br>   <video src='13.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>日照分析<br>   <video src='14.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>多边形视频融合<br>  <video src='15.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>第一人称路径漫游<br>  <video src='16.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的功能很多都是按照 火星科技 里面的案例为原型来实现。还有一部分功能没有加上去，后续会添加。比如标绘，二三维联动等等。在封装的过程中，因为是结合 Vue 来实现的，由于Vue 的监听机制原因，所以三维里面很多定义的变量是不能放到 <strong>data</strong> 里面去的， 切记 <strong>props</strong> 也不行。当然知道和去真正实现还是有差距的，前面就是因为吃过这个亏，所以每次激活功能的时候，帧率就会下降。也是调了半天才发现的。在这里当作反面教材给大家提醒一下，切记！！！<br> <div class="note danger flat"><blockquote>
+<p>实例化的 Cesium.Viewer() 不能放到 Vue 中的 <strong>data</strong> 和 <strong>props</strong>中。不然会很卡顿！！！</p>
+</blockquote>
+</div> </p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-EzFUIMfx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-EzFUIMfx"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "你应该很快乐",
+              author: "虎二",
+              url: "https://freetyst.nf.migu.cn/public/product5th/product35/2019/11/1310/2019%E5%B9%B411%E6%9C%8811%E6%97%A514%E7%82%B915%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103486.mp3?key=179ebe1b401a1026&Tim=1616140847963&channelid=00&msisdn=b2a5086abb09405c82b502bc446b1e97&CI=632541034862600913000007296966&F=000009",
+              pic: "https://cdnmusic.migu.cn/picture/2020/0802/0246/AS6e9ed85020aa374dbc96a3125eabf4f2.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>Cesium</category>
+      </categories>
+  </entry>
+  <entry>
     <title>VueRouter原理与实现</title>
     <url>/2020/12/18/VueRouter%E5%8E%9F%E7%90%86%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="VueRouter原理与实现"><a href="#VueRouter原理与实现" class="headerlink" title="VueRouter原理与实现"></a><center>VueRouter原理与实现<center/></h2><p>我们在平常的 <code>Vue</code> 项目开发中，应该都是用过 <code>VueRouter</code> 和 <code>Vuex</code> 这两个重要的插件。今天就主要研究一下 <code>VueRouter</code> 的是原理是什么，然后自己简单实现一个基础版本的 <code>VueRouter</code>。 <a href='https://github.com/vuejs/vue-router' target="_blank" >VueRouter源码地址</a></p>
@@ -118,12 +180,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   OK，总算是写完了。 <code>VueRouter</code> 的核心原理如果仔细看完上面的，应该是明白的。上面的代码可以在 <strong>github</strong> 获取。<a href='https://github.com/JerckyLY/VueCustomRouterDemo' target="_blank" >地址</a> 。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-kEsOucWJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ToTOYkQh" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-kEsOucWJ"),
+            element: document.getElementById("aplayer-ToTOYkQh"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -200,12 +262,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MUvOSRiA" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ihaZIONe" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MUvOSRiA"),
+            element: document.getElementById("aplayer-ihaZIONe"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -261,12 +323,12 @@
 </ol>
 <h2 id="打包使用"><a href="#打包使用" class="headerlink" title="打包使用"></a>打包使用</h2><p>  当自己的源码修改完成之后，运行 <code>npm run makeZipFile</code> 就能生成和官网一样的 预编译包了。这里就不再演示了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-wrOkbYrd" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-tUEYiOzo" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-wrOkbYrd"),
+            element: document.getElementById("aplayer-tUEYiOzo"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -341,12 +403,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-iMaIQaBV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-MmwnERWH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-iMaIQaBV"),
+            element: document.getElementById("aplayer-MmwnERWH"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -414,12 +476,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-fRtEKeyT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-hVKBlzXW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-fRtEKeyT"),
+            element: document.getElementById("aplayer-hVKBlzXW"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -511,12 +573,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-neSrdaLp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-VReDYFRY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-neSrdaLp"),
+            element: document.getElementById("aplayer-VReDYFRY"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -572,12 +634,12 @@
 <p>后面会写项目中遇到的各种问题，再之后就开始写源码关于Cesium3DTiles调度的一点点研究成果  </p>
 </blockquote>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-QRFJOBCq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-fPyGGtfR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-QRFJOBCq"),
+            element: document.getElementById("aplayer-fPyGGtfR"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -721,12 +783,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-DNzwIrtK" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-JLdGMzIB" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-DNzwIrtK"),
+            element: document.getElementById("aplayer-JLdGMzIB"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -810,12 +872,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-print-tool' target="_blank" >mapboxgl-print-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-UzvPQtCp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-yIpsescq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-UzvPQtCp"),
+            element: document.getElementById("aplayer-yIpsescq"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -868,12 +930,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-IwgkwAwg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-LtweoCWO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-IwgkwAwg"),
+            element: document.getElementById("aplayer-LtweoCWO"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -944,12 +1006,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-PAwgQozT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-TDmBeaSd" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-PAwgQozT"),
+            element: document.getElementById("aplayer-TDmBeaSd"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1000,12 +1062,12 @@
 <li><strong><code>曾经有一份真诚的爱情摆在我面前，我没有珍惜，等到了失去才后悔莫及，人世间最大的痛苦，莫过于此。如果上天能我一次机会，我一定会对那个女生说三个字，我爱你，如果要在这个感情上加个期限，我希望是一万年！</code></strong></li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-czqZgBUQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-hezPcWWI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-czqZgBUQ"),
+            element: document.getElementById("aplayer-hezPcWWI"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1075,12 +1137,12 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-SBPyqyhy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ybWiUqJb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-SBPyqyhy"),
+            element: document.getElementById("aplayer-ybWiUqJb"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1161,12 +1223,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-sbXbbUVM" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-HlAPtltR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-sbXbbUVM"),
+            element: document.getElementById("aplayer-HlAPtltR"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1226,12 +1288,12 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-dhemiTts" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-iXnhsOyo" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-dhemiTts"),
+            element: document.getElementById("aplayer-iXnhsOyo"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1265,12 +1327,12 @@ target="_blank">arcgis</a></p>
 
 <a id="more"></a>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-RiOHQtbI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-WTIaiJGZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-RiOHQtbI"),
+            element: document.getElementById("aplayer-WTIaiJGZ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
