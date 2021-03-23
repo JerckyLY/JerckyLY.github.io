@@ -113,6 +113,12 @@ date: 2019-05-09 21:09:45
               "author": "虎二",
               "url": "https://freetyst.nf.migu.cn/public/product5th/product35/2019/11/1310/2019%E5%B9%B411%E6%9C%8811%E6%97%A514%E7%82%B915%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103486.mp3?key=179ebe1b401a1026&Tim=1616140847963&channelid=00&msisdn=b2a5086abb09405c82b502bc446b1e97&CI=632541034862600913000007296966&F=000009",
               "pic": "https://cdnmusic.migu.cn/picture/2020/0802/0246/AS6e9ed85020aa374dbc96a3125eabf4f2.jpg"
+           },
+          {
+              "title": "明天会更好",
+              "author": "群星",
+              "url": "https://freetyst.nf.migu.cn/public/product4th/product36/2019/09/1617/2019%E5%B9%B409%E6%9C%8802%E6%97%A516%E7%82%B940%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%BB%9A%E7%9F%B3%E5%94%B1%E7%89%87%E8%AF%8D%E6%9B%B2%E9%A2%84%E7%95%991%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63480216478.mp3?key=ee020ad0d1687cc2&Tim=1616494755978&channelid=00&msisdn=37b679460fd043d3825ba69cf3f19009&CI=634802164782600913000006049674&F=000009",
+              "pic": "https://cdnmusic.migu.cn/picture/2020/1017/1021/AS8c9ff20208cb76c25a4362d74bec3ec0.jpg"
            }
           
     ]
