@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Cesium系列(6)--点线面缓冲区</title>
+    <url>/2021/03/23/Cesium%E5%85%A5%E9%97%A8-6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium点线面缓冲区实现"><a href="#Cesium点线面缓冲区实现" class="headerlink" title="Cesium点线面缓冲区实现"></a><center>Cesium点线面缓冲区实现<center/></h2><p>上篇文章主要展示了我最近封装的一些常用工具，接下来几篇文章主要介绍相关功能的实现。这篇文章就介绍一下关于三维缓冲区的实现原理。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>其实从事 Webgis 相关的道友都用过或者听过 <strong>turf.js</strong> 这个前端 <strong>GIS</strong> <strong>javascript</strong>分析库 (什么？没听过？ 道友，最近游戏红尘了吧，哈哈<br>~), <a href='https://turfjs.fenxianglu.cn/category/' target="_blank" >中文文档地址</a>。<strong>turf.js</strong>  提供了很多分析方法，具体我就不展开说了，一个是我了解的也不是很清楚，另一个就是人家写的很详细<br>了，就不班门弄斧了。<br>三维缓冲区和二维缓冲区实现方式是一样的，都是基于 <strong>turf.js</strong> 的 <strong>buffer</strong> 方法，传入相关的参数，然后将生成的 <strong>Feature</strong> 展示就行了。</p>
+<ul>
+<li>buffer 方法<br><img src= "/img/loading.gif" data-lazy-src="1.png"></li>
+<li>buffer 使用示例<br><img src= "/img/loading.gif" data-lazy-src="2.png"></li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>参数很简单，一个是要缓冲的基础几何对象，一个是缓冲半径，默认是千米。基本的绘制交互就不说了，核心的代码如下：</p>
+<ul>
+<li>点缓冲区<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建点缓冲区</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">CesiumBufferUtil.prototype.createPointBuffer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//添加点</span></span><br><span class="line">  <span class="built_in">this</span>.addPoint()</span><br><span class="line"></span><br><span class="line">  <span class="comment">//添加点的缓冲区</span></span><br><span class="line">  <span class="keyword">const</span> coordinate = <span class="built_in">this</span>.cartesianToLatlng(<span class="built_in">this</span>.positions[<span class="number">0</span>]).slice(<span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">let</span> pointF = turf.point(coordinate)</span><br><span class="line">  <span class="keyword">let</span> buffered = turf.buffer(pointF, <span class="built_in">this</span>.radius)</span><br><span class="line">  <span class="keyword">let</span> coordinates = buffered.geometry.coordinates;</span><br><span class="line">  <span class="keyword">let</span> points = coordinates[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">let</span> degreesArray = <span class="built_in">this</span>.pointsToDegreesArray(points);</span><br><span class="line">  <span class="built_in">this</span>.createBuffer(Cesium.Cartesian3.fromDegreesArray(degreesArray))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>线缓冲区<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建线缓冲区</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">CesiumBufferUtil.prototype.createLineBuffer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> points = <span class="built_in">this</span>.getLngLats(); <span class="comment">// 坐标数组</span></span><br><span class="line">  <span class="keyword">var</span> polylineF = turf.lineString(points);</span><br><span class="line">  <span class="keyword">var</span> bufferd = turf.buffer(polylineF, <span class="built_in">this</span>.radius);</span><br><span class="line">  <span class="keyword">var</span> coordinates = bufferd.geometry.coordinates;</span><br><span class="line">  points = coordinates[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">var</span> degreesArray = <span class="built_in">this</span>.pointsToDegreesArray(points)</span><br><span class="line">  <span class="built_in">this</span>.createBuffer(Cesium.Cartesian3.fromDegreesArray(degreesArray))</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>面缓冲区<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 多边形缓冲区</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">CesiumBufferUtil.prototype.createPolygonBuffer = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> points = <span class="built_in">this</span>.getLngLats(); <span class="comment">// 坐标数组</span></span><br><span class="line">  points.push(points[<span class="number">0</span>])</span><br><span class="line">  <span class="keyword">var</span> polygonF = turf.polygon([points]);</span><br><span class="line">  <span class="keyword">var</span> bufferd = turf.buffer(polygonF, <span class="built_in">this</span>.radius);</span><br><span class="line">  <span class="keyword">var</span> coordinates = bufferd.geometry.coordinates;</span><br><span class="line">  points = coordinates[<span class="number">0</span>]</span><br><span class="line">  <span class="keyword">var</span> degreesArray = <span class="built_in">this</span>.pointsToDegreesArray(points)</span><br><span class="line">  <span class="built_in">this</span>.createBuffer(Cesium.Cartesian3.fromDegreesArray(degreesArray))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>通用缓冲区生成函数<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成缓冲区</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Array&#125;</span> </span>array  坐标数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">CesiumBufferUtil.prototype.createBuffer = <span class="function"><span class="keyword">function</span> (<span class="params">array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> bufferPolygon = <span class="built_in">this</span>.viewer.entities.add(&#123;</span><br><span class="line">    polygon: &#123;</span><br><span class="line">      hierarchy: <span class="keyword">new</span> Cesium.PolygonHierarchy(array),</span><br><span class="line">      material: Cesium.Color.RED.withAlpha(<span class="number">0.6</span>),</span><br><span class="line">      classificationType: Cesium.ClassificationType.BOTH</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="built_in">this</span>.bufferEntities.push(bufferPolygon)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>相关方法<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">       </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取经纬度坐标数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">CesiumBufferUtil.prototype.getLngLats = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> arr = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">this</span>.positions.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> item = <span class="built_in">this</span>.cartesianToLatlng(<span class="built_in">this</span>.positions[i]);</span><br><span class="line">    arr.push(item.slice(<span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 转经纬度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;*&#125;</span> </span>cartesian </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">CesiumBufferUtil.prototype.cartesianToLatlng = <span class="function"><span class="keyword">function</span> (<span class="params">cartesian</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> latlng = <span class="built_in">this</span>.viewer.scene.globe.ellipsoid.cartesianToCartographic(</span><br><span class="line">    cartesian</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">var</span> lat = Cesium.Math.toDegrees(latlng.latitude);</span><br><span class="line">  <span class="keyword">var</span> lng = Cesium.Math.toDegrees(latlng.longitude);</span><br><span class="line">  <span class="keyword">var</span> height = latlng.height</span><br><span class="line">  <span class="keyword">return</span> [lng, lat, height];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//二维数组转一维数组</span></span><br><span class="line">CesiumBufferUtil.prototype.pointsToDegreesArray = <span class="function"><span class="keyword">function</span> (<span class="params">points</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> degreesArray = [];</span><br><span class="line">  points.map(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    degreesArray.push(item[<span class="number">0</span>]);</span><br><span class="line">    degreesArray.push(item[<span class="number">1</span>]);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> degreesArray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>  <img src= "/img/loading.gif" data-lazy-src="3.png"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>缓冲区实现的过程很简单，没什么可多说的，需要注意的是二维三维坐标的转换，二维面的坐标数组要闭合。其他的就是正常的实现就行了。</p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-doYwiyNL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-doYwiyNL"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "明天会更好",
+              author: "群星",
+              url: "https://freetyst.nf.migu.cn/public/product4th/product36/2019/09/1617/2019%E5%B9%B409%E6%9C%8802%E6%97%A516%E7%82%B940%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%BB%9A%E7%9F%B3%E5%94%B1%E7%89%87%E8%AF%8D%E6%9B%B2%E9%A2%84%E7%95%991%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63480216478.mp3?key=ee020ad0d1687cc2&Tim=1616494755978&channelid=00&msisdn=37b679460fd043d3825ba69cf3f19009&CI=634802164782600913000006049674&F=000009",
+              pic: "https://cdnmusic.migu.cn/picture/2020/1017/1021/AS8c9ff20208cb76c25a4362d74bec3ec0.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>Cesium</category>
+      </categories>
+      <tags>
+        <tag>cesium</tag>
+        <tag>webgis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cesium工具封装展示</title>
     <url>/2021/03/18/Cesium%E5%B7%A5%E5%85%B7%E5%B0%81%E8%A3%85%E5%B1%95%E7%A4%BA/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium基本工具封装展示"><a href="#Cesium基本工具封装展示" class="headerlink" title="Cesium基本工具封装展示"></a><center>Cesium基本工具封装展示<center/></h2><p>很久没更新博客了，最近一段时间主要是忙着整理之前项目中实现的 Cesium 相关功能，结合 Vue 对这些工具进行封装，提供一个管理的工具条组件。能按照配置文件加载需要显示的工具，以及工具间的激活互斥。同时创建 <strong>Viewer</strong> 的时候，添加了一些辅助和美化。说了再多都没用，直接上链接 <a href='http://jerckly.gitee.io/cesium-view/#/' target="_blank" >演示地址</a></p>
@@ -37,12 +89,12 @@
 </blockquote>
 </div> </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-EzFUIMfx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-OxyhdYNX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-EzFUIMfx"),
+            element: document.getElementById("aplayer-OxyhdYNX"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -180,12 +232,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   OK，总算是写完了。 <code>VueRouter</code> 的核心原理如果仔细看完上面的，应该是明白的。上面的代码可以在 <strong>github</strong> 获取。<a href='https://github.com/JerckyLY/VueCustomRouterDemo' target="_blank" >地址</a> 。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ToTOYkQh" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-xKJbFwvi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ToTOYkQh"),
+            element: document.getElementById("aplayer-xKJbFwvi"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -262,12 +314,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ihaZIONe" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-qXCyaJVt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ihaZIONe"),
+            element: document.getElementById("aplayer-qXCyaJVt"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -323,12 +375,12 @@
 </ol>
 <h2 id="打包使用"><a href="#打包使用" class="headerlink" title="打包使用"></a>打包使用</h2><p>  当自己的源码修改完成之后，运行 <code>npm run makeZipFile</code> 就能生成和官网一样的 预编译包了。这里就不再演示了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-tUEYiOzo" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-FkiobwAZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-tUEYiOzo"),
+            element: document.getElementById("aplayer-FkiobwAZ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -403,12 +455,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MmwnERWH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ojAVQGYv" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MmwnERWH"),
+            element: document.getElementById("aplayer-ojAVQGYv"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -476,12 +528,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-hVKBlzXW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-eLAnYDgk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-hVKBlzXW"),
+            element: document.getElementById("aplayer-eLAnYDgk"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -573,12 +625,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-VReDYFRY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-yWjeZIts" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-VReDYFRY"),
+            element: document.getElementById("aplayer-yWjeZIts"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -634,12 +686,12 @@
 <p>后面会写项目中遇到的各种问题，再之后就开始写源码关于Cesium3DTiles调度的一点点研究成果  </p>
 </blockquote>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-fPyGGtfR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-qfwtumZJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-fPyGGtfR"),
+            element: document.getElementById("aplayer-qfwtumZJ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -783,12 +835,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-JLdGMzIB" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-yxAqWtUw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-JLdGMzIB"),
+            element: document.getElementById("aplayer-yxAqWtUw"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -872,12 +924,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-print-tool' target="_blank" >mapboxgl-print-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-yIpsescq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-LkUNSfpp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-yIpsescq"),
+            element: document.getElementById("aplayer-LkUNSfpp"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -930,12 +982,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-LtweoCWO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-LadavbPi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-LtweoCWO"),
+            element: document.getElementById("aplayer-LadavbPi"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1006,12 +1058,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-TDmBeaSd" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-KLpoOXlb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-TDmBeaSd"),
+            element: document.getElementById("aplayer-KLpoOXlb"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1062,12 +1114,12 @@
 <li><strong><code>曾经有一份真诚的爱情摆在我面前，我没有珍惜，等到了失去才后悔莫及，人世间最大的痛苦，莫过于此。如果上天能我一次机会，我一定会对那个女生说三个字，我爱你，如果要在这个感情上加个期限，我希望是一万年！</code></strong></li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-hezPcWWI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-WjRdzhwn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-hezPcWWI"),
+            element: document.getElementById("aplayer-WjRdzhwn"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1137,12 +1189,12 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ybWiUqJb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-zAqTxNsx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ybWiUqJb"),
+            element: document.getElementById("aplayer-zAqTxNsx"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1223,12 +1275,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-HlAPtltR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-YafuEDHz" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-HlAPtltR"),
+            element: document.getElementById("aplayer-YafuEDHz"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1288,12 +1340,12 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-iXnhsOyo" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-WAmybtHK" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-iXnhsOyo"),
+            element: document.getElementById("aplayer-WAmybtHK"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1327,12 +1379,12 @@ target="_blank">arcgis</a></p>
 
 <a id="more"></a>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-WTIaiJGZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-nxBIFVrD" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-WTIaiJGZ"),
+            element: document.getElementById("aplayer-nxBIFVrD"),
             narrow: false,
             autoplay: false,
             showlrc: false,
