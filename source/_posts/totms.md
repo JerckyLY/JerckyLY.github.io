@@ -8,6 +8,7 @@ categories: GIS
 ***
 
 <center>祝愿所有的妈妈们，节日快乐！</center>
+
 ***
 
 ## 地图服务切片简介
@@ -31,8 +32,7 @@ tms目录规则(图片是网上copy的)：
 ![tms](tma.png)
 
 &nbsp;&nbsp;&nbsp;&nbsp;通过图片，能看到三种的目录规则是不一样的，那么当我们想要离线部署时就不方便了。因此,把geoserver或者arcgis的切片目录规则转成google--tms或者标准的tms(这两个区别主要是切片源点不一样，google--tms源点是在左上角，标准的tms源点是在左下角)
-然后用<a href='http://nginx.org/en/' target="_blank"
-\>Nginx</a>代理一下，就能很容易实现离线部署。
+然后用<a href='http://nginx.org/en/' target="_blank" />Nginx</a>代理一下，就能很容易实现离线部署。
 
 ## 代码资源
 
