@@ -1,6 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>node-sqlite3简易后台搭建</title>
+    <url>/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="node-sqlite3简易后台搭建"><a href="#node-sqlite3简易后台搭建" class="headerlink" title="node-sqlite3简易后台搭建"></a><center>node-sqlite3简易后台搭建<center/></h2><p>最近项目需要写一个演示用的三维Demo，其中要有用户管理界面，能对用户进行增删改查操作。当然这都是小需求，随便就写了，也<br>没啥。但是给我说没人给我写接口（内心：嗯，嗯???)。虽然做过一段时间的全栈开发，突然让我写后台，我还是有点不适应。但是没<br>办法，任务来了，干吧！<br>之前写的是 <strong>Java</strong> + <strong>Mysql</strong> + <strong>SpringBoot</strong> 后台，但是一个简单的用户管理，再加一个登录的接口，我是真心不想用（其实忘了不少，不<br>会了 哈哈）。作为一个 <strong>WebGIS</strong> 码农，最熟悉的还是 <strong>JavaScript</strong> 。那能用 <strong>Js</strong> 写后台的莫过于 <strong>Node</strong>了，再结合 <strong>express</strong> 库，很轻便的<br>就可以搭建一个后台。接下来就是数据库了。目前，开源免费，又小巧轻便的 <strong>sqlite</strong> 多合适啊。 同时 <strong>Node</strong> 也有 <strong>sqlite3</strong> JS库可以操作<br>它。OK，技术选型定了，接下来就开始实现吧。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>对应<strong>Node</strong>的安装和配置，各位道友了解的比我都清楚，我就不多说了。主要讲一下 <strong>sqlite3</strong>的安装</p>
+<ul>
+<li><p>sqlite3 (windows)数据库安装<br> 下载地址 <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a><br> 需要下载 <strong>sqlite-dll-win32-86-xx.zip</strong> 或者 <strong>sqlite-dll-win64-xx.zip</strong> 以及 <strong>sqlite-tools-win32-x86-xx.zip</strong><br> <img src= "/img/loading.gif" data-lazy-src="1.png"><br> 把这两个解压之后，里面的文件放到一个文件夹下<br> <img src= "/img/loading.gif" data-lazy-src="2.png"><br> 然后在系统的环境变量中，在 <strong>Path</strong> 变量里面把存放 <strong>sqlit3</strong> 的文件夹路径添加进去<br> <img src= "/img/loading.gif" data-lazy-src="3.png"><br> 最后检查一下是否安装成功 在cmd 命令行中输入 <strong>sqlit3</strong> 回车。如果安装成功出现会入下图所示：<br> <img src= "/img/loading.gif" data-lazy-src="4.png"></p>
+</li>
+<li><p>SQLiteStudio 可视化工具<br> 数据库用命令行操作还是不方便，<strong>SQLiteStudio</strong> 是开源，且支持多平台的一个 <strong>sqlite</strong> 可视化软件。<br> 下载地址： <a href="https://sqlitestudio.pl/">https://sqlitestudio.pl/</a><br> 解压文件，找到 <strong>SQLiteStudio.exe</strong> 双击打开，初次加载，需要选择语言，找到中文即可：<br> <img src= "/img/loading.gif" data-lazy-src="5.png"></p>
+</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li><p>建库<br>利用 <strong>SQLiteStudio</strong> 新建一个数据库。 Database –&gt; Add a database :<br><img src= "/img/loading.gif" data-lazy-src="6.png"><br>1 是新建，2是打开。 新建的时候，选好文件夹，然后输入数据库的名称就行了。因为我之前建立了，就直接选择打开。<br><img src= "/img/loading.gif" data-lazy-src="7.png"><br>点击测试连接，出现绿色对号。说明连接正常。然后点击 OK。<br><img src= "/img/loading.gif" data-lazy-src="8.png"></p>
+</li>
+<li><p>建表<br>在 <strong>test.db</strong> 里面，我已经建好了一个 <strong>user</strong> 表格，有 <strong>id</strong> 、<strong>name</strong> 、 <strong>password</strong> 还有 <strong>create_time</strong> 四个字段。你可以用工具创建，也<br>可以手动创建。表的SQL语句：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">    id          STRING (256) PRIMARY KEY</span><br><span class="line">                             UNIQUE</span><br><span class="line">                             NOT NULL,</span><br><span class="line">    name        STRING (64)  NOT NULL,</span><br><span class="line">    password    STRING (128) NOT NULL,</span><br><span class="line">    create_time DATETIME     NOT NULL</span><br><span class="line">                             DEFAULT (datetime(&#39;now&#39;, &#39;localtime&#39;) ) </span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2></li>
+<li><p>创建项目<br>建立一个文件夹，然后 cmd 命令 初始化:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装依赖<br>用的基础的 <strong>express</strong> 创建 Server, 然后用 <strong>sqlite3</strong>库来操作数据库。用 <strong>uuid</strong> 来生成随机的id。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm i express sqlite3 uuid --save</span><br></pre></td></tr></table></figure>
+<p>package.json内容如下：<br><img src= "/img/loading.gif" data-lazy-src="9.png"> </p>
+</li>
+<li><p>代码使用 sqlite3<br>api 简介：<br><img src= "/img/loading.gif" data-lazy-src="10.png"></p>
+<ol>
+<li><p>代码打开数据库</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sqlite3 = <span class="built_in">require</span>(<span class="string">&quot;sqlite3&quot;</span>).verbose()</span><br><span class="line"><span class="comment">// sqlites数据库地址</span></span><br><span class="line"><span class="keyword">let</span> sqliteDbPath = <span class="string">&quot;D:\\01_Software\\Program File\\sqlite3\\DB\\test.db&quot;</span></span><br><span class="line"><span class="comment">// 打开sqlites数据库</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> sqlite3.Database(sqliteDbPath)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增用户</p>
+<blockquote>
+<p>post的请求时，从 <strong>request.body</strong> 中获取请求数据，需要配置一下</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建 express 应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;));<span class="comment">//添加通用的JSON和URL编码的解析器作为顶级中间件，该中间件将解析所有传入请求的主体。</span></span><br><span class="line">app.use(express.json());</span><br></pre></td></tr></table></figure>
+<p>如果你的express的版本不是4.x及以上 那么需要用到 <strong>body-parser</strong> 库来代替 <strong>express</strong>。</p>
+</blockquote>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> bodyParse = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建 express 应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line">app.use(bodyParse.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;));<span class="comment">//添加通用的JSON和URL编码的解析器作为顶级中间件，该中间件将解析所有传入请求的主体。</span></span><br><span class="line">app.use(bodyParse.json());</span><br></pre></td></tr></table></figure>
+<p> 新增用户的代码</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新增接口</span></span><br><span class="line"><span class="keyword">const</span> addUser = <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> param =  req.body;</span><br><span class="line">    <span class="keyword">const</span> name = param.name;</span><br><span class="line">    <span class="keyword">const</span> password = param.password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> uid = uuid()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> add_sql = <span class="string">`insert into user (id , name ,password ) values(?,?,?)`</span></span><br><span class="line">    db.run(add_sql,[uid,name,password],<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="function"><span class="title">if</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                msg:<span class="string">&#x27;插入失败&#x27;</span>,</span><br><span class="line">                ret:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        res.send(&#123;</span><br><span class="line">            code:<span class="number">200</span>,</span><br><span class="line">            msg:<span class="string">&#x27;插入成功&#x27;</span>,</span><br><span class="line">            ret:<span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p> 上述代码是从 <strong>request.body</strong> 获取提交的用户名 <strong>name</strong> 和密码 <strong>password</strong>，然后利用 <strong>uuid</strong> 生成一个 <strong>id</strong>，之后写了一个插入的sql<br> 语句 <strong>add_sql</strong>。 然后用到了 <strong>sqlite3</strong> 的 <strong>run</strong> 方法来执行sql语句。代码很简单都是基本的插入语句。<br> 启动应用，利用<strong>postman</strong> 测试一下：<br> <img src= "/img/loading.gif" data-lazy-src="11.png"><br> 结果返回插入成功，同时刷新数据库，能看到插入的最新的一条数据。</p>
+</li>
+<li><p>修改用户<br> 修改的逻辑是根据用户的 <strong>id</strong> 对用户名和密码进行修改。</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//更新</span></span><br><span class="line"><span class="keyword">const</span> updateUser = <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> param =  req.body;</span><br><span class="line">    <span class="keyword">const</span> password = param.password;</span><br><span class="line">    <span class="keyword">const</span> name = param.name;</span><br><span class="line">    <span class="keyword">const</span> id = param.id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> update_sql = <span class="string">`update user set name=?, password = ? where id = ?`</span>;</span><br><span class="line">    db.run(update_sql,[name,password,id],<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="function"><span class="title">if</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                msg:<span class="string">&#x27;更新失败&#x27;</span>,</span><br><span class="line">                ret:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span>  data = &#123;</span><br><span class="line">            code:<span class="number">200</span>,</span><br><span class="line">            ret:<span class="literal">true</span>,</span><br><span class="line">            msg:<span class="string">&#x27;更新成功&#x27;</span></span><br><span class="line">        &#125; ;</span><br><span class="line"></span><br><span class="line">        res.send(data)</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 测试结果如下：<br> <img src= "/img/loading.gif" data-lazy-src="12.png"></p>
+</li>
+<li><p>查询用户<br>查询全部数据</p>
+<pre><code class="js">    //查询全部数据
+    const getAll = function(res)&#123;
+        db.all(`select * from user order by create_time desc  `,function (err,row) &#123;
+            if(err)&#123;
+                res.send(&#123;
+                    msg:&#39;查询失败&#39;,
+                    ret:false
+                &#125;)
+            &#125;
+
+            const data = &#123;
+                    code:200,
+                    data:row,
+                    ret:true,
+                    msg:&#39;查询成功&#39;
+                &#125;
+
+            // console.log(data)
+            res.send(data)
+        &#125;)
+    &#125;</code></pre>
+<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="13.png"></p>
+</li>
+<li><p>删除用户<br>根据用户 <strong>id</strong> 删除用户。</p>
+<pre><code class="js">    //删除
+    const delUser = function(req,res)&#123;
+        const param = req.query || req.params ;
+        const id = param.id;
+        const del_sql =    `delete from user where id = ?`;
+        db.run(del_sql,[id],function (err) &#123;
+            if(err)&#123;
+                res.send(&#123;
+                    msg:&#39;删除失败&#39;,
+                    ret:false
+                &#125;)
+            &#125;
+
+            res.send(&#123;
+                code:200,
+                ret:true,
+                msg:&#39;删除成功&#39;
+            &#125;)
+        &#125;)
+    &#125;</code></pre>
+<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="14.png"> </p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/node-sqlite3-server-demo' target="_blank" >node-sqlite3-server-demo</a>  </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  总体实现还是挺简单的，也没什么复杂的 SQL 语句。部署的时候，可以把 <strong>Node</strong> 安装为 window服务，就不用担心客户那边服务器关机了。</p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-OXLxsPne" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-OXLxsPne"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "大鱼",
+              author: "周深/郭沁",
+              url: "https://freetyst.nf.migu.cn/public/product5th/product27/2018/12/21/2018%E5%B9%B410%E6%9C%8819%E6%97%A516%E7%82%B923%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%A2%A6%E5%93%8D%E5%BC%BA%E9%9F%B3186%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6404689Z0HE.mp3?key=b74e16bf79b5983a&Tim=1616640844447&channelid=00&msisdn=b30efb370c4f44fdb04710eaad359cd9&CI=6404689Z0HE2600913000000634056&F=000009",
+              pic: "https://cdnmusic.migu.cn/picture/2020/0216/1135/AM9e357dde4ae7a59634b1ea6ba2c077ab.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+
+]]></content>
+      <categories>
+        <category>Node</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+        <tag>Sqlite3</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cesium系列(6)--点线面缓冲区</title>
     <url>/2021/03/23/Cesium%E5%85%A5%E9%97%A8-6/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium点线面缓冲区实现"><a href="#Cesium点线面缓冲区实现" class="headerlink" title="Cesium点线面缓冲区实现"></a><center>Cesium点线面缓冲区实现<center/></h2><p>上篇文章主要展示了我最近封装的一些常用工具，接下来几篇文章主要介绍相关功能的实现。这篇文章就介绍一下关于三维缓冲区的实现原理。</p>
@@ -23,12 +151,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>缓冲区实现的过程很简单，没什么可多说的，需要注意的是二维三维坐标的转换，二维面的坐标数组要闭合。其他的就是正常的实现就行了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-doYwiyNL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-YmlkbTkM" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-doYwiyNL"),
+            element: document.getElementById("aplayer-YmlkbTkM"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -89,12 +217,12 @@
 </blockquote>
 </div> </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-OxyhdYNX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-eLaTWuJT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-OxyhdYNX"),
+            element: document.getElementById("aplayer-eLaTWuJT"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -232,12 +360,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   OK，总算是写完了。 <code>VueRouter</code> 的核心原理如果仔细看完上面的，应该是明白的。上面的代码可以在 <strong>github</strong> 获取。<a href='https://github.com/JerckyLY/VueCustomRouterDemo' target="_blank" >地址</a> 。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-xKJbFwvi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-SCzgGfyi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-xKJbFwvi"),
+            element: document.getElementById("aplayer-SCzgGfyi"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -314,12 +442,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-qXCyaJVt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-HcRjdeIC" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-qXCyaJVt"),
+            element: document.getElementById("aplayer-HcRjdeIC"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -375,12 +503,12 @@
 </ol>
 <h2 id="打包使用"><a href="#打包使用" class="headerlink" title="打包使用"></a>打包使用</h2><p>  当自己的源码修改完成之后，运行 <code>npm run makeZipFile</code> 就能生成和官网一样的 预编译包了。这里就不再演示了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-FkiobwAZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-VhYJkYwD" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-FkiobwAZ"),
+            element: document.getElementById("aplayer-VhYJkYwD"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -455,12 +583,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ojAVQGYv" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-oBPwTAZg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ojAVQGYv"),
+            element: document.getElementById("aplayer-oBPwTAZg"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -528,12 +656,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-eLAnYDgk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-oSfWddsu" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-eLAnYDgk"),
+            element: document.getElementById("aplayer-oSfWddsu"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -625,12 +753,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-yWjeZIts" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-OYLKnecD" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-yWjeZIts"),
+            element: document.getElementById("aplayer-OYLKnecD"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -686,12 +814,12 @@
 <p>后面会写项目中遇到的各种问题，再之后就开始写源码关于Cesium3DTiles调度的一点点研究成果  </p>
 </blockquote>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-qfwtumZJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-CWFyKiFz" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-qfwtumZJ"),
+            element: document.getElementById("aplayer-CWFyKiFz"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -835,12 +963,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-yxAqWtUw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-yTsAZdBg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-yxAqWtUw"),
+            element: document.getElementById("aplayer-yTsAZdBg"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -924,12 +1052,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-print-tool' target="_blank" >mapboxgl-print-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-LkUNSfpp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-rNtkxcfq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-LkUNSfpp"),
+            element: document.getElementById("aplayer-rNtkxcfq"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -982,12 +1110,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-LadavbPi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-xaSWTnxH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-LadavbPi"),
+            element: document.getElementById("aplayer-xaSWTnxH"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1058,12 +1186,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-KLpoOXlb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-jKQbMHFX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-KLpoOXlb"),
+            element: document.getElementById("aplayer-jKQbMHFX"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1114,12 +1242,12 @@
 <li><strong><code>曾经有一份真诚的爱情摆在我面前，我没有珍惜，等到了失去才后悔莫及，人世间最大的痛苦，莫过于此。如果上天能我一次机会，我一定会对那个女生说三个字，我爱你，如果要在这个感情上加个期限，我希望是一万年！</code></strong></li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-WjRdzhwn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ePZxhfaV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-WjRdzhwn"),
+            element: document.getElementById("aplayer-ePZxhfaV"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1189,12 +1317,12 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-zAqTxNsx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-YudwQHHq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-zAqTxNsx"),
+            element: document.getElementById("aplayer-YudwQHHq"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1275,12 +1403,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-YafuEDHz" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-PkcQJnTy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-YafuEDHz"),
+            element: document.getElementById("aplayer-PkcQJnTy"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1316,8 +1444,8 @@
     <url>/2019/05/12/totms/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr>
 <center>祝愿所有的妈妈们，节日快乐！</center>
-***
 
+<hr>
 <h2 id="地图服务切片简介"><a href="#地图服务切片简介" class="headerlink" title="地图服务切片简介"></a>地图服务切片简介</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;关于切片网上有很多的介绍，在此不再多余赘述，想要了解可以看<a
 href="https://segmentfault.com/a/1190000011276788"
 target="_blank">这里</a> 目前我接触到主流的切片生成工具是：arcgis,geoserver。它们各自都有一套自己的切片目录规则。</p>
@@ -1334,18 +1462,18 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <li>其中’L03’代表等级为3，”R00000002”中的’R’是行即 y,’00000002’为行号是16进制的数值。’C00000001’中的’C’是列即 x,’00000001’为列号，16进制数值</li>
 </ul>
 <p>tms目录规则(图片是网上copy的)：<br><img src= "/img/loading.gif" data-lazy-src="tma.png" alt="tms"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;通过图片，能看到三种的目录规则是不一样的，那么当我们想要离线部署时就不方便了。因此,把geoserver或者arcgis的切片目录规则转成google–tms或者标准的tms(这两个区别主要是切片源点不一样，google–tms源点是在左上角，标准的tms源点是在左下角)<br>然后用&lt;a href=’<a href="http://nginx.org/en/&#39;">http://nginx.org/en/&#39;</a> target=”_blank”<br>&gt;Nginx</a>代理一下，就能很容易实现离线部署。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;通过图片，能看到三种的目录规则是不一样的，那么当我们想要离线部署时就不方便了。因此,把geoserver或者arcgis的切片目录规则转成google–tms或者标准的tms(这两个区别主要是切片源点不一样，google–tms源点是在左上角，标准的tms源点是在左下角)<br>然后用<a href='http://nginx.org/en/' target="_blank" />Nginx</a>代理一下，就能很容易实现离线部署。</p>
 <h2 id="代码资源"><a href="#代码资源" class="headerlink" title="代码资源"></a>代码资源</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;关于这两种的转换，我已经写好了，放到了github中，其中geoserver是针对3857坐标系的.pbf文件，其他的目录结构请适当修改即可。</p>
 <p>1、 <a href="https://github.com/JerckyLY/geoserverToTMS" target="_blank">geoserver</a> </p>
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-WAmybtHK" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-tlMFMYzw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-WAmybtHK"),
+            element: document.getElementById("aplayer-tlMFMYzw"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1379,12 +1507,12 @@ target="_blank">arcgis</a></p>
 
 <a id="more"></a>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-nxBIFVrD" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-yrSJELPV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-nxBIFVrD"),
+            element: document.getElementById("aplayer-yrSJELPV"),
             narrow: false,
             autoplay: false,
             showlrc: false,
