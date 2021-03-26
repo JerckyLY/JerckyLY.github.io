@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Cesium系列(7)--方位角测量</title>
+    <url>/2021/03/26/Cesium%E5%85%A5%E9%97%A8-7/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium方位角测量-仿火星科技"><a href="#Cesium方位角测量-仿火星科技" class="headerlink" title="Cesium方位角测量(仿火星科技)"></a><center>Cesium方位角测量(仿火星科技)<center/></h2><p>接着之前的通用工具介绍来讲，今天主要介绍方位角测量。仿照火星科技的例子实现，可以连续测量。先上图：<br><img src= "/img/loading.gif" data-lazy-src="1.png"></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>首先明白什么是方位角，百度百科介绍：</p>
+<blockquote>
+<p>方位角，又称地平经度(Azimuth angle，缩写为Az)，是在平面上量度物体之间的角度差的方法之一。是从某点的指北方向线起，依顺时针方向到目标方向线之间的水平夹角。</p>
+</blockquote>
+<p>从定义中得到几个关键信息：</p>
+<ul>
+<li>两个点， 起点和目标点</li>
+<li>两点间顺时针的水平夹角</li>
+</ul>
+<p>根据上面的信息，想到的方法就是，根据起点建立一个 x东方向，y为北方向的局部坐标系(或者y为东，x为北)，计算出目标点在这个坐标系的局部坐标值，然后利用三角函数 <strong>arctan</strong>计算出夹角(图中角A的值)。<br><img src= "/img/loading.gif" data-lazy-src="2.png"></p>
+<p><strong>Cesium</strong> 中提供了建立局部坐标系的方法</p>
+<ul>
+<li>以x为北，y东的局部坐标系<br><img src= "/img/loading.gif" data-lazy-src="3.png"></li>
+<li>以y为北，x东的局部坐标系<br><img src= "/img/loading.gif" data-lazy-src="4.png"></li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>核心代码如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算两个点的方位角度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lng_a</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lat_a</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lng_b</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lat_b</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="title">courseAngle</span>(<span class="params">lng_a, lat_a, lng_b, lat_b</span>)</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以a点为原点建立局部坐标系（东方向为y轴,北方向为x轴,垂直于地面为z轴），得到一个局部坐标到世界坐标转换的变换矩阵</span></span><br><span class="line">    <span class="comment">// const localToWorld_Matrix = Cesium.Transforms.northEastDownToFixedFrame(</span></span><br><span class="line">    <span class="comment">//     new Cesium.Cartesian3.fromDegrees(lng_a, lat_a)</span></span><br><span class="line">    <span class="comment">// );</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以a点为原点建立局部坐标系（东方向为x轴,北方向为y轴,垂直于地面为z轴），得到一个局部坐标到世界坐标转换的变换矩阵</span></span><br><span class="line">    <span class="keyword">const</span> localToWorld_Matrix = Cesium.Transforms.eastNorthUpToFixedFrame(</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3.fromDegrees(lng_a, lat_a)</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//求世界坐标到局部坐标的变换矩阵</span></span><br><span class="line">    <span class="keyword">const</span> worldToLocal_Matrix = Cesium.Matrix4.inverse(</span><br><span class="line">        localToWorld_Matrix,</span><br><span class="line">        <span class="keyword">new</span> Cesium.Matrix4()</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//a点在局部坐标的位置，其实就是局部坐标原点</span></span><br><span class="line">    <span class="keyword">const</span> localPosition_A = Cesium.Matrix4.multiplyByPoint(</span><br><span class="line">        worldToLocal_Matrix,</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3.fromDegrees(lng_a, lat_a),</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3()</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//B点在以A点为原点的局部的坐标位置</span></span><br><span class="line">    <span class="keyword">const</span> localPosition_B = Cesium.Matrix4.multiplyByPoint(</span><br><span class="line">        worldToLocal_Matrix,</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3.fromDegrees(lng_b, lat_b),</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3()</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//弧度</span></span><br><span class="line">    <span class="comment">// const angle = Math.atan2(</span></span><br><span class="line">    <span class="comment">//     localPosition_B.y - localPosition_A.y,</span></span><br><span class="line">    <span class="comment">//     localPosition_B.x - localPosition_A.x</span></span><br><span class="line">    <span class="comment">// );</span></span><br><span class="line">    <span class="comment">//弧度</span></span><br><span class="line">    <span class="keyword">const</span> angle = <span class="built_in">Math</span>.atan2(</span><br><span class="line">        localPosition_B.x - localPosition_A.x,</span><br><span class="line">        localPosition_B.y - localPosition_A.y</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//角度</span></span><br><span class="line">    <span class="keyword">let</span> theta = angle * (<span class="number">180</span> / <span class="built_in">Math</span>.PI);</span><br><span class="line">    <span class="keyword">if</span> (theta &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        theta = theta + <span class="number">360</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> theta;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我是按照以x轴为东方向，y为北方向为局部坐标系建立的(另一种方向的计算也写了出来，请自行查看)。主要就是弧度计算的时候，是以 <strong>△y</strong> 为对边 还是以 <strong>△x</strong> 为对边求来结果。</p>
+<p><strong><code>天不生我李淳罡，剑道万古如长夜</code></strong></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-yXTNIVIT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-yXTNIVIT"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "一生所爱",
+              author: "卢冠廷",
+              url: "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/1212/2018%E5%B9%B411%E6%9C%8810%E6%97%A517%E7%82%B915%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E6%AD%A3%E4%B8%9C96%E9%A6%96-14/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005661L4UR120847.mp3?key=630618d18d18efbe&Tim=1616756337808&channelid=00&msisdn=815357fdc13c49918109ab2a83bcbf1c&CI=6005661L4UR2600910000009386457&F=000009",
+              pic: "https://cdnmusic.migu.cn/picture/2020/0727/1400/AS281933668a3d761be7a02ce37b24e5a2.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+]]></content>
+      <categories>
+        <category>Cesium</category>
+      </categories>
+      <tags>
+        <tag>cesium</tag>
+        <tag>webgis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>node-sqlite3简易后台搭建</title>
     <url>/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="node-sqlite3简易后台搭建"><a href="#node-sqlite3简易后台搭建" class="headerlink" title="node-sqlite3简易后台搭建"></a><center>node-sqlite3简易后台搭建<center/></h2><p>最近项目需要写一个演示用的三维Demo，其中要有用户管理界面，能对用户进行增删改查操作。当然这都是小需求，随便就写了，也<br>没啥。但是给我说没人给我写接口（内心：嗯，嗯???)。虽然做过一段时间的全栈开发，突然让我写后台，我还是有点不适应。但是没<br>办法，任务来了，干吧！<br>之前写的是 <strong>Java</strong> + <strong>Mysql</strong> + <strong>SpringBoot</strong> 后台，但是一个简单的用户管理，再加一个登录的接口，我是真心不想用（其实忘了不少，不<br>会了 哈哈）。作为一个 <strong>WebGIS</strong> 码农，最熟悉的还是 <strong>JavaScript</strong> 。那能用 <strong>Js</strong> 写后台的莫过于 <strong>Node</strong>了，再结合 <strong>express</strong> 库，很轻便的<br>就可以搭建一个后台。接下来就是数据库了。目前，开源免费，又小巧轻便的 <strong>sqlite</strong> 多合适啊。 同时 <strong>Node</strong> 也有 <strong>sqlite3</strong> JS库可以操作<br>它。OK，技术选型定了，接下来就开始实现吧。</p>
@@ -98,12 +154,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/node-sqlite3-server-demo' target="_blank" >node-sqlite3-server-demo</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  总体实现还是挺简单的，也没什么复杂的 SQL 语句。部署的时候，可以把 <strong>Node</strong> 安装为 window服务，就不用担心客户那边服务器关机了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-PQBHOtJu" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-wXvOhHyo" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-PQBHOtJu"),
+            element: document.getElementById("aplayer-wXvOhHyo"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -152,12 +208,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>缓冲区实现的过程很简单，没什么可多说的，需要注意的是二维三维坐标的转换，二维面的坐标数组要闭合。其他的就是正常的实现就行了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ktwbPYyV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-TwADWmoe" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ktwbPYyV"),
+            element: document.getElementById("aplayer-TwADWmoe"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -218,12 +274,12 @@
 </blockquote>
 </div> </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-rUcNYmzD" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-BWOuoRRU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-rUcNYmzD"),
+            element: document.getElementById("aplayer-BWOuoRRU"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -361,12 +417,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   OK，总算是写完了。 <code>VueRouter</code> 的核心原理如果仔细看完上面的，应该是明白的。上面的代码可以在 <strong>github</strong> 获取。<a href='https://github.com/JerckyLY/VueCustomRouterDemo' target="_blank" >地址</a> 。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-pkQtnXxn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-cGREFBfX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-pkQtnXxn"),
+            element: document.getElementById("aplayer-cGREFBfX"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -443,12 +499,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ThkyZeOZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-RLvEPGXp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ThkyZeOZ"),
+            element: document.getElementById("aplayer-RLvEPGXp"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -504,12 +560,12 @@
 </ol>
 <h2 id="打包使用"><a href="#打包使用" class="headerlink" title="打包使用"></a>打包使用</h2><p>  当自己的源码修改完成之后，运行 <code>npm run makeZipFile</code> 就能生成和官网一样的 预编译包了。这里就不再演示了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-TjLnanBw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-fdRiXanS" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-TjLnanBw"),
+            element: document.getElementById("aplayer-fdRiXanS"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -584,12 +640,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-JJRGJXMR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-IfwGEcxl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-JJRGJXMR"),
+            element: document.getElementById("aplayer-IfwGEcxl"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -657,12 +713,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-BZqXGtmD" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-PghOsnhl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-BZqXGtmD"),
+            element: document.getElementById("aplayer-PghOsnhl"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -754,12 +810,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-qczaFIiH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-mEVVMzwL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-qczaFIiH"),
+            element: document.getElementById("aplayer-mEVVMzwL"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -815,12 +871,12 @@
 <p>后面会写项目中遇到的各种问题，再之后就开始写源码关于Cesium3DTiles调度的一点点研究成果  </p>
 </blockquote>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-QmlBDvCt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-zBKOYjPd" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-QmlBDvCt"),
+            element: document.getElementById("aplayer-zBKOYjPd"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -964,12 +1020,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MHnAnaAW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-GSvTDAAX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MHnAnaAW"),
+            element: document.getElementById("aplayer-GSvTDAAX"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -989,9 +1045,9 @@
         <category>GIS</category>
       </categories>
       <tags>
+        <tag>mapboxgl</tag>
         <tag>npm</tag>
         <tag>webpack</tag>
-        <tag>mapboxgl</tag>
         <tag>webgl</tag>
       </tags>
   </entry>
@@ -1053,12 +1109,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-print-tool' target="_blank" >mapboxgl-print-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-CeyErkYw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-rYwRZrdg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-CeyErkYw"),
+            element: document.getElementById("aplayer-rYwRZrdg"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1111,12 +1167,12 @@
 <li>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-owDsHRhG" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-nXjSGaaI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-owDsHRhG"),
+            element: document.getElementById("aplayer-nXjSGaaI"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1187,12 +1243,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-SKKlzeDG" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-nqCUzhzm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-SKKlzeDG"),
+            element: document.getElementById("aplayer-nqCUzhzm"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1243,12 +1299,12 @@
 <li><strong><code>曾经有一份真诚的爱情摆在我面前，我没有珍惜，等到了失去才后悔莫及，人世间最大的痛苦，莫过于此。如果上天能我一次机会，我一定会对那个女生说三个字，我爱你，如果要在这个感情上加个期限，我希望是一万年！</code></strong></li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-UMuZmrIS" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-UAAVUhzc" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-UMuZmrIS"),
+            element: document.getElementById("aplayer-UAAVUhzc"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1318,12 +1374,12 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-tZIEVYYL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-iDzTZwuS" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-tZIEVYYL"),
+            element: document.getElementById("aplayer-iDzTZwuS"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1404,12 +1460,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-GMNvHECi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-FFcNNHAW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-GMNvHECi"),
+            element: document.getElementById("aplayer-FFcNNHAW"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1469,12 +1525,12 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-wjQJdAcT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-yOhQNQcT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-wjQJdAcT"),
+            element: document.getElementById("aplayer-yOhQNQcT"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1508,12 +1564,12 @@ target="_blank">arcgis</a></p>
 
 <a id="more"></a>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-OUnYpWzI" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-xSYzKeFm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-OUnYpWzI"),
+            element: document.getElementById("aplayer-xSYzKeFm"),
             narrow: false,
             autoplay: false,
             showlrc: false,
