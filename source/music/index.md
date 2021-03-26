@@ -125,6 +125,12 @@ date: 2019-05-09 21:09:45
               "author": "周深/郭沁",
               "url": "https://freetyst.nf.migu.cn/public/product5th/product27/2018/12/21/2018%E5%B9%B410%E6%9C%8819%E6%97%A516%E7%82%B923%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%A2%A6%E5%93%8D%E5%BC%BA%E9%9F%B3186%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6404689Z0HE.mp3?key=b74e16bf79b5983a&Tim=1616640844447&channelid=00&msisdn=b30efb370c4f44fdb04710eaad359cd9&CI=6404689Z0HE2600913000000634056&F=000009",
               "pic": "https://cdnmusic.migu.cn/picture/2020/0216/1135/AM9e357dde4ae7a59634b1ea6ba2c077ab.jpg"
+          },
+          {
+              "title": "一生所爱",
+              "author": "卢冠廷",
+              "url": "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/1212/2018%E5%B9%B411%E6%9C%8810%E6%97%A517%E7%82%B915%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E6%AD%A3%E4%B8%9C96%E9%A6%96-14/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005661L4UR120847.mp3?key=630618d18d18efbe&Tim=1616756337808&channelid=00&msisdn=815357fdc13c49918109ab2a83bcbf1c&CI=6005661L4UR2600910000009386457&F=000009",
+              "pic": "https://cdnmusic.migu.cn/picture/2020/0727/1400/AS281933668a3d761be7a02ce37b24e5a2.jpg"
            }
           
     ]
