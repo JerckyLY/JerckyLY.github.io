@@ -1,5 +1,5 @@
 ---
-title: Cesium系列(1)--Vue3 + Cesium 快速构建
+title: Cesium系列(1)--Vue-cli3 + Cesium 快速构建
 date: 2020-07-01 21:06:13
 tags: 
  - cesium 
@@ -9,7 +9,7 @@ description: Cesium系列
 top_img: view1.png
 ---
 
-## <center>vue3集成Cesium的vue.config.js配置<center/>
+## <center>vue-cli3集成Cesium的vue.config.js配置<center/>
 
 ## 前言
   2020年给你讲个笑话，鹅厂被骗了。hhhhhhh。   
@@ -17,7 +17,7 @@ top_img: view1.png
   言归正传，新的一年，不管经历了什么都要继续。今年准备从二维转战三维了，开源免费的目前也就是Cesium了。之前一直都知道这个，只是从来没有真正的使用过，接触过。刚开始的时候，就看了一天的资料，也就是本地运行一下，大致看了一下代码和案例。然后就给我一个项目让我直接该需求了，头两天也是有点手忙脚乱，现在大概了解一点了，就记录一下最近遇到的问题。
  
 ## 步骤
-  1. 有个vue3的项目, 然后用 **npm** 命令去安装 **cesium**
+  1. 有个vue-cli3的项目, 然后用 **npm** 命令去安装 **cesium**
     ```
        npm i cesium  或者 cnpm i cesium 
     ```
@@ -158,4 +158,3 @@ top_img: view1.png
 
 ## 音乐小憩
 {% aplayer "我曾" "隔壁老樊" "//freetyst.nf.migu.cn/public/productBe/productB01/2019/08/0717/2019%E5%B9%B403%E6%9C%8801%E6%97%A516%E7%82%B937%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103405.mp3?key=f5f6bf49ae541152&Tim=1597915519527&channelid=00&msisdn=7189f4cfa3ba4332ab8ddd058a1fb038&CI=632541034052600913000002629846&F=000009" "https://cdnmusic.migu.cn/picture/2020/0801/0249/ASf1b833147de26840e610c45b96643885.jpg"  %}
-    

@@ -120,7 +120,7 @@ top_img: top_img.png
  3. 功能和事件
    + 方法：
      - 设置弹窗标题的方法 **setTitle(title:String)** 
-     - 设置弹窗位置方法 **setTitle(setPosition:Cesium.Cartesian3)** 
+     - 设置弹窗位置方法 **setPosition(position:Cesium.Cartesian3)** 
      - 设置弹窗内容方法 **setHTML(html:HTML)** 
      - 设置弹窗偏移量方法 **setOffset(offset:Array)** 默认[0,0]
      - 弹窗添加到Viewer里面  **addTo(viewer:Viewer)**
