@@ -7,7 +7,7 @@ date: 2019-05-09 21:09:45
 {
     "narrow": false,                         
     "autoplay": true,                        
-    "mode": "random",
+    "mode": "fix",
     "mutex": true,                        
     "theme": "#e6d0b2",	                     
     "listmaxheight": "600px",               
@@ -131,7 +131,19 @@ date: 2019-05-09 21:09:45
               "author": "卢冠廷",
               "url": "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/1212/2018%E5%B9%B411%E6%9C%8810%E6%97%A517%E7%82%B915%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E6%AD%A3%E4%B8%9C96%E9%A6%96-14/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005661L4UR120847.mp3?key=630618d18d18efbe&Tim=1616756337808&channelid=00&msisdn=815357fdc13c49918109ab2a83bcbf1c&CI=6005661L4UR2600910000009386457&F=000009",
               "pic": "https://cdnmusic.migu.cn/picture/2020/0727/1400/AS281933668a3d761be7a02ce37b24e5a2.jpg"
-           }
+           },
+           {
+               "title": "你就是我想要的丫头",
+               "author": "赵照",
+               "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/XeRkJhB3eGQuQFhF77UpWOV3GcaCLd1L/%E4%BD%A0%E5%B0%B1%E6%98%AF%E6%88%91%E6%83%B3%E8%A6%81%E7%9A%84%E4%B8%AB%E5%A4%B4-%E8%B5%B5%E7%85%A7.mp3",
+               "pic": "https://imgessl.kugou.com/stdmusic/20200909/20200909105356271665.jpg"
+            } ,
+            {
+               "title": "光明",
+               "author": "谭艳",
+               "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/8RbBFGccu3ci0lH0LqAl6O8WUBlLXNC8/%E8%B0%AD%E8%89%B3%20-%20%E5%85%89%E6%98%8E.mp3",
+               "pic": "https://imgessl.kugou.com/stdmusic/20210113/20210113211448850090.jpg"
+            } 
           
     ]
 }
