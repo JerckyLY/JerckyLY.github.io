@@ -25,8 +25,10 @@ categories: GIS
    - <a href="http://postgis.net/docs/ST_AsMVT.html" target="_blank">ST_AsMVT</a> 是postgis提供的空间函数，能够返回矢量切片，它和<a href="http://postgis.net/docs/ST_AsMVTGeom.html" target="_blank">ST_AsMVTGeom</a>是同时使用的。   
    ![st_AsMVT](02.png)
    <center>ST_AsMVT</center>   
+   
    ![st_AsMVTGeom](01.png)
-   <center>ST_AsMVTGeom</center>    
+   <center>ST_AsMVTGeom</center>   
+    
    - ST_AsMVTGeom能够对给定范围查询出来的矢量，并转换为屏幕坐标，然后ST_AsMVT对数据进行压缩，返回.mvt格式。
 
 ## 矢量切片服务器
