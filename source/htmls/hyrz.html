@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>火影忍者经典战役破解168集</title>
+    <style>
+        body{
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .tool-item{
+            color: white;
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            text-align: left;
+            z-index: 99999999;
+        }
+
+    </style>
+</head>
+<body >
+<div class="tool-item">
+    <button onclick="reduce()">上一集</button>
+    <button onclick="add()">下一集</button>
+    <br/>
+    <span>选集：</span>
+    <input type="number" style="width: 55px" id="numberValue" min="1" max="168">
+    <br/>
+    <button onclick="change()">跳转</button>
+    <span>共168集</span>
+</div>
+<iframe id="videoIframe" style="height: 90%;width: 100%" frameborder="0"></iframe>
+<script>
+    const itemName = 'video_count'
+    let count = parseInt(localStorage.getItem(itemName)) || 1
+
+    window.onload = function () {
+        localStorage.setItem(itemName,count)
+        document.getElementById('numberValue').value = count
+        changUrl(count)
+    }
+    function add() {
+        count++
+        localStorage.setItem(itemName,count)
+        changUrl(count)
+    }
+    function reduce() {
+        count--
+        localStorage.setItem(itemName,count)
+        changUrl(count)
+    }
+
+    function change() {
+        const value = document.getElementById('numberValue').value
+        count = value
+        localStorage.setItem(itemName,count)
+        changUrl(count)
+    }
+
+    function changUrl(number) {
+        document.getElementById('numberValue').value = number
+        document.getElementById('videoIframe').style.height = window.innerHeight + 'px'
+        document.getElementById('videoIframe').src =
+         `https://www.qianyicp.com/jiexi/?url=https://v.youku.com/v_show/id_XMjgzNTA5MjUzMg==.html?spm=a2hbt.13141534.1_2.${number}&s=efbfbd78efbfbd6749ef`
+
+        document.getElementsByClassName('dplayer-video dplayer-video-current')[0].setAttribute('x5-video-orientation','landscape|portrait')
+    }
+
+</script>
+</body>
+</html>
