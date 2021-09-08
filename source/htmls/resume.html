@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>简历</title>
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="resume/vant/index.css" rel="external nofollow" target="_blank">
+    <link rel="stylesheet" href="resume/index.css" target="_blank">
+    <link rel="shortcut icon" href="resume/favicon.ico">
+    <!-- 引入 Vue 和 Vant 的 JS 文件 -->
+    <script src="resume/vue/vue.min.js"></script>
+    <script src="resume/vant/vant.min.js" rel="external nofollow"></script>
+    <script src="resume/vant/touch-emulator.js"></script>
+    <script src="resume/vue/jinrishici.js" charset="utf-8"></script>
+</head>
+<body>
+<script type="text/javascript" size="90" alpha="0.2" zIndex="0" src="resume/vue/ribbon.js"></script>
+
+<div id="app">
+    <div class="nav-box">
+        <div class="nav-panel">
+            <span @click="jump(index)" v-for="(item,index) in navList" :class="[{'active':currentIndex=== index}]"
+                  :key="index">{{item.name}}</span>
+        </div>
+    </div>
+    <!--         <div class="header-title">-->
+    <!--             <div class="header-item">Jercky</div>-->
+    <!--             <div class="header-item typing" id="jinrishici-sentence">....</div>-->
+    <!--         </div>-->
+    <div class="main-body">
+        <van-list style="margin-top: 60px">
+            <div class="main-view">
+                <h2>个人信息</h2>
+                <van-row>
+                    <van-col class="main-item" span="16">
+                        <van-row>
+                            <van-col span="11">姓名：刘Sir</van-col>
+                            <van-col span="5">年龄： {{age}}</van-col>
+                        </van-row>
+                        <van-row>
+                            <van-col span="11">电话：152*******6</van-col>
+                            <van-col span="5">工作年限：{{work}} 年</van-col>
+                        </van-row>
+                        <van-row>
+                            <van-col span="11">邮箱：1743877040@qq.com</van-col>
+                        </van-row>
+                    </van-col>
+                    <van-col span="6">
+                        <van-image
+                                width="120"
+                                fit="contain"
+                                src="./resume/2.jpg"
+                        />
+                    </van-col>
+                </van-row>
+            </div>
+            <div class="main-view">
+                <h2>求职意向</h2>
+                <van-row>
+                    <van-col class="main-item" span="16">从事职业：WEBGIS 工程师</van-col>
+                </van-row>
+            </div>
+            <div class="main-view">
+                <h2>教育背景</h2>
+                <van-row>
+                    <van-col class="main-item" span="8">
+                        就读时间：2013.09-2017.06
+                    </van-col>
+                    <van-col class="main-item" span="8">
+                        院校名称：北京建筑大学
+                    </van-col>
+                    <van-col class="main-item" span="8">
+                        所学专业：地理信息科学(本科)
+                    </van-col>
+                </van-row>
+            </div>
+            <div class="main-view">
+                <h2>工作经历</h2>
+                <van-row>
+                    <van-col class="main-item" span="3">例图开关：</van-col>
+                    <van-col span="6">
+                        <van-switch size="24px"  v-model="checked" />
+                    </van-col>
+                </van-row>
+
+                <template v-for="item in WorkConfig">
+                    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa'}"></van-divider>
+                    <van-row>
+                        <van-col class="main-item company-item" span="9">
+                            公司名称：{{item.companyName}}
+                        </van-col>
+                        <van-col class="main-item company-item" span="7">
+                            职位名称：{{item.jobName}}
+                        </van-col>
+                        <van-col class="main-item company-item" span="8">
+                            在职时间：{{item.workDate}}
+                        </van-col>
+                    </van-row>
+                    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa'}"></van-divider>
+                    <template v-for="(list,index) in item.list">
+                        <h3>{{index+1}}、{{list.title}}</h3>
+                        <van-row>
+                            <van-col class="main-item" span="3">项目描述：</van-col>
+                            <van-col span="21">{{list.des}}</van-col>
+                        </van-row>
+                        <van-row>
+                            <van-col class="main-item" span="3">项目职责：</van-col>
+                            <van-col span="21">{{list.part}}</van-col>
+                        </van-row>
+                        <template v-if="checked">
+                            <van-row v-if="list.img.length>0">
+                                <van-col class="main-item" span="3">项目例图：</van-col>
+                            </van-row>
+                            <van-swipe :autoplay="3000">
+                                <van-swipe-item @mousedown="mousedown" @mousemove="mousemove"
+                                                @click="isClick ?previewImg(list.img,index):''"
+                                                v-for="(image, index) in list.img" :key="index">
+                                    <van-image :style="{pointerEvents: 'none'}" height="50%" width="100%" :src="image">
+                                        <template v-slot:loading>
+                                            <van-loading type="spinner" size="20" />
+                                        </template>
+                                    </van-image>
+                                </van-swipe-item>
+                            </van-swipe>
+                        </template>
+                    </template>
+                </template>
+            </div>
+            <div class="main-view">
+                <h2>掌握技能</h2>
+                <template v-for="(item,index) in SkillConfig">
+                    <div v-if="item.url" class="skill-item">{{index + 1}}、{{item.title}}<a :href="item.url" target="_blank"> {{item.url}}</a></div>
+                    <div v-else class="skill-item">{{index + 1}}、{{item.title}}</div>
+                </template>
+            </div>
+            <div class="main-view">
+                <h2>获奖情况</h2>
+                <template v-for="(item,index) in AwardConfig">
+                    <div  class="skill-item">{{index + 1}}、{{item.title}}</div>
+                </template>
+            </div>
+        </van-list>
+    </div>
+
+
+</div>
+</body>
+<script src="resume/config.js"></script>
+
+<script src="resume/index.js"></script>
+</html>
