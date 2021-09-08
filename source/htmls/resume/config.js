@@ -153,15 +153,29 @@ const SkillConfig = [
 //获奖
 const AwardConfig = [
     {
-        title:'2014国家励志奖学金。'
+        title:'2014国家励志奖学金。',
+        img:[
+            './resume/img/award/1.png',
+        ]
     },
     {
-        title:'2015个人奖学金。'
+        title:'2015个人奖学金。',
+        img:[
+            './resume/img/award/2.png',
+        ]
     },
     {
-        title:'2016国家励志奖学金，2016学习进步奖学金。'
+        title:'2016国家励志奖学金，2016学习进步奖学金。',
+        img:[
+            './resume/img/award/3.png',
+            './resume/img/award/4.png',
+        ]
     },
     {
-        title:'2020年国土资源（广东）科学技术二等奖。'
+        title:'2020年国土资源（广东）科学技术二等奖。',
+        img:[
+            './resume/img/award/5.png',
+            './resume/img/award/6.png',
+        ]
     },
 ]

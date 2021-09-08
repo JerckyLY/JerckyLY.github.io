@@ -18,6 +18,7 @@ new Vue({
     data(){
         return{
             checked:true,
+            awardChecked:false,
             isClick: true,
             currentIndex:0,
             scroll: '',

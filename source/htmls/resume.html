@@ -137,8 +137,27 @@
             </div>
             <div class="main-view">
                 <h2>获奖情况</h2>
+                <van-row>
+                    <van-col class="main-item" span="3">视图开关：</van-col>
+                    <van-col span="6">
+                        <van-switch size="24px"  v-model="awardChecked" />
+                    </van-col>
+                </van-row>
                 <template v-for="(item,index) in AwardConfig">
                     <div  class="skill-item">{{index + 1}}、{{item.title}}</div>
+                    <template v-if="awardChecked">
+                        <van-swipe :autoplay="3000">
+                            <van-swipe-item :style="{height:'50%'}"   @mousedown="mousedown" @mousemove="mousemove"
+                                            @click="isClick ?previewImg(item.img,index):''"
+                                            v-for="(image, index) in item.img" :key="index">
+                                <van-image :style="{pointerEvents: 'none'}"  width="100%" :src="image">
+                                    <template v-slot:loading>
+                                        <van-loading type="spinner" size="20" />
+                                    </template>
+                                </van-image>
+                            </van-swipe-item>
+                        </van-swipe>
+                    </template>
                 </template>
             </div>
         </van-list>
