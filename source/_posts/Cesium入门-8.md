@@ -8,6 +8,7 @@ categories: Cesium
 description: Cesium系列
 top_img: 2.png
 ---
+
 ## <center>Cesium自定义帧率显示<center/>
 
  **Cesium** 提供了不少用于调试的工具，特别方便在开发的时候使用。其中帧率显示特别方便我们对性能调试。因为帧率到了30以下就基

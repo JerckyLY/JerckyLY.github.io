@@ -143,7 +143,13 @@ date: 2019-05-09 21:09:45
                "author": "谭艳",
                "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/8RbBFGccu3ci0lH0LqAl6O8WUBlLXNC8/%E8%B0%AD%E8%89%B3%20-%20%E5%85%89%E6%98%8E.mp3",
                "pic": "https://imgessl.kugou.com/stdmusic/20210113/20210113211448850090.jpg"
-            } 
+            } ,
+           {
+              "title": "道道道",
+              "author": "国语",
+              "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/UuHgt2XXkgrCo2MuTJ3Jamu0yKVEOqQp/%E5%9B%BD%E8%AF%AD-%E9%81%93%E9%81%93%E9%81%93.mp3",
+              "pic": "https://imgessl.kugou.com/stdmusic/20150718/20150718141335609634.jpg"
+           } 
           
     ]
 }
