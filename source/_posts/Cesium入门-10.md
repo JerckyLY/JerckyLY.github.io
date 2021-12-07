@@ -96,6 +96,7 @@ top_img: 1.png
   </video> 
 
 最后加上卷帘的效果
+ - 卷帘
   <video   controls width='100%' autoplay height='100%'>
       <source src="3.mp4" type="video/mp4">
   </video> 
