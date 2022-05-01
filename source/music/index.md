@@ -155,8 +155,13 @@ date: 2019-05-09 21:09:45
                "author": "蔡琴",
                "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/yatJ97AitORttQkDK1pi9UcpOWmCItYQ/%E8%94%A1%E7%90%B4-%E4%BD%A0%E7%9A%84%E7%9C%BC%E7%A5%9E.mp3",
                "pic": "https://imgessl.kugou.com/stdmusic/20191224/20191224110806951564.jpg"
-            } 
-          
+            } ,
+           {
+             "title": "无名的人",
+             "author": "毛不易",
+             "url": "https://freetyst.nf.migu.cn/public/product9th/product45/2022/03/0409/2021%E5%B9%B412%E6%9C%8817%E6%97%A517%E7%82%B902%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E9%9F%B3%E4%B9%8B%E9%82%A61%E9%A6%96740373/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60071702603095528.mp3?Key=2c627a1186d4d16d&Tim=1650100755693&channelid=00&msisdn=c31a97c1aedd4918a5ae5fcfc45be443&CI=600717026032600919000005498542&F=000009",
+             "pic": "https://cdnmusic.migu.cn/picture/2021/1214/1656/AS7cd46d7fced5bd51e7406deda3cfd77b.jpg"
+          } 
     ]
 }
 {% endaplayerlist %}
