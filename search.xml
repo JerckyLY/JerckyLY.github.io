@@ -49,16 +49,16 @@
 <p>按计划，本该是去报道的那天。我当时也在公交车上，马上到地铁了。接到了媳妇的电话，她哭着说肚子疼的不能动了。我赶紧下车，<br>打了车赶紧回去。路上也跟新公司的人事说了一下情况。回到屋里，看到媳妇的情况之后，立刻打了120。说实话这是我人生中第一次<br>打120。也才知道，救护车其实跟医院是单独分开的。它是一个流动站，接到人之后就送往最近的医院。然后就是进医院，挂急诊，做<br>核酸。</p>
 <p>因为我们从郑州来的，需要在发热门诊做核酸，结果出来之后才能开始看病。当时真的是心急，媳妇肚子疼的都不能动了，不停询问。<br>早上就去的医院结果等到下午四点多才给开的药，输液。疫情真是给生活带来巨大的麻烦。在等核酸结果的时候，媳妇说：她是不是不<br>该来北京。我半开玩笑的说，万事开头难，这是想让我们留下深刻回忆，会好的，以后会越来也很多。</p>
 <p>两天的输液之后，媳妇已经恢复正常了。我就去了新公司报道。公司的同事很好，公司氛围也挺好，轻松活跃。不像在郑州的时候，大<br>家都是忙着自己的，很少有沟通。</p>
-<p>如今也工作一个月了，新公司也基本都熟悉了。同事之间也会一起聊天开开玩笑什么的。挺好。</p>
+<p>如今也工作一个月了，新公司也基本都熟悉了。同事之间也会一起聊天开开玩笑什么的。挺好。媳妇她在附近找了一个公司，每天骑电<br>车15分钟，早上她会送我到地铁口。这种生活简单，但我感觉也挺幸福的，哈哈哈！</p>
 <p>今天是五一，祝大家五一节日快乐！北京这几天正是疫情严重的时候，现在去公共场所都是需要48小时的核酸阴性证明。原本带媳妇去<br>故宫的计划也泡汤了。老老实实在家呆着就好了，待会还得去做小区全员核酸了。 </p>
 <p><strong><code>希望疫情早点消失，回到那个不用人人核酸，不用人人戴口罩，可以到处去旅游的时代</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-VtYWZZud" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-hngjpNZH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-VtYWZZud"),
+            element: document.getElementById("aplayer-hngjpNZH"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -130,12 +130,12 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的功能基本是能满足项目的需求，这里只是介绍基本实现，具体 <strong>Viewer</strong> 里面展示的内容，根据项目实际需求来丰富内容即可。根<br>据核心代码基本就能自己完成功能了，就不再上传源码啦。</p>
 <h2 id="题外分享"><a href="#题外分享" class="headerlink" title="题外分享"></a>题外分享</h2><p>之前看了一个有趣的小工具 <strong>RunCat</strong> , 在 Windows 任务栏，随 CPU 越跑越快的猫 <a href='https://www.appinn.com/runcat-for-windows/' target="_blank" >介绍</a>。自己就下载安装了一下，还挺好玩。<br>  <img src= "/img/loading.gif" data-lazy-src='1.gif' /><br>请忽略录制效果￣□￣｜｜</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-yBCxlIIi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-zMXfEtYZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-yBCxlIIi"),
+            element: document.getElementById("aplayer-zMXfEtYZ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -199,12 +199,12 @@
 </blockquote>
 </div> </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-bXsmIWee" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-bENjeRba" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-bXsmIWee"),
+            element: document.getElementById("aplayer-bENjeRba"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -279,12 +279,12 @@
 </ol>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-wyonsomm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-USurcbrH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-wyonsomm"),
+            element: document.getElementById("aplayer-USurcbrH"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -344,12 +344,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ZcUIZaZA" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-EUxtSNhR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ZcUIZaZA"),
+            element: document.getElementById("aplayer-EUxtSNhR"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -410,12 +410,12 @@
 <p>虽然有不少的遗憾，但是都是满满的回忆。正因为不完美，而更令人记忆深刻，更加的美好。</p>
 <p><strong><code>我相信，未来会越来越好</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-Keirsxgm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-iobOhdJQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-Keirsxgm"),
+            element: document.getElementById("aplayer-iobOhdJQ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -465,12 +465,12 @@
 <p><strong><code>天不生我李淳罡，剑道万古如长夜</code></strong></p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-fhRohwfL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-brcjJnbn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-fhRohwfL"),
+            element: document.getElementById("aplayer-brcjJnbn"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -574,12 +574,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/node-sqlite3-server-demo' target="_blank" >node-sqlite3-server-demo</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  总体实现还是挺简单的，也没什么复杂的 SQL 语句。部署的时候，可以把 <strong>Node</strong> 安装为 window服务，就不用担心客户那边服务器关机了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MMDPLMIG" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-biHlaeYn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MMDPLMIG"),
+            element: document.getElementById("aplayer-biHlaeYn"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -628,12 +628,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>缓冲区实现的过程很简单，没什么可多说的，需要注意的是二维三维坐标的转换，二维面的坐标数组要闭合。其他的就是正常的实现就行了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-XnpiDSaZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-bjuunHee" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-XnpiDSaZ"),
+            element: document.getElementById("aplayer-bjuunHee"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -764,12 +764,12 @@
 <li><p><code>history</code> 模式结果：<br> <img src= "/img/loading.gif" data-lazy-src="router2.gif"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>OK，总算是写完了。 <code>VueRouter</code> 的核心原理如果仔细看完上面的，应该是明白的。上面的代码可以在 <strong>github</strong> 获取。<a href='https://github.com/JerckyLY/VueCustomRouterDemo' target="_blank" >地址</a> 。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-HripczMK" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-RTdApnvV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-HripczMK"),
+            element: document.getElementById("aplayer-RTdApnvV"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -844,12 +844,12 @@
 <p><img src= "/img/loading.gif" data-lazy-src="6.png"><br>使用 <code>state[7] = 0</code> 这种方式也能直接变成响应式了。是不是很强！</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MPcriWZO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-eLtacPcQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MPcriWZO"),
+            element: document.getElementById("aplayer-eLtacPcQ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -914,12 +914,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-EdbHNPkj" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-lQYNBibp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-EdbHNPkj"),
+            element: document.getElementById("aplayer-lQYNBibp"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -992,12 +992,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2>完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-EEqEItdM" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-gGRbISKx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-EEqEItdM"),
+            element: document.getElementById("aplayer-gGRbISKx"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1066,12 +1066,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-XnQoVFZP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-gAatKmgl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-XnQoVFZP"),
+            element: document.getElementById("aplayer-gAatKmgl"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1116,12 +1116,12 @@
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">      <span class="comment">//根据图片和文字绘制canvas  ratio参数 是放大倍数</span></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">drawCanvas</span>(<span class="params">img, text, ratio</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// width height</span></span><br><span class="line">        <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">&#x27;canvas&#x27;</span>); <span class="comment">//创建canvas标签</span></span><br><span class="line">        <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">var</span> width = ctx.measureText(text).width + <span class="number">8</span>,</span><br><span class="line">          height = <span class="number">20</span>; <span class="comment">//高度我这里是定死的，可以作为参数参入</span></span><br><span class="line">    </span><br><span class="line">        canvas.style.opacity = <span class="number">1</span>;</span><br><span class="line">        canvas.width = width * ratio;</span><br><span class="line">        canvas.height = height * ratio;</span><br><span class="line">        canvas.style.width = width + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">        canvas.style.height = height + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//然后将画布缩放，将图像放大ratio倍画到画布上 目的 使图片文字更加清晰</span></span><br><span class="line">        ctx.scale(ratio, ratio);</span><br><span class="line">        <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.src = img;</span><br><span class="line">         <span class="comment">// 图片创建是异步操作，需要在图片完成之后，再写入文字，能保证文字在图片上方。</span></span><br><span class="line">         <span class="comment">// 如果不在里面，会出现图片覆盖文字</span></span><br><span class="line">        image.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          ctx.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">          <span class="comment">// 名称文字</span></span><br><span class="line">          ctx.fillStyle = <span class="string">&#x27;#ff0000&#x27;</span>;</span><br><span class="line">          ctx.font = <span class="string">&#x27;8px 宋体&#x27;</span>;</span><br><span class="line">          ctx.fillText(text, <span class="number">8</span>, height / <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> canvas;</span><br><span class="line">      &#125;</span><br><span class="line">   <span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">+ 加载到Cesium中 </span></span><br><span class="line"><span class="string">   `</span><span class="string">``</span>js</span><br><span class="line">      viewer.entities.add(&#123;</span><br><span class="line">           <span class="attr">position</span>: Cesium.Cartesian3.fromDegrees(</span><br><span class="line">             <span class="number">109.05830792532525</span>,</span><br><span class="line">             <span class="number">37.44105749283626</span>,</span><br><span class="line">             <span class="number">16</span></span><br><span class="line">           ),</span><br><span class="line">           <span class="attr">billboard</span>: &#123;</span><br><span class="line">             <span class="attr">image</span>: drawCanvas(<span class="string">&#x27;./source/images/bg.png&#x27;</span>, <span class="string">&#x27;Hello World 你好 Cesium!&#x27;</span>, <span class="number">3</span>),</span><br><span class="line">             <span class="attr">sizeInMeters</span>: <span class="literal">true</span>,</span><br><span class="line">             <span class="attr">scale</span>: <span class="number">0.1</span>,</span><br><span class="line">           &#125;,</span><br><span class="line">         &#125;);</span><br></pre></td></tr></table></figure></li>
 <li><p>效果：<br><img src= "/img/loading.gif" data-lazy-src="3.png"></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-WtRfeFmm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-mKArkIrg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-WtRfeFmm"),
+            element: document.getElementById("aplayer-mKArkIrg"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1180,12 +1180,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-KRbfnmEq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ZsREPRFr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-KRbfnmEq"),
+            element: document.getElementById("aplayer-ZsREPRFr"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1327,12 +1327,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-gkTWvHyB" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-MbNwabeM" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-gkTWvHyB"),
+            element: document.getElementById("aplayer-MbNwabeM"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1413,12 +1413,12 @@
 </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-uIsjArkG" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-QBDHOTnb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-uIsjArkG"),
+            element: document.getElementById("aplayer-QBDHOTnb"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1467,12 +1467,12 @@
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
 <li><p>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-vlkKMiAw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ZREqSusT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-vlkKMiAw"),
+            element: document.getElementById("aplayer-ZREqSusT"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1545,12 +1545,12 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-vDbTJPXR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-RnjCrKoT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-vDbTJPXR"),
+            element: document.getElementById("aplayer-RnjCrKoT"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1601,12 +1601,12 @@
 </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-tCWLJRZH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-XdbICaeO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-tCWLJRZH"),
+            element: document.getElementById("aplayer-XdbICaeO"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1680,12 +1680,12 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-PqFVeCZc" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-VCvPfewp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-PqFVeCZc"),
+            element: document.getElementById("aplayer-VCvPfewp"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1764,12 +1764,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-RdkvLdxt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-mVFdNIqV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-RdkvLdxt"),
+            element: document.getElementById("aplayer-mVFdNIqV"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1829,12 +1829,12 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-rCuevZQF" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-PtAGKzuY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-rCuevZQF"),
+            element: document.getElementById("aplayer-PtAGKzuY"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1868,12 +1868,12 @@ target="_blank">arcgis</a></p>
 
 <span id="more"></span>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-PWFkzJCh" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-cdAkrPIJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-PWFkzJCh"),
+            element: document.getElementById("aplayer-cdAkrPIJ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
