@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cesium系列(3)--全景漫游(室内漫游)第一视角跟随 | Jercky</title><meta name="keywords" content="cesium,webgis"><meta name="author" content="LiuYang"><meta name="copyright" content="LiuYang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Cesium系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cesium系列(3)--全景漫游(室内漫游)第一视角跟随">
+<meta property="og:url" content="https://jercky.top/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/index.html">
+<meta property="og:site_name" content="Jercky">
+<meta property="og:description" content="Cesium系列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jercky.top/uploads/cover7.jpg">
+<meta property="article:published_time" content="2020-08-19T14:05:10.000Z">
+<meta property="article:modified_time" content="2021-11-06T08:35:25.558Z">
+<meta property="article:author" content="LiuYang">
+<meta property="article:tag" content="cesium">
+<meta property="article:tag" content="webgis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jercky.top/uploads/cover7.jpg"><link rel="shortcut icon" href="/uploads/favicon.ico"><link rel="canonical" href="https://jercky.top/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.4.0',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-11-06 16:35:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/uploads/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">25</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">21</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cesium%E7%9A%84%E5%85%A8%E6%99%AF%E6%BC%AB%E6%B8%B8-%E5%AE%A4%E5%86%85%E6%BC%AB%E6%B8%B8-%E7%AC%AC%E4%B8%80%E8%A7%86%E8%A7%92%E8%B7%9F%E9%9A%8F"><span class="toc-number">1.</span> <span class="toc-text">Cesium的全景漫游(室内漫游)第一视角跟随</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C"><span class="toc-number">3.</span> <span class="toc-text">结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E4%B9%90%E5%B0%8F%E6%86%A9"><span class="toc-number">5.</span> <span class="toc-text">音乐小憩</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/top.png)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Jercky</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">Cesium系列(3)--全景漫游(室内漫游)第一视角跟随</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-19T14:05:10.000Z" title="发表于 2020-08-19 22:05:10">2020-08-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-06T08:35:25.558Z" title="更新于 2021-11-06 16:35:25">2021-11-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Cesium/">Cesium</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="Cesium的全景漫游-室内漫游-第一视角跟随"><a href="#Cesium的全景漫游-室内漫游-第一视角跟随" class="headerlink" title="Cesium的全景漫游(室内漫游)第一视角跟随"></a><center>Cesium的全景漫游(室内漫游)第一视角跟随<center/></h2><blockquote>
+<p>Cesium的示例中是有漫游的示例。但是角度并不是第一视角。如下图：   </p>
+</blockquote>
+<p><img src= "/img/loading.gif" data-lazy-src="1.png"></p>
+<p>在对于特殊的需求中，比如室内漫游。如果不是第一视角，漫游的过程中会被室内其他物体遮挡，效果不好，也不切实际。因此需要在此基础上进行修改，以达到好的效果。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ol>
+<li><p>在实际应用中，漫游的路线是规划好的。也就是一系列的坐标点，然后根据坐标点插值计算，平滑运动。获取的方式很多种，看实际项目需求。我是事先选取好的点。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> myPositions = [</span><br><span class="line">  [<span class="number">109.05832893717263</span>, <span class="number">37.441496598851096</span>],</span><br><span class="line">  [<span class="number">109.05855416786699</span>, <span class="number">37.44130123438769</span>],</span><br><span class="line">   <span class="comment">//...       </span></span><br><span class="line">  [<span class="number">109.0587449465546</span>, <span class="number">37.44119249116668</span>],</span><br><span class="line">  [<span class="number">109.05845600554856</span>, <span class="number">37.441396645980845</span>],</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 只有经纬度没有高度，因为我是把高度写死的，如果需要高度变化，是可以加上高度。</p>
+</blockquote>
+</li>
+<li><p>指定动画的起始时间，然后把 <strong>timeline</strong> 调整至起始时间，然后设置相关参数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> start = Cesium.JulianDate.fromDate(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2015</span>, <span class="number">2</span>, <span class="number">25</span>, <span class="number">16</span>));</span><br><span class="line"><span class="keyword">var</span> stop = Cesium.JulianDate.addSeconds(</span><br><span class="line">  start,</span><br><span class="line">  myPositions.length - <span class="number">1</span>,</span><br><span class="line">  <span class="keyword">new</span> Cesium.JulianDate()</span><br><span class="line">);</span><br><span class="line">    </span><br><span class="line"><span class="comment">//Make sure viewer is at the desired time.</span></span><br><span class="line">viewer.clock.startTime = start.clone();</span><br><span class="line">viewer.clock.stopTime = stop.clone();</span><br><span class="line">viewer.clock.currentTime = start.clone();</span><br><span class="line">viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP; <span class="comment">//Loop at the end</span></span><br><span class="line">viewer.clock.multiplier = <span class="number">0.3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Set timeline to simulation bounds</span></span><br><span class="line">viewer.timeline.zoomTo(start, stop);</span><br></pre></td></tr></table></figure>
+<p>开始时间是可以随意给定的，我这里给的是 <strong>new Date(2015, 2, 25,16)</strong><br>结束时间这一点需要注意的是，根据数组的长度来定的。结束时间必须大于开始时间。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> stop = Cesium.JulianDate.addSeconds(</span><br><span class="line">    start,</span><br><span class="line">    myPositions.length - <span class="number">1</span>,</span><br><span class="line">    <span class="keyword">new</span> Cesium.JulianDate()</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<p>设置动画的参数：<strong>clockRange</strong> 是播放模式 <strong>Cesium.ClockRange.LOOP_STOP</strong> 自动循环播放。<strong>multiplier</strong> 是播放的速度</p>
+</li>
+<li><p>根据坐标数组，计算插值点数据</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">computeCirclularFlight</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> property = <span class="keyword">new</span> Cesium.SampledPositionProperty();</span><br><span class="line">    <span class="comment">//设置插入选项</span></span><br><span class="line">    property.setInterpolationOptions(&#123;</span><br><span class="line">      <span class="comment">// interpolationDegree: 1,</span></span><br><span class="line">      <span class="comment">// interpolationAlgorithm: Cesium.LinearApproximation,</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// interpolationDegree: 5,</span></span><br><span class="line">      <span class="comment">// interpolationAlgorithm:</span></span><br><span class="line">      <span class="comment">//   Cesium.LagrangePolynomialApproximation,</span></span><br><span class="line"></span><br><span class="line">      <span class="attr">interpolationDegree</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">interpolationAlgorithm</span>: Cesium.HermitePolynomialApproximation,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; myPositions.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> time = Cesium.JulianDate.addSeconds(</span><br><span class="line">        start,</span><br><span class="line">        i,</span><br><span class="line">        <span class="keyword">new</span> Cesium.JulianDate()</span><br><span class="line">      );</span><br><span class="line">      <span class="keyword">var</span> position = Cesium.Cartesian3.fromDegrees(</span><br><span class="line">        myPositions[i][<span class="number">0</span>],</span><br><span class="line">        myPositions[i][<span class="number">1</span>],</span><br><span class="line">        <span class="number">5</span></span><br><span class="line">      );</span><br><span class="line">      property.addSample(time, position);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> property;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不同插值配置设置，得出来的结果是不同的，可以参照Cesium示例查看。</p>
+</li>
+<li><p>创建运动的物体，并把物体设置为镜头追踪的对象。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> position = computeCirclularFlight();</span><br><span class="line"><span class="comment">//Actually create the entity</span></span><br><span class="line"><span class="keyword">var</span> entity = viewer.entities.add(&#123;</span><br><span class="line">  <span class="comment">//Set the entity availability to the same interval as the simulation time.</span></span><br><span class="line">  <span class="attr">availability</span>: <span class="keyword">new</span> Cesium.TimeIntervalCollection([</span><br><span class="line">    <span class="keyword">new</span> Cesium.TimeInterval(&#123;</span><br><span class="line">      <span class="attr">start</span>: start,</span><br><span class="line">      <span class="attr">stop</span>: stop,</span><br><span class="line">    &#125;),</span><br><span class="line">  ]),</span><br><span class="line">  <span class="comment">//Use our computed positions</span></span><br><span class="line">  <span class="attr">position</span>: position,</span><br><span class="line">  <span class="comment">//Automatically compute orientation based on position movement.</span></span><br><span class="line">  <span class="attr">orientation</span>: <span class="keyword">new</span> Cesium.VelocityOrientationProperty(position),</span><br><span class="line">  <span class="attr">model</span>: &#123;</span><br><span class="line">    <span class="attr">uri</span>: <span class="string">&#x27;./SampleData/models/CesiumAir/Cesium_Air.glb&#x27;</span>,</span><br><span class="line">    <span class="attr">minimumPixelSize</span>: <span class="number">64</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//Show the path as a pink line sampled in 1 second increments.</span></span><br><span class="line">  <span class="attr">path</span>: &#123;</span><br><span class="line">    <span class="attr">resolution</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">material</span>: <span class="keyword">new</span> Cesium.PolylineGlowMaterialProperty(&#123;</span><br><span class="line">      <span class="attr">glowPower</span>: <span class="number">0.1</span>,</span><br><span class="line">      <span class="attr">color</span>: Cesium.Color.GREEN,</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="attr">width</span>: <span class="number">16</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//追踪物体</span></span><br><span class="line"> viewer.trackedEntity = entity;  </span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
+<li><p>每一帧根据物体的坐标和走向，设置相机的角度</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="comment">//视角变换</span></span><br><span class="line"> <span class="keyword">var</span> matrix3Scratch = <span class="keyword">new</span> Cesium.Matrix3();</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">getModelMatrix</span>(<span class="params">entity, time, result</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> position = Cesium.Property.getValueOrUndefined(</span><br><span class="line">    entity.position,</span><br><span class="line">    time,</span><br><span class="line">    <span class="keyword">new</span> Cesium.Cartesian3()</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span> (!Cesium.defined(position)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> orientation = Cesium.Property.getValueOrUndefined(</span><br><span class="line">    entity.orientation,</span><br><span class="line">    time,</span><br><span class="line">    <span class="keyword">new</span> Cesium.Quaternion()</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span> (!Cesium.defined(orientation)) &#123;</span><br><span class="line">    result = Cesium.Transforms.eastNorthUpToFixedFrame(</span><br><span class="line">      position,</span><br><span class="line">      <span class="literal">undefined</span>,</span><br><span class="line">      result</span><br><span class="line">    );</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = Cesium.Matrix4.fromRotationTranslation(</span><br><span class="line">      Cesium.Matrix3.fromQuaternion(orientation, matrix3Scratch),</span><br><span class="line">      position,</span><br><span class="line">      result</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="keyword">var</span> scratch = <span class="keyword">new</span> Cesium.Matrix4();</span><br><span class="line"> <span class="keyword">var</span> renderListener = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//viewer.camera.positionCartographic.height = 2000 + $this.limitCamera(f_property);</span></span><br><span class="line">  <span class="keyword">if</span> (viewer.trackedEntity) &#123;</span><br><span class="line">    getModelMatrix(viewer.trackedEntity, viewer.clock.currentTime, scratch);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> transformX = <span class="number">90</span>; <span class="comment">//距离运动点的距离（后方）</span></span><br><span class="line">    <span class="keyword">var</span> transformZ = <span class="number">55</span>; <span class="comment">//距离运动点的高度（上方）</span></span><br><span class="line">    <span class="keyword">var</span> transformY = <span class="number">0</span>; <span class="comment">//距离运动点的高度（侧方）</span></span><br><span class="line">    viewer.scene.camera.lookAtTransform(</span><br><span class="line">      scratch,</span><br><span class="line">      <span class="keyword">new</span> Cesium.Cartesian3(-transformX, transformY, transformZ)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> viewer.scene.preRender.addEventListener(renderListener);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>监听事件中，<strong>transformX</strong> 是相机距离运动点的正后方距离。<strong>transformY</strong> 是相机距离运动点的侧方距离。<strong>transformZ</strong> 是相机距离运动点的上方距离。</p>
+</blockquote>
+<blockquote>
+<p>开始播放的时候 需要把 <strong>shouldAnimate</strong> 打开， viewer.clock.shouldAnimate = true;<br>暂停播放 需要把 <strong>shouldAnimate</strong> 关闭， viewer.clock.shouldAnimate = false; 同时把镜头追踪对象去除 viewer.trackedEntity = undefined;</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><ul>
+<li><p>室外轨迹漫游<br><video src='1.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></p>
+</li>
+<li><p>调整角度参数 室内漫游<br><video src='2.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></p>
+</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-KHHnVchQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-KHHnVchQ"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "等我先说",
+              author: "夏天Alex",
+              url: "//freetyst.nf.migu.cn/public/productBe/productB01/2019/08/0715/2013%E5%B9%B405%E6%9C%8814%E6%97%A5%E7%BE%8E%E5%8A%9B%E6%98%9F%E7%A9%BA%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A51%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60066801295.mp3?key=1d5649e633106758&Tim=1603352822023&channelid=00&msisdn=6adb56a5e32741a08e14c0776ca4bf9f&CI=600668012952600902000007984502&F=000009",
+              pic: "https://p3fx.kgimg.com/stdmusic/20160907/20160907201949745191.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">LiuYang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jercky.top/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/">https://jercky.top/2020/08/19/Cesium%E5%85%A5%E9%97%A8-3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jercky.top" target="_blank">Jercky</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cesium/">cesium</a><a class="post-meta__tags" href="/tags/webgis/">webgis</a></div><div class="post_share"><div class="social-share" data-image="/uploads/cover7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/uploads/wechat.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="/uploads/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/uploads/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/uploads/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/10/22/Cesium%E5%85%A5%E9%97%A8-4/"><img class="prev-cover" data-lazy-src="/uploads/cover13.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Cesium系列(4)--自定义Popup框</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/21/Cesium%E5%85%A5%E9%97%A8-2/"><img class="next-cover" data-lazy-src="/uploads/cover16.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Cesium系列(2)--绘制图片文字标注</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/12/07/Cesium入门-10/" title="Cesium系列(10)--三维双屏对比"><img class="cover" data-lazy-src="/uploads/cover4.png"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-07</div><div class="title">Cesium系列(10)--三维双屏对比</div></div></a></div><div><a href="/2021/09/10/Cesium入门-9/" title="Cesium系列(9)--二三维联动"><img class="cover" data-lazy-src="/uploads/cover8.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-10</div><div class="title">Cesium系列(9)--二三维联动</div></div></a></div><div><a href="/2021/06/23/Cesium入门-8/" title="Cesium系列(8)--自定义帧率显示"><img class="cover" data-lazy-src="/uploads/cover.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-23</div><div class="title">Cesium系列(8)--自定义帧率显示</div></div></a></div><div><a href="/2021/03/26/Cesium入门-7/" title="Cesium系列(7)--方位角测量"><img class="cover" data-lazy-src="/uploads/cover12.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-26</div><div class="title">Cesium系列(7)--方位角测量</div></div></a></div><div><a href="/2021/03/23/Cesium入门-6/" title="Cesium系列(6)--点线面缓冲区"><img class="cover" data-lazy-src="/uploads/cover3.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-23</div><div class="title">Cesium系列(6)--点线面缓冲区</div></div></a></div><div><a href="/2020/12/10/Cesium入门-5/" title="Cesium系列(5)--源码编译和调试(ES6)"><img class="cover" data-lazy-src="/uploads/cover2.jpg"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-10</div><div class="title">Cesium系列(5)--源码编译和调试(ES6)</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(/uploads/background.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2022 By LiuYang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: 'LJltQYKflcAssg86UQNXugWB-MdYXbMMI',
+      appKey: '5rKrEUnyQjn4t6xBuYiFUwki',
+      placeholder: 'ヾﾉ≧∀≦)o 来呀！造作呀！~',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'i18n',
+      recordIP: true,
+      serverURLs: 'https://ljltqykf.api.lncldglobal.com',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>

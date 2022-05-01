@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>node-sqlite3简易后台搭建 | Jercky</title><meta name="keywords" content="Node,Sqlite3"><meta name="author" content="LiuYang"><meta name="copyright" content="LiuYang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="node-sqlite3简易后台搭建最近项目需要写一个演示用的三维Demo，其中要有用户管理界面，能对用户进行增删改查操作。当然这都是小需求，随便就写了，也没啥。但是给我说没人给我写接口（内心：嗯，嗯???)。虽然做过一段时间的全栈开发，突然让我写后台，我还是有点不适应。但是没办法，任务来了，干吧！之前写的是 Java + Mysql + SpringBoot 后台，但是一个简单的用户管理，再加一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-sqlite3简易后台搭建">
+<meta property="og:url" content="https://jercky.top/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Jercky">
+<meta property="og:description" content="node-sqlite3简易后台搭建最近项目需要写一个演示用的三维Demo，其中要有用户管理界面，能对用户进行增删改查操作。当然这都是小需求，随便就写了，也没啥。但是给我说没人给我写接口（内心：嗯，嗯???)。虽然做过一段时间的全栈开发，突然让我写后台，我还是有点不适应。但是没办法，任务来了，干吧！之前写的是 Java + Mysql + SpringBoot 后台，但是一个简单的用户管理，再加一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jercky.top/uploads/cover2.jpg">
+<meta property="article:published_time" content="2021-03-24T06:46:11.000Z">
+<meta property="article:modified_time" content="2021-11-06T08:35:25.922Z">
+<meta property="article:author" content="LiuYang">
+<meta property="article:tag" content="Node">
+<meta property="article:tag" content="Sqlite3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jercky.top/uploads/cover2.jpg"><link rel="shortcut icon" href="/uploads/favicon.ico"><link rel="canonical" href="https://jercky.top/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  hexoversion: '5.4.0',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isSidebar: true,
+  postUpdate: '2021-11-06 16:35:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {
+  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }
+})()</script><meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" data-lazy-src="/uploads/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">25</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">21</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">5</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div></div></div></div><div id="body-wrap"><div id="sidebar"><i class="fas fa-arrow-right on" id="toggle-sidebar"></i><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E6%90%AD%E5%BB%BA"><span class="toc-number">1.</span> <span class="toc-text">node-sqlite3简易后台搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">5.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9F%B3%E4%B9%90%E5%B0%8F%E6%86%A9"><span class="toc-number">7.</span> <span class="toc-text">音乐小憩</span></a></li></ol></div></div></div><header class="post-bg" id="page-header" style="background-image: url(/uploads/cover2.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Jercky</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><div id="post-title"><div class="posttitle">node-sqlite3简易后台搭建</div></div><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-24T06:46:11.000Z" title="发表于 2021-03-24 14:46:11">2021-03-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-06T08:35:25.922Z" title="更新于 2021-11-06 16:35:25">2021-11-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Node/">Node</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span></a></span></div></div></div></header><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="node-sqlite3简易后台搭建"><a href="#node-sqlite3简易后台搭建" class="headerlink" title="node-sqlite3简易后台搭建"></a><center>node-sqlite3简易后台搭建<center/></h2><p>最近项目需要写一个演示用的三维Demo，其中要有用户管理界面，能对用户进行增删改查操作。当然这都是小需求，随便就写了，也<br>没啥。但是给我说没人给我写接口（内心：嗯，嗯???)。虽然做过一段时间的全栈开发，突然让我写后台，我还是有点不适应。但是没<br>办法，任务来了，干吧！<br>之前写的是 <strong>Java</strong> + <strong>Mysql</strong> + <strong>SpringBoot</strong> 后台，但是一个简单的用户管理，再加一个登录的接口，我是真心不想用（其实忘了不少，不<br>会了 哈哈）。作为一个 <strong>WebGIS</strong> 码农，最熟悉的还是 <strong>JavaScript</strong> 。那能用 <strong>Js</strong> 写后台的莫过于 <strong>Node</strong>了，再结合 <strong>express</strong> 库，很轻便的<br>就可以搭建一个后台。接下来就是数据库了。目前，开源免费，又小巧轻便的 <strong>sqlite</strong> 多合适啊。 同时 <strong>Node</strong> 也有 <strong>sqlite3</strong> JS库可以操作<br>它。OK，技术选型定了，接下来就开始实现吧。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>对应<strong>Node</strong>的安装和配置，各位道友了解的比我都清楚，我就不多说了。主要讲一下 <strong>sqlite3</strong>的安装</p>
+<ul>
+<li><p>sqlite3 (windows)数据库安装<br> 下载地址 <a target="_blank" rel="noopener" href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a><br> 需要下载 <strong>sqlite-dll-win32-86-xx.zip</strong> 或者 <strong>sqlite-dll-win64-xx.zip</strong> 以及 <strong>sqlite-tools-win32-x86-xx.zip</strong><br> <img src= "/img/loading.gif" data-lazy-src="1.png"><br> 把这两个解压之后，里面的文件放到一个文件夹下<br> <img src= "/img/loading.gif" data-lazy-src="2.png"><br> 然后在系统的环境变量中，在 <strong>Path</strong> 变量里面把存放 <strong>sqlit3</strong> 的文件夹路径添加进去<br> <img src= "/img/loading.gif" data-lazy-src="3.png"><br> 最后检查一下是否安装成功 在cmd 命令行中输入 <strong>sqlit3</strong> 回车。如果安装成功出现会入下图所示：<br> <img src= "/img/loading.gif" data-lazy-src="4.png"></p>
+</li>
+<li><p>SQLiteStudio 可视化工具<br> 数据库用命令行操作还是不方便，<strong>SQLiteStudio</strong> 是开源，且支持多平台的一个 <strong>sqlite</strong> 可视化软件。<br> 下载地址： <a target="_blank" rel="noopener" href="https://sqlitestudio.pl/">https://sqlitestudio.pl/</a><br> 解压文件，找到 <strong>SQLiteStudio.exe</strong> 双击打开，初次加载，需要选择语言，找到中文即可：<br> <img src= "/img/loading.gif" data-lazy-src="5.png"></p>
+</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
+<li>建库<br>利用 <strong>SQLiteStudio</strong> 新建一个数据库。 Database –&gt; Add a database :<br><img src= "/img/loading.gif" data-lazy-src="6.png"><br>1 是新建，2是打开。 新建的时候，选好文件夹，然后输入数据库的名称就行了。因为我之前建立了，就直接选择打开。<br><img src= "/img/loading.gif" data-lazy-src="7.png"><br>点击测试连接，出现绿色对号。说明连接正常。然后点击 OK。<br><img src= "/img/loading.gif" data-lazy-src="8.png"></li>
+<li>建表<br>在 <strong>test.db</strong> 里面，我已经建好了一个 <strong>user</strong> 表格，有 <strong>id</strong> 、<strong>name</strong> 、 <strong>password</strong> 还有 <strong>create_time</strong> 四个字段。你可以用工具创建，也<br>可以手动创建。表的SQL语句：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">    id          STRING (256) PRIMARY KEY</span><br><span class="line">                             UNIQUE</span><br><span class="line">                             NOT NULL,</span><br><span class="line">    name        STRING (64)  NOT NULL,</span><br><span class="line">    password    STRING (128) NOT NULL,</span><br><span class="line">    create_time DATETIME     NOT NULL</span><br><span class="line">                             DEFAULT (datetime(&#x27;now&#x27;, &#x27;localtime&#x27;) ) </span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<li><p>创建项目<br>建立一个文件夹，然后 cmd 命令 初始化:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装依赖<br>用的基础的 <strong>express</strong> 创建 Server, 然后用 <strong>sqlite3</strong>库来操作数据库。用 <strong>uuid</strong> 来生成随机的id。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i express sqlite3 uuid --save</span><br></pre></td></tr></table></figure>
+<p>package.json内容如下：<br><img src= "/img/loading.gif" data-lazy-src="9.png"> </p>
+</li>
+<li><p>代码使用 sqlite3<br>api 简介：<br><img src= "/img/loading.gif" data-lazy-src="10.png"></p>
+<ol>
+<li><p>代码打开数据库</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sqlite3 = <span class="built_in">require</span>(<span class="string">&quot;sqlite3&quot;</span>).verbose()</span><br><span class="line"><span class="comment">// sqlites数据库地址</span></span><br><span class="line"><span class="keyword">let</span> sqliteDbPath = <span class="string">&quot;D:\\01_Software\\Program File\\sqlite3\\DB\\test.db&quot;</span></span><br><span class="line"><span class="comment">// 打开sqlites数据库</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> sqlite3.Database(sqliteDbPath)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增用户</p>
+<blockquote>
+<p>post的请求时，从 <strong>request.body</strong> 中获取请求数据，需要配置一下</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建 express 应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line">app.use(express.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;));<span class="comment">//添加通用的JSON和URL编码的解析器作为顶级中间件，该中间件将解析所有传入请求的主体。</span></span><br><span class="line">app.use(express.json());</span><br></pre></td></tr></table></figure>
+<p>如果你的express的版本不是4.x及以上 那么需要用到 <strong>body-parser</strong> 库来代替 <strong>express</strong>。</p>
+</blockquote>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> bodyParse = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建 express 应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line">app.use(bodyParse.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;));<span class="comment">//添加通用的JSON和URL编码的解析器作为顶级中间件，该中间件将解析所有传入请求的主体。</span></span><br><span class="line">app.use(bodyParse.json());</span><br></pre></td></tr></table></figure>
+<p> 新增用户的代码</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新增接口</span></span><br><span class="line"><span class="keyword">const</span> addUser = <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> param =  req.body;</span><br><span class="line">    <span class="keyword">const</span> name = param.name;</span><br><span class="line">    <span class="keyword">const</span> password = param.password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> uid = uuid()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> add_sql = <span class="string">`insert into user (id , name ,password ) values(?,?,?)`</span></span><br><span class="line">    db.run(add_sql,[uid,name,password],<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;插入失败&#x27;</span>,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        res.send(&#123;</span><br><span class="line">            <span class="attr">code</span>:<span class="number">200</span>,</span><br><span class="line">            <span class="attr">msg</span>:<span class="string">&#x27;插入成功&#x27;</span>,</span><br><span class="line">            <span class="attr">ret</span>:<span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p> 上述代码是从 <strong>request.body</strong> 获取提交的用户名 <strong>name</strong> 和密码 <strong>password</strong>，然后利用 <strong>uuid</strong> 生成一个 <strong>id</strong>，之后写了一个插入的sql<br> 语句 <strong>add_sql</strong>。 然后用到了 <strong>sqlite3</strong> 的 <strong>run</strong> 方法来执行sql语句。代码很简单都是基本的插入语句。<br> 启动应用，利用<strong>postman</strong> 测试一下：<br> <img src= "/img/loading.gif" data-lazy-src="11.png"><br> 结果返回插入成功，同时刷新数据库，能看到插入的最新的一条数据。</p>
+</li>
+<li><p>修改用户<br> 修改的逻辑是根据用户的 <strong>id</strong> 对用户名和密码进行修改。</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//更新</span></span><br><span class="line"><span class="keyword">const</span> updateUser = <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> param =  req.body;</span><br><span class="line">    <span class="keyword">const</span> password = param.password;</span><br><span class="line">    <span class="keyword">const</span> name = param.name;</span><br><span class="line">    <span class="keyword">const</span> id = param.id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> update_sql = <span class="string">`update user set name=?, password = ? where id = ?`</span>;</span><br><span class="line">    db.run(update_sql,[name,password,id],<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;更新失败&#x27;</span>,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span>  data = &#123;</span><br><span class="line">            <span class="attr">code</span>:<span class="number">200</span>,</span><br><span class="line">            <span class="attr">ret</span>:<span class="literal">true</span>,</span><br><span class="line">            <span class="attr">msg</span>:<span class="string">&#x27;更新成功&#x27;</span></span><br><span class="line">        &#125; ;</span><br><span class="line"></span><br><span class="line">        res.send(data)</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 测试结果如下：<br> <img src= "/img/loading.gif" data-lazy-src="12.png"></p>
+</li>
+<li><p>查询用户<br>查询全部数据</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//查询全部数据</span></span><br><span class="line"><span class="keyword">const</span> getAll = <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">    db.all(<span class="string">`select * from user order by create_time desc  `</span>,<span class="function"><span class="keyword">function</span> (<span class="params">err,row</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;查询失败&#x27;</span>,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> data = &#123;</span><br><span class="line">                <span class="attr">code</span>:<span class="number">200</span>,</span><br><span class="line">                <span class="attr">data</span>:row,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">true</span>,</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;查询成功&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// console.log(data)</span></span><br><span class="line">        res.send(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="13.png"></p>
+</li>
+<li><p>删除用户<br>根据用户 <strong>id</strong> 删除用户。</p>
+<pre><code class="js">    //删除
+    const delUser = function(req,res)&#123;
+        const param = req.query || req.params ;
+        const id = param.id;
+        const del_sql =    `delete from user where id = ?`;
+        db.run(del_sql,[id],function (err) &#123;
+            if(err)&#123;
+                res.send(&#123;
+                    msg:&#39;删除失败&#39;,
+                    ret:false
+                &#125;)
+            &#125;
+    
+            res.send(&#123;
+                code:200,
+                ret:true,
+                msg:&#39;删除成功&#39;
+            &#125;)
+        &#125;)
+    &#125;
+</code></pre>
+<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="14.png"> </p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/node-sqlite3-server-demo' target="_blank" >node-sqlite3-server-demo</a>  </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  总体实现还是挺简单的，也没什么复杂的 SQL 语句。部署的时候，可以把 <strong>Node</strong> 安装为 window服务，就不用担心客户那边服务器关机了。</p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-xvHZztrg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-xvHZztrg"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "大鱼",
+              author: "周深/郭沁",
+              url: "https://freetyst.nf.migu.cn/public/product5th/product27/2018/12/21/2018%E5%B9%B410%E6%9C%8819%E6%97%A516%E7%82%B923%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%A2%A6%E5%93%8D%E5%BC%BA%E9%9F%B3186%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6404689Z0HE.mp3?key=b74e16bf79b5983a&Tim=1616640844447&channelid=00&msisdn=b30efb370c4f44fdb04710eaad359cd9&CI=6404689Z0HE2600913000000634056&F=000009",
+              pic: "https://cdnmusic.migu.cn/picture/2020/0216/1135/AM9e357dde4ae7a59634b1ea6ba2c077ab.jpg",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">LiuYang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jercky.top/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/">https://jercky.top/2021/03/24/node-sqlite3%E7%AE%80%E6%98%93%E5%90%8E%E5%8F%B0%E5%AE%9E%E7%8E%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jercky.top" target="_blank">Jercky</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Node/">Node</a><a class="post-meta__tags" href="/tags/Sqlite3/">Sqlite3</a></div><div class="post_share"><div class="social-share" data-image="/uploads/cover2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/uploads/wechat.png" target="_blank"><img class="post-qr-code-img" data-lazy-src="/uploads/wechat.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/uploads/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/uploads/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/26/Cesium%E5%85%A5%E9%97%A8-7/"><img class="prev-cover" data-lazy-src="/uploads/cover12.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Cesium系列(7)--方位角测量</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/23/Cesium%E5%85%A5%E9%97%A8-6/"><img class="next-cover" data-lazy-src="/uploads/cover3.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Cesium系列(6)--点线面缓冲区</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></article></main><footer id="footer" style="background-image: url(/uploads/background.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2022 By LiuYang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const initData = {
+      el: '#vcomment',
+      appId: 'LJltQYKflcAssg86UQNXugWB-MdYXbMMI',
+      appKey: '5rKrEUnyQjn4t6xBuYiFUwki',
+      placeholder: 'ヾﾉ≧∀≦)o 来呀！造作呀！~',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'i18n',
+      recordIP: true,
+      serverURLs: 'https://ljltqykf.api.lncldglobal.com',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else $.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>
