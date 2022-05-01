@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>江湖再见-重新开始</title>
-    <url>/2022/03/21/%E6%B1%9F%E6%B9%96%E5%86%8D%E8%A7%81-%E9%87%8D%E6%96%B0%E5%BC%80%E5%A7%8B/</url>
+    <url>/2022/05/01/%E6%B1%9F%E6%B9%96%E5%86%8D%E8%A7%81-%E9%87%8D%E6%96%B0%E5%BC%80%E5%A7%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div align="center"> <div style="margin: 1rem 0 0.7rem;font-size: 1.5em;color:#1f2d3d;font-weight: bold">江湖再见-重新开始</div> </div> 
 
 <hr>
@@ -53,12 +53,12 @@
 <p>今天是五一，祝大家五一节日快乐！北京这几天正是疫情严重的时候，现在去公共场所都是需要48小时的核酸阴性证明。原本带媳妇去<br>故宫的计划也泡汤了。老老实实在家呆着就好了，待会还得去做小区全员核酸了。 </p>
 <p><strong><code>希望疫情早点消失，回到那个不用人人核酸，不用人人戴口罩，可以到处去旅游的时代</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-BvUcKVvg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-gcMeXYvm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-BvUcKVvg"),
+            element: document.getElementById("aplayer-gcMeXYvm"),
             narrow: false,
             autoplay: false,
             showlrc: false,
