@@ -38,7 +38,9 @@ code_word_wrap: false
 # copyright: Add the copyright information after copied content (複製的內容後面加上版權信息)
 copy:
   enable: true
-  copyright: false
+  copyright:
+    enable: false
+    limit_count: 50
 
 
 # social settings (社交圖標設置)
@@ -220,11 +222,11 @@ post_copyright:
 reward:
   enable: true
   QR_code:
-    - itemlist:
-        img: /uploads/wechat.png
+      - img: /uploads/wechat.png
+        link:
         text: 微信
-    - itemlist:
-        img: /uploads/alipay.jpg
+      - img: /uploads/alipay.jpg
+        link:
         text: 支付宝
 
 # Related Articles
@@ -275,9 +277,9 @@ addtoany:
 
 comments:
   # Up to two comments system, the first will be shown as default
-  # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Utterances/Facebook Comments
+  # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Waline/Utterances/Facebook Comments/Twikoo/Giscus/Remark42
   use:
-   - Valine
+   - Waline
   # - Disqus
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
@@ -337,6 +339,16 @@ valine:
   emojiCDN: # emoji CDN
   enableQQ: true # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
   requiredFields: nick,mail # required fields (nick/mail)
+
+
+# waline - A simple comment system with backend support fork from Valine
+# https://waline.js.org/
+waline:
+  serverURL: https://waline-a7ex5ltmm-jerckyly.vercel.app # Waline server address url
+  bg: # waline background
+  pageview: false
+  option:
+
 
 # utterances
 # https://utteranc.es/
@@ -637,10 +649,16 @@ aside:
   enable: true
   mobile: true # display on mobile
   position: left # left or right
+  button: true
+  display:
+    archive: true
+    tag: true
+    category: true
   card_author:
     enable: true
     description:
     button:
+      enable: true
       icon: fab fa-github
       text: Follow Me
       link: https://github.com/JerckyLY
@@ -688,6 +706,7 @@ newest_comments:
   enable: false
   limit: 6
   avatar: true
+  storage: 10
   leancloud:
     enable: false
     appId: # leancloud application app id
@@ -845,6 +864,9 @@ Open_Graph_meta: true
 # Caches the contents in a fragment, speed up the generation (開啟hexo自帶的緩存,加快生成速度)
 fragment_cache: true
 
+
+# Add the vendor prefixes to ensure compatibility
+css_prefix: true
 # Inject
 # Insert the code to head (before '</head>' tag) and the bottom (before '</body>' tag)
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
@@ -861,89 +883,70 @@ inject:
 # Don't modify the following settings unless you know how they work
 # 非必要請不要修改
 CDN:
-  # main
-  main_css: /css/index.css
-  jquery: https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js
-  main: /js/main.js
-  utils: /js/utils.js
+  # The CDN provider of internal scripts (主題內部 js 的 cdn 配置)
+  # option: local/jsdelivr/unpkg/cdnjs/custom
+  # Dev version can only choose. ( dev版的主題只能設置為 local )
+  internal_provider: local
 
-  # pjax
-  pjax: https://cdn.jsdelivr.net/npm/pjax/pjax.min.js
+  # The CDN provider of third party scripts (第三方 js 的 cdn 配置)
+  # option: local/jsdelivr/unpkg/cdnjs/custom
+  # when set it to local, you need to install hexo-butterfly-extjs
+  third_party_provider: jsdelivr
 
-  # comments
-  gitalk: https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js
-  gitalk_css: https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css
-  valine: https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js
-  disqusjs: https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js
-  disqusjs_css: https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css
-  utterances: https://utteranc.es/client.js
+  # Add version number to CDN, true or false
+  version: false
 
-  # share
-  addtoany: https://static.addtoany.com/menu/page.js
-  sharejs: https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js
-  sharejs_css: https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css
+  # Custom format
+  # For example: https://cdn.staticfile.org/${cdnjs_name}/${version}/${min_cdnjs_file}
+  custom_format:
 
-  # search
-  local_search: /js/search/local-search.js
-  algolia_js: /js/search/algolia.js
-  algolia_search: https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js
-  algolia_search_css: https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css
-
-  # math
-  mathjax: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  katex: https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css
-  katex_copytex: https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js
-  katex_copytex_css: https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css
-  mermaid: https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js
-
-  # count
-  busuanzi: //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
-#  busuanzi: //busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
-
-
-  # background effect
-  canvas_ribbon: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js
-  canvas_fluttering_ribbon: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js
-  canvas_nest: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js
-
-  lazyload: https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js
-  instantpage: https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js
-  typed: https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js
-  pangu: https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js
-
-  # photo
-  fancybox_css: https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css
-  fancybox: https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js
-  medium_zoom: https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js
-
-  # snackbar
-  snackbar_css: https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css
-  snackbar: https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js
-
-  # effect
-  activate_power_mode: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js
-  fireworks: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js
-  click_heart: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js
-  ClickShowText: https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js
-
-  # fontawesome
-  fontawesome: https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css
-
-  # Conversion between Traditional and Simplified Chinese
-  translate: /js/tw_cn.js
-
-  # justifiedGallery
-  justifiedGallery_js: https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js
-  justifiedGallery_css: https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css
-
-  # aplayer
-  aplayer_css: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css
-  aplayer_js: https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js
-  meting_js: https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js
-
-  # Prism.js
-  prismjs_js: https://cdn.jsdelivr.net/npm/prismjs/prism.min.js
-  prismjs_lineNumber_js: https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js
-  prismjs_autoloader: https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js
-
-  artitalk: https://cdn.jsdelivr.net/npm/artitalk
+  option:
+  # main_css:
+  # main:
+  # utils:
+  # translate:
+  # local_search:
+  # algolia_js:
+  # algolia_search_v4:
+  # instantsearch_v4:
+  # pjax:
+  # gitalk:
+  # gitalk_css:
+  # blueimp_md5:
+  # valine:
+  # disqusjs:
+  # disqusjs_css:
+  # twikoo:
+  # waline_js:
+  # waline_css:
+  # sharejs:
+  # sharejs_css:
+  # mathjax:
+  # katex:
+  # katex_copytex:
+  # mermaid:
+  # canvas_ribbon:
+  # canvas_fluttering_ribbon:
+  # canvas_nest:
+  # lazyload:
+  # instantpage:
+  # typed:
+  # pangu:
+  # fancybox_css_v4:
+  # fancybox_v4:
+  # medium_zoom:
+  # snackbar_css:
+  # snackbar:
+  # activate_power_mode:
+  # fireworks:
+  # click_heart:
+  # ClickShowText:
+  # fontawesomeV6:
+  # flickr_justified_gallery_js:
+  # flickr_justified_gallery_css:
+  # aplayer_css:
+  # aplayer_js:
+  # meting_js:
+  # prismjs_js:
+  # prismjs_lineNumber_js:
+  # prismjs_autoloader
