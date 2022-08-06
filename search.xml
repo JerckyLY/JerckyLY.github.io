@@ -40,7 +40,7 @@
 <p><video src='2.mp4' type='video/mp4' controls='controls'  width='100%' height='300'></video></p>
 <p>紧着8月又出现了疫情，开始全员核酸。再之后11月份出现疫情，再次全员核酸。</p>
 <p>临近过年的时候，也是再次出现疫情。那十几天，天天做核酸。2022年的新年第一签是棉签。</p>
-<p>看一下照片了解21年下半年，郑州的坎坷之路。<br><img src= "/img/loading.gif" data-lazy-src="2.jpg"/></p>
+<p>看一下照片了解21年下半年，郑州的坎坷之路。<br><img src="2.jpg"/></p>
 <p>在郑州收获了有结果的爱情，也交到了新的朋友。在郑州这几年他们帮助我很多。刚去郑州的时候，是他们让我在初到一个陌生的城市<br>时，不会感到无助。在我失恋时，我一个电话，同学就从外地到郑州陪我喝酒。朋友不在多，真心就好。</p>
 <p><code>在此，祝愿他们，也祝愿大家一切安好！</code></p>
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>到了北京在酒店安顿之后，我跟媳妇就一起去看房子了。因为在郑州的时候就提前联系好了中介，所以下午去看了几个房子之后就直接<br>定了，回去的路上两个人感觉有点太快了，有点不敢相信。</p>
@@ -53,12 +53,12 @@
 <p>今天是五一，祝大家五一节日快乐！北京这几天正是疫情严重的时候，现在去公共场所都是需要48小时的核酸阴性证明。原本带媳妇去<br>故宫的计划也泡汤了。老老实实在家呆着就好了，待会还得去做小区全员核酸了。 </p>
 <p><strong><code>希望疫情早点消失，回到那个不用人人核酸，不用人人戴口罩，可以到处去旅游的时代</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-hngjpNZH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-zwOqbuNg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-hngjpNZH"),
+            element: document.getElementById("aplayer-zwOqbuNg"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -87,7 +87,7 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div align="center"> <div style="margin: 1rem 0 0.7rem;font-size: 1.5em;color:#1f2d3d;font-weight: bold">Cesium双屏对比</div> </div> 
 
 <p>距离上个博客更新已经过去两三个月了，期间前期一直忙着做项目，后面又是两三个项目一起改bug，改需求……。终于忙碌的日子里，今天能偷得半日闲，那继续开始修炼吧。</p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上个博客介绍了怎么用 <strong>OpenLayers</strong> 跟 <strong>Cesium</strong> 结合来现在二三维联动展示，在近期的项目中，有个需求是地下管网模型，跟倾斜模型<br>同时展示效果图如下：<br> <img src= "/img/loading.gif" data-lazy-src='2.png' /><br>那用二三维联动就没法满足需求了。得是两个三维 <strong>Viewer</strong> 联动才行。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上个博客介绍了怎么用 <strong>OpenLayers</strong> 跟 <strong>Cesium</strong> 结合来现在二三维联动展示，在近期的项目中，有个需求是地下管网模型，跟倾斜模型<br>同时展示效果图如下：<br> <img src='2.png' /><br>那用二三维联动就没法满足需求了。得是两个三维 <strong>Viewer</strong> 联动才行。</p>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>相比二三维根据获取当前屏幕范围来实现联动，双屏联动就相对简单些。可以利用 <strong>Viewer.camera.changed</strong> 事件来监听变换，然后获<br>取当前的 <strong>Viewer.camera</strong> 的值，去更新另一个 <strong>Viewer</strong> 相机的位置。</p>
 <blockquote>
 <p> <strong>Viewer.camera.setView({…})</strong></p>
@@ -128,14 +128,14 @@
 </li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的功能基本是能满足项目的需求，这里只是介绍基本实现，具体 <strong>Viewer</strong> 里面展示的内容，根据项目实际需求来丰富内容即可。根<br>据核心代码基本就能自己完成功能了，就不再上传源码啦。</p>
-<h2 id="题外分享"><a href="#题外分享" class="headerlink" title="题外分享"></a>题外分享</h2><p>之前看了一个有趣的小工具 <strong>RunCat</strong> , 在 Windows 任务栏，随 CPU 越跑越快的猫 <a href='https://www.appinn.com/runcat-for-windows/' target="_blank" >介绍</a>。自己就下载安装了一下，还挺好玩。<br>  <img src= "/img/loading.gif" data-lazy-src='1.gif' /><br>请忽略录制效果￣□￣｜｜</p>
+<h2 id="题外分享"><a href="#题外分享" class="headerlink" title="题外分享"></a>题外分享</h2><p>之前看了一个有趣的小工具 <strong>RunCat</strong> , 在 Windows 任务栏，随 CPU 越跑越快的猫 <a href='https://www.appinn.com/runcat-for-windows/' target="_blank" >介绍</a>。自己就下载安装了一下，还挺好玩。<br>  <img src='1.gif' /><br>请忽略录制效果￣□￣｜｜</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-zMXfEtYZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-elVnoXrw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-zMXfEtYZ"),
+            element: document.getElementById("aplayer-elVnoXrw"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -176,7 +176,7 @@
 </div> 
 
 <ul>
-<li>整体界面<br><img src= "/img/loading.gif" data-lazy-src="1.png"><br>界面上能到到，近地天空图我换成了蓝天白云（照片也是网上找的，很粗糙 O.o）。右下角添加了经纬度坐标以及当前的帧率显示。同时美化了鼠标操作以及修改了默认的操作按键顺序（右键《==》中键）。<br><video src='1.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>整体界面<br><img src="1.png"><br>界面上能到到，近地天空图我换成了蓝天白云（照片也是网上找的，很粗糙 O.o）。右下角添加了经纬度坐标以及当前的帧率显示。同时美化了鼠标操作以及修改了默认的操作按键顺序（右键《==》中键）。<br><video src='1.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
 <li>雪效果<br><video src='2.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
 <li>雨效果<br><video src='3.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
 <li>空间测距<br> <video src='4.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
@@ -199,12 +199,12 @@
 </blockquote>
 </div> </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-bENjeRba" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-kfqphBzk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-bENjeRba"),
+            element: document.getElementById("aplayer-kfqphBzk"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -235,7 +235,7 @@
 <div align="center"> <div style="margin: 1rem 0 0.7rem;font-size: 1.5em;color:#1f2d3d;font-weight: bold">Cesium + Openlayers 二三维联动</div> </div> 
 
 
-<h2 id="为何不用-Cesium-二维模式"><a href="#为何不用-Cesium-二维模式" class="headerlink" title="为何不用 Cesium 二维模式"></a>为何不用 Cesium 二维模式</h2><p> <strong>Cesium</strong> 虽然支持二维模式，但它毕竟的专注方向还是在三维方面。在二维模式下，跟专注于做二维的 <strong>OpenLayers</strong> 或者 <strong>Leaflet</strong>，以及<br> 二维起步，现在开始支持三维的 <strong>MapboxGL</strong> 相比。Cesium的二维模式，总感觉差了那么点意思。我在实际项目的使用中，用 <strong>Cesium</strong><br> 二维模式加载自己的切片服务，由于 <strong>Cesium</strong> 层级的概念，跟二维的层级概念有些区别。因此同样的服务，统一的比例尺下，看的效果<br>  <strong>Cesium</strong> 总是有点差强人意。 看下对比效果：<br> <img src= "/img/loading.gif" data-lazy-src='2.png' /><br> <div align="center">Cesium加载展示</div><br> <img src= "/img/loading.gif" data-lazy-src='3.png' /><br>  <div align="center">Openlayers加载展示</div></p>
+<h2 id="为何不用-Cesium-二维模式"><a href="#为何不用-Cesium-二维模式" class="headerlink" title="为何不用 Cesium 二维模式"></a>为何不用 Cesium 二维模式</h2><p> <strong>Cesium</strong> 虽然支持二维模式，但它毕竟的专注方向还是在三维方面。在二维模式下，跟专注于做二维的 <strong>OpenLayers</strong> 或者 <strong>Leaflet</strong>，以及<br> 二维起步，现在开始支持三维的 <strong>MapboxGL</strong> 相比。Cesium的二维模式，总感觉差了那么点意思。我在实际项目的使用中，用 <strong>Cesium</strong><br> 二维模式加载自己的切片服务，由于 <strong>Cesium</strong> 层级的概念，跟二维的层级概念有些区别。因此同样的服务，统一的比例尺下，看的效果<br>  <strong>Cesium</strong> 总是有点差强人意。 看下对比效果：<br> <img src='2.png' /><br> <div align="center">Cesium加载展示</div><br> <img src='3.png' /><br>  <div align="center">Openlayers加载展示</div></p>
 <p>所以项目中期，二维部分的功能用 <strong>Openlayers</strong>  代替了，说多了都是泪 o(╥﹏╥)o。   </p>
 <p>废话不多说，先看结果：</p>
 <h2 id="上菜"><a href="#上菜" class="headerlink" title="上菜"></a>上菜</h2>  <video   controls width='100%' autoplay height='100%'>
@@ -262,7 +262,7 @@
 </blockquote>
 </div> 
 
-<img src= "/img/loading.gif" data-lazy-src="4.png" />
+<img src="4.png" />
 </li>
 <li><p>三维监听事件处理</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 三维监听事件处理</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="title">getViewCameraRectrange</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> rectangle = <span class="built_in">this</span>.viewer.camera.computeViewRectangle();</span><br><span class="line">    <span class="comment">// 弧度转为经纬度</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> west = (rectangle.west / <span class="built_in">Math</span>.PI) * <span class="number">180</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> north = (rectangle.north / <span class="built_in">Math</span>.PI) * <span class="number">180</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> east = (rectangle.east / <span class="built_in">Math</span>.PI) * <span class="number">180</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> south = (rectangle.south / <span class="built_in">Math</span>.PI) * <span class="number">180</span>;</span><br><span class="line">    <span class="comment">//三维联动二维界面</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">this</span>.isIn2DMapFlag) &#123;</span><br><span class="line">        <span class="keyword">if</span> (north &gt; <span class="number">87</span> &amp;&amp; south &lt; -<span class="number">87</span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> center = <span class="built_in">this</span>.getCenterPosition(<span class="built_in">this</span>.viewer);</span><br><span class="line">            <span class="built_in">this</span>.olMap.getView().setZoom(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">this</span>.olMap.getView().setCenter(ol.proj.transform([center.lon,center.lat],<span class="string">&#x27;EPSG:4326&#x27;</span>,<span class="string">&#x27;EPSG:3857&#x27;</span>));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// console.log(west, south, east, north);</span></span><br><span class="line">            <span class="comment">// this.olMap.getView().fit([transform(west,&#x27;EPSG:4326&#x27;,&#x27;EPSG:3857&#x27;), transform(south,&#x27;EPSG:4326&#x27;,&#x27;EPSG:3857&#x27;), transform(east,&#x27;EPSG:4326&#x27;,&#x27;EPSG:3857&#x27;), transform(north,&#x27;EPSG:4326&#x27;,&#x27;EPSG:3857&#x27;)]);</span></span><br><span class="line">            <span class="built_in">this</span>.olMap.getView().fit(ol.proj.transformExtent([west,south, east, north],<span class="string">&#x27;EPSG:4326&#x27;</span>,<span class="string">&#x27;EPSG:3857&#x27;</span>));</span><br><span class="line">    </span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -279,12 +279,12 @@
 </ol>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-USurcbrH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-JrzXbJwn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-USurcbrH"),
+            element: document.getElementById("aplayer-JrzXbJwn"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -313,8 +313,8 @@
     <url>/2021/06/23/Cesium%E5%85%A5%E9%97%A8-8/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium自定义帧率显示"><a href="#Cesium自定义帧率显示" class="headerlink" title="Cesium自定义帧率显示"></a><center>Cesium自定义帧率显示<center/></h2><p> <strong>Cesium</strong> 提供了不少用于调试的工具，特别方便在开发的时候使用。其中帧率显示特别方便我们对性能调试。因为帧率到了30以下就基<br> 本会开始卡顿了。如果想一直显示帧率，直接用 <strong>Cesium</strong> 默认的话，有时候会跟我们的界面的整体风格不搭配。那么就得自定义来实现<br> 了。</p>
 <h2 id="结果对比"><a href="#结果对比" class="headerlink" title="结果对比"></a>结果对比</h2>  <div style="display: flex;justify-content: space-between;align-items: center" >
-        <img src= "/img/loading.gif" data-lazy-src="1.png" >
-        <img src= "/img/loading.gif" data-lazy-src="2.png">
+        <img src="1.png" >
+        <img src="2.png">
   </div>
   
  看个动态的
@@ -330,7 +330,7 @@
 
 <ul>
 <li><p>源代码 Source\Scene\PerformanceDisplay.js</p>
-<img src= "/img/loading.gif" data-lazy-src="3.png"/>
+<img src="3.png"/>
 </li>
 <li><p>代码修改</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CesiumFPSUtil</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">containerId</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.id = containerId || <span class="string">&quot;fpsdiv&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>._lastFpsSampleTime = getTimestamp();</span><br><span class="line">    <span class="built_in">this</span>._lastMsSampleTime = getTimestamp();</span><br><span class="line">    <span class="built_in">this</span>._fpsFrameCount = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">this</span>._msFrameCount = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">this</span>.createDiv();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">createDiv</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> parent = <span class="built_in">document</span>.getElementById(<span class="built_in">this</span>.id);</span><br><span class="line">    <span class="keyword">const</span> fpsDiv = <span class="built_in">document</span>.createElement(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">    fpsDiv.className = <span class="string">&quot;info-content&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>._fpsText = <span class="built_in">document</span>.createElement(<span class="string">&quot;span&quot;</span>);</span><br><span class="line">    <span class="built_in">this</span>._msText = <span class="built_in">document</span>.createElement(<span class="string">&quot;span&quot;</span>);</span><br><span class="line">    fpsDiv.append(<span class="built_in">this</span>._fpsText);</span><br><span class="line">    fpsDiv.append(<span class="built_in">this</span>._msText);</span><br><span class="line">    parent.append(fpsDiv);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">update</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> time = getTimestamp();</span><br><span class="line">    <span class="built_in">this</span>._fpsFrameCount++;</span><br><span class="line">    <span class="keyword">let</span> updateDisplay = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">let</span> fpsElapsedTime = time - <span class="built_in">this</span>._lastFpsSampleTime;</span><br><span class="line">    <span class="keyword">if</span> (fpsElapsedTime &gt; <span class="number">1000</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> fps = <span class="string">&quot;N/A&quot;</span>;</span><br><span class="line">      <span class="keyword">if</span> (updateDisplay) &#123;</span><br><span class="line">        fps = ((<span class="built_in">this</span>._fpsFrameCount * <span class="number">1000</span>) / fpsElapsedTime) | <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">this</span>._fpsText.innerText = fps + <span class="string">&quot; FPS&quot;</span>;</span><br><span class="line">      <span class="built_in">this</span>._lastFpsSampleTime = time;</span><br><span class="line">      <span class="built_in">this</span>._fpsFrameCount = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>._msFrameCount++;</span><br><span class="line">    <span class="keyword">let</span> msElapsedTime = time - <span class="built_in">this</span>._lastMsSampleTime;</span><br><span class="line">    <span class="keyword">if</span> (msElapsedTime &gt; <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> ms = <span class="string">&quot;N/A&quot;</span>;</span><br><span class="line">      <span class="keyword">if</span> (updateDisplay) &#123;</span><br><span class="line">        ms = (msElapsedTime / <span class="built_in">this</span>._msFrameCount).toFixed(<span class="number">2</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="built_in">this</span>._msText.innerText = ms + <span class="string">&quot; MS&quot;</span>;</span><br><span class="line">      <span class="built_in">this</span>._lastMsSampleTime = time;</span><br><span class="line">      <span class="built_in">this</span>._msFrameCount = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
@@ -344,12 +344,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-EUxtSNhR" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-RrKAcqqE" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-EUxtSNhR"),
+            element: document.getElementById("aplayer-RrKAcqqE"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -379,21 +379,21 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="我们结婚啦"><a href="#我们结婚啦" class="headerlink" title="我们结婚啦"></a><center>我们结婚啦<center/></h2><p>今天是我们结婚一个月纪念日，趁此机会记录一下我们结婚前的准备以及结婚时的点点滴滴，留作纪念。今天偷偷的给媳妇送了一束花到她公司，她还是很开心的，哈哈哈。</p>
 <h2 id="婚期"><a href="#婚期" class="headerlink" title="婚期"></a>婚期</h2><p>经过两家人的商定，以及找的先生算的日子，婚期是定在了 <strong><code>2021年05月17号农历四月初六</code></strong> 。婚期定了之后，我们就开始为结婚忙碌了起来。</p>
 <h2 id="婚纱照"><a href="#婚纱照" class="headerlink" title="婚纱照"></a>婚纱照</h2><p>婚纱照一天就拍完了，只是特别累。最后是想笑都笑不动了。虽然累， 但是挺开心的。发几张媳妇的照片 (#^.^#)</p>
-<div style="display: flex;justify-content: space-between" ><img src= "/img/loading.gif" data-lazy-src="8.jpg"  /><img src= "/img/loading.gif" data-lazy-src="9.jpg"  /></div>
-<div style="display: flex;justify-content: space-between" ><img src= "/img/loading.gif" data-lazy-src="10.jpg"  /><img src= "/img/loading.gif" data-lazy-src="11.jpg"  /></div>
+<div style="display: flex;justify-content: space-between" ><img src="8.jpg"  /><img src="9.jpg"  /></div>
+<div style="display: flex;justify-content: space-between" ><img src="10.jpg"  /><img src="11.jpg"  /></div>
 
 <h2 id="领证"><a href="#领证" class="headerlink" title="领证"></a>领证</h2><p>公司与公司之间的婚假不一样，我这边只有法定的三天假，好在之前攒的调休比较多。我媳妇那只能请七天，而且必须要有结婚证才能<br>请假。本打算 <code>520</code> 去领证的，只能提前了。领证是在 <code>0506</code>五一假期结束的第一天，去了婚姻登记所之后通知先去复印证件。婚姻登<br>记所旁边的打印店，对于结婚复印证件都免费。哈哈，祝愿老板生意兴隆。媳妇还细心的备了喜糖，给了老板跟登记的工作人员。复印<br>完之后，我们开始登记，然后给了一份免费体检表，去医院体检完回来就可以直接领证啦。</p>
-<h4 id="这是婚姻登记处"><a href="#这是婚姻登记处" class="headerlink" title="这是婚姻登记处:"></a>这是婚姻登记处:</h4><img src= "/img/loading.gif" data-lazy-src="12.jpg"  />
+<h4 id="这是婚姻登记处"><a href="#这是婚姻登记处" class="headerlink" title="这是婚姻登记处:"></a>这是婚姻登记处:</h4><img src="12.jpg"  />
 
-<h4 id="我们领证啦！"><a href="#我们领证啦！" class="headerlink" title="我们领证啦！"></a>我们领证啦！</h4><img src= "/img/loading.gif" data-lazy-src="7.jpg"  />
+<h4 id="我们领证啦！"><a href="#我们领证啦！" class="headerlink" title="我们领证啦！"></a>我们领证啦！</h4><img src="7.jpg"  />
 
 
 <h2 id="婚假"><a href="#婚假" class="headerlink" title="婚假"></a>婚假</h2><p>因为17号就结婚了，还有好多事没准备。去公司上了两天班，期间还请了一天去办事，然后就开始请婚假了。5月12号，回家。准备结婚！</p>
 <h2 id="传谏"><a href="#传谏" class="headerlink" title="传谏"></a>传谏</h2><p>13号，传谏。目的是通知亲人我们要结婚了。我们这边的风俗是：早上我家这边的亲人来吃饭，同时媳妇那边的来媒人过来，我这边找<br>媒人陪着。然后中午媒人们跟着去她家。我也跟着去了，主要是为了让媳妇那边的亲戚都认识一下我。</p>
-<h2 id="布置"><a href="#布置" class="headerlink" title="布置"></a>布置</h2><p>14号，把我这边的亲人都喊过来，大舅大妗，小舅小妗，小姨姨夫，姥姥姥爷。打气球的，扎气球的，在梯子上贴气球的。一家人聚<br>一起特别的开心，特别的温馨。看一下成果：（这些都是视频截图的，手机没怎么拍）<br><img src= "/img/loading.gif" data-lazy-src="14.png"  /><br><img src= "/img/loading.gif" data-lazy-src="15.png"  /></p>
+<h2 id="布置"><a href="#布置" class="headerlink" title="布置"></a>布置</h2><p>14号，把我这边的亲人都喊过来，大舅大妗，小舅小妗，小姨姨夫，姥姥姥爷。打气球的，扎气球的，在梯子上贴气球的。一家人聚<br>一起特别的开心，特别的温馨。看一下成果：（这些都是视频截图的，手机没怎么拍）<br><img src="14.png"  /><br><img src="15.png"  /></p>
 <h2 id="到来"><a href="#到来" class="headerlink" title="到来"></a>到来</h2><p>15号，伴郎伴娘到来。有几个都是在一个地方，回来的时候坐一辆车回来的。</p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>16号，去试婚礼当天的礼服，还有伴郎伴娘的衣服。下午的时候，专门把车洗洗，明天要当婚车。开车又走了一趟明天接亲的路线，认<br>认路。晚上去车站接一个伴娘到来。同时家里婚庆的场景也来布置了。看一下场景。<br><img src= "/img/loading.gif" data-lazy-src="1.png"  /><br><img src= "/img/loading.gif" data-lazy-src="4.png"  /><br><img src= "/img/loading.gif" data-lazy-src="5.png"  /></p>
-<h2 id="结婚"><a href="#结婚" class="headerlink" title="结婚"></a>结婚</h2><p>17号，早上五点我起来去接化妆师，顺便把媳妇的两个同学接过去。（回我家正好路过媳妇家）。<br>7点20，我们出发去接新娘。<br><img src= "/img/loading.gif" data-lazy-src="18.jpg"  /><br>早上走的时候太激动，把新娘的胸花给忘了拿了。就赶紧打电话让我姨夫送，期间催了好几次，因为接亲的车中途是不能停。<br>鉴于隐私以及图片很多，我就不把接亲的过程照片发了，发几张家乡的风景照吧。<br><img src= "/img/loading.gif" data-lazy-src="16.png"  /><br><img src= "/img/loading.gif" data-lazy-src="17.png"  /><br>中间的婚庆过程，我就不发了。来看一下新郎新娘们还有我的以及新娘的好朋友。特别感谢他（她）们能来参加我们的婚礼（照片的来源很多，请自动忽略像素问题￣□￣｜｜）。<br><img src= "/img/loading.gif" data-lazy-src="19.jpg"  /><br><img src= "/img/loading.gif" data-lazy-src="20.jpg"  /><br><img src= "/img/loading.gif" data-lazy-src="21.jpg"  /></p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>16号，去试婚礼当天的礼服，还有伴郎伴娘的衣服。下午的时候，专门把车洗洗，明天要当婚车。开车又走了一趟明天接亲的路线，认<br>认路。晚上去车站接一个伴娘到来。同时家里婚庆的场景也来布置了。看一下场景。<br><img src="1.png"  /><br><img src="4.png"  /><br><img src="5.png"  /></p>
+<h2 id="结婚"><a href="#结婚" class="headerlink" title="结婚"></a>结婚</h2><p>17号，早上五点我起来去接化妆师，顺便把媳妇的两个同学接过去。（回我家正好路过媳妇家）。<br>7点20，我们出发去接新娘。<br><img src="18.jpg"  /><br>早上走的时候太激动，把新娘的胸花给忘了拿了。就赶紧打电话让我姨夫送，期间催了好几次，因为接亲的车中途是不能停。<br>鉴于隐私以及图片很多，我就不把接亲的过程照片发了，发几张家乡的风景照吧。<br><img src="16.png"  /><br><img src="17.png"  /><br>中间的婚庆过程，我就不发了。来看一下新郎新娘们还有我的以及新娘的好朋友。特别感谢他（她）们能来参加我们的婚礼（照片的来源很多，请自动忽略像素问题￣□￣｜｜）。<br><img src="19.jpg"  /><br><img src="20.jpg"  /><br><img src="21.jpg"  /></p>
 <h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>其实中间还有很多部分都没写，不是不重要，是很重要一时间我无法言语来表达。</p>
 <p>感谢我的家人们。为了我结婚的事，我爸妈也是忙碌了很多天。家里很多的布置都是他们在家弄的。家里的孩子我是老大，也是第一次<br>置办婚礼，很多都不懂的不知道的，都是我妈到处找人问该怎么弄。婚房是我爸重新买的白漆粉刷了一遍，地面是他们拖了好几遍。家<br>具也是一点点的搬到楼上。妹妹也在结婚那天充当记账的身份，在婚庆开始的时候，她一会儿跑过来看，一会儿跑过去记账。<br>父母的恩情，我们一辈子也还不完。</p>
 <p>感谢岳父岳母。他们把女儿养育这么大也不容易，愿意让这么好的闺女嫁给我，感谢他们。</p>
@@ -410,12 +410,12 @@
 <p>虽然有不少的遗憾，但是都是满满的回忆。正因为不完美，而更令人记忆深刻，更加的美好。</p>
 <p><strong><code>我相信，未来会越来越好</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-iobOhdJQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-fALdZMAV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-iobOhdJQ"),
+            element: document.getElementById("aplayer-fALdZMAV"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -442,7 +442,7 @@
   <entry>
     <title>Cesium系列(7)--方位角测量</title>
     <url>/2021/03/26/Cesium%E5%85%A5%E9%97%A8-7/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium方位角测量-仿火星科技"><a href="#Cesium方位角测量-仿火星科技" class="headerlink" title="Cesium方位角测量(仿火星科技)"></a><center>Cesium方位角测量(仿火星科技)<center/></h2><p>接着之前的通用工具介绍来讲，今天主要介绍方位角测量。仿照火星科技的例子实现，可以连续测量。先上图：<br><img src= "/img/loading.gif" data-lazy-src="1.png"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium方位角测量-仿火星科技"><a href="#Cesium方位角测量-仿火星科技" class="headerlink" title="Cesium方位角测量(仿火星科技)"></a><center>Cesium方位角测量(仿火星科技)<center/></h2><p>接着之前的通用工具介绍来讲，今天主要介绍方位角测量。仿照火星科技的例子实现，可以连续测量。先上图：<br><img src="1.png"></p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>首先明白什么是方位角，百度百科介绍：</p>
 <blockquote>
 <p>方位角，又称地平经度(Azimuth angle，缩写为Az)，是在平面上量度物体之间的角度差的方法之一。是从某点的指北方向线起，依顺时针方向到目标方向线之间的水平夹角。</p>
@@ -452,11 +452,11 @@
 <li>两个点， 起点和目标点</li>
 <li>两点间顺时针的水平夹角</li>
 </ul>
-<p>根据上面的信息，想到的方法就是，根据起点建立一个 x东方向，y为北方向的局部坐标系(或者y为东，x为北)，计算出目标点在这个坐标系的局部坐标值，然后利用三角函数 <strong>arctan</strong>计算出夹角(图中角A的值)。<br><img src= "/img/loading.gif" data-lazy-src="2.png"></p>
+<p>根据上面的信息，想到的方法就是，根据起点建立一个 x东方向，y为北方向的局部坐标系(或者y为东，x为北)，计算出目标点在这个坐标系的局部坐标值，然后利用三角函数 <strong>arctan</strong>计算出夹角(图中角A的值)。<br><img src="2.png"></p>
 <p><strong>Cesium</strong> 中提供了建立局部坐标系的方法</p>
 <ul>
-<li>以x为北，y东的局部坐标系<br><img src= "/img/loading.gif" data-lazy-src="3.png"></li>
-<li>以y为北，x东的局部坐标系<br><img src= "/img/loading.gif" data-lazy-src="4.png"></li>
+<li>以x为北，y东的局部坐标系<br><img src="3.png"></li>
+<li>以y为北，x东的局部坐标系<br><img src="4.png"></li>
 </ul>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>核心代码如下：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算两个点的方位角度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lng_a</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lat_a</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lng_b</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">lat_b</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="title">courseAngle</span>(<span class="params">lng_a, lat_a, lng_b, lat_b</span>)</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以a点为原点建立局部坐标系（东方向为y轴,北方向为x轴,垂直于地面为z轴），得到一个局部坐标到世界坐标转换的变换矩阵</span></span><br><span class="line">    <span class="comment">// const localToWorld_Matrix = Cesium.Transforms.northEastDownToFixedFrame(</span></span><br><span class="line">    <span class="comment">//     new Cesium.Cartesian3.fromDegrees(lng_a, lat_a)</span></span><br><span class="line">    <span class="comment">// );</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以a点为原点建立局部坐标系（东方向为x轴,北方向为y轴,垂直于地面为z轴），得到一个局部坐标到世界坐标转换的变换矩阵</span></span><br><span class="line">    <span class="keyword">const</span> localToWorld_Matrix = Cesium.Transforms.eastNorthUpToFixedFrame(</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3.fromDegrees(lng_a, lat_a)</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//求世界坐标到局部坐标的变换矩阵</span></span><br><span class="line">    <span class="keyword">const</span> worldToLocal_Matrix = Cesium.Matrix4.inverse(</span><br><span class="line">        localToWorld_Matrix,</span><br><span class="line">        <span class="keyword">new</span> Cesium.Matrix4()</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//a点在局部坐标的位置，其实就是局部坐标原点</span></span><br><span class="line">    <span class="keyword">const</span> localPosition_A = Cesium.Matrix4.multiplyByPoint(</span><br><span class="line">        worldToLocal_Matrix,</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3.fromDegrees(lng_a, lat_a),</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3()</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//B点在以A点为原点的局部的坐标位置</span></span><br><span class="line">    <span class="keyword">const</span> localPosition_B = Cesium.Matrix4.multiplyByPoint(</span><br><span class="line">        worldToLocal_Matrix,</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3.fromDegrees(lng_b, lat_b),</span><br><span class="line">        <span class="keyword">new</span> Cesium.Cartesian3()</span><br><span class="line">    );</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//弧度</span></span><br><span class="line">    <span class="comment">// const angle = Math.atan2(</span></span><br><span class="line">    <span class="comment">//     localPosition_B.y - localPosition_A.y,</span></span><br><span class="line">    <span class="comment">//     localPosition_B.x - localPosition_A.x</span></span><br><span class="line">    <span class="comment">// );</span></span><br><span class="line">    <span class="comment">//弧度</span></span><br><span class="line">    <span class="keyword">const</span> angle = <span class="built_in">Math</span>.atan2(</span><br><span class="line">        localPosition_B.x - localPosition_A.x,</span><br><span class="line">        localPosition_B.y - localPosition_A.y</span><br><span class="line">    );</span><br><span class="line">    <span class="comment">//角度</span></span><br><span class="line">    <span class="keyword">let</span> theta = angle * (<span class="number">180</span> / <span class="built_in">Math</span>.PI);</span><br><span class="line">    <span class="keyword">if</span> (theta &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        theta = theta + <span class="number">360</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> theta;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -465,12 +465,12 @@
 <p><strong><code>天不生我李淳罡，剑道万古如长夜</code></strong></p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-brcjJnbn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ciUZFJJG" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-brcjJnbn"),
+            element: document.getElementById("aplayer-ciUZFJJG"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -501,13 +501,13 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="node-sqlite3简易后台搭建"><a href="#node-sqlite3简易后台搭建" class="headerlink" title="node-sqlite3简易后台搭建"></a><center>node-sqlite3简易后台搭建<center/></h2><p>最近项目需要写一个演示用的三维Demo，其中要有用户管理界面，能对用户进行增删改查操作。当然这都是小需求，随便就写了，也<br>没啥。但是给我说没人给我写接口（内心：嗯，嗯???)。虽然做过一段时间的全栈开发，突然让我写后台，我还是有点不适应。但是没<br>办法，任务来了，干吧！<br>之前写的是 <strong>Java</strong> + <strong>Mysql</strong> + <strong>SpringBoot</strong> 后台，但是一个简单的用户管理，再加一个登录的接口，我是真心不想用（其实忘了不少，不<br>会了 哈哈）。作为一个 <strong>WebGIS</strong> 码农，最熟悉的还是 <strong>JavaScript</strong> 。那能用 <strong>Js</strong> 写后台的莫过于 <strong>Node</strong>了，再结合 <strong>express</strong> 库，很轻便的<br>就可以搭建一个后台。接下来就是数据库了。目前，开源免费，又小巧轻便的 <strong>sqlite</strong> 多合适啊。 同时 <strong>Node</strong> 也有 <strong>sqlite3</strong> JS库可以操作<br>它。OK，技术选型定了，接下来就开始实现吧。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>对应<strong>Node</strong>的安装和配置，各位道友了解的比我都清楚，我就不多说了。主要讲一下 <strong>sqlite3</strong>的安装</p>
 <ul>
-<li><p>sqlite3 (windows)数据库安装<br> 下载地址 <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a><br> 需要下载 <strong>sqlite-dll-win32-86-xx.zip</strong> 或者 <strong>sqlite-dll-win64-xx.zip</strong> 以及 <strong>sqlite-tools-win32-x86-xx.zip</strong><br> <img src= "/img/loading.gif" data-lazy-src="1.png"><br> 把这两个解压之后，里面的文件放到一个文件夹下<br> <img src= "/img/loading.gif" data-lazy-src="2.png"><br> 然后在系统的环境变量中，在 <strong>Path</strong> 变量里面把存放 <strong>sqlit3</strong> 的文件夹路径添加进去<br> <img src= "/img/loading.gif" data-lazy-src="3.png"><br> 最后检查一下是否安装成功 在cmd 命令行中输入 <strong>sqlit3</strong> 回车。如果安装成功出现会入下图所示：<br> <img src= "/img/loading.gif" data-lazy-src="4.png"></p>
+<li><p>sqlite3 (windows)数据库安装<br> 下载地址 <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a><br> 需要下载 <strong>sqlite-dll-win32-86-xx.zip</strong> 或者 <strong>sqlite-dll-win64-xx.zip</strong> 以及 <strong>sqlite-tools-win32-x86-xx.zip</strong><br> <img src="1.png"><br> 把这两个解压之后，里面的文件放到一个文件夹下<br> <img src="2.png"><br> 然后在系统的环境变量中，在 <strong>Path</strong> 变量里面把存放 <strong>sqlit3</strong> 的文件夹路径添加进去<br> <img src="3.png"><br> 最后检查一下是否安装成功 在cmd 命令行中输入 <strong>sqlit3</strong> 回车。如果安装成功出现会入下图所示：<br> <img src="4.png"></p>
 </li>
-<li><p>SQLiteStudio 可视化工具<br> 数据库用命令行操作还是不方便，<strong>SQLiteStudio</strong> 是开源，且支持多平台的一个 <strong>sqlite</strong> 可视化软件。<br> 下载地址： <a href="https://sqlitestudio.pl/">https://sqlitestudio.pl/</a><br> 解压文件，找到 <strong>SQLiteStudio.exe</strong> 双击打开，初次加载，需要选择语言，找到中文即可：<br> <img src= "/img/loading.gif" data-lazy-src="5.png"></p>
+<li><p>SQLiteStudio 可视化工具<br> 数据库用命令行操作还是不方便，<strong>SQLiteStudio</strong> 是开源，且支持多平台的一个 <strong>sqlite</strong> 可视化软件。<br> 下载地址： <a href="https://sqlitestudio.pl/">https://sqlitestudio.pl/</a><br> 解压文件，找到 <strong>SQLiteStudio.exe</strong> 双击打开，初次加载，需要选择语言，找到中文即可：<br> <img src="5.png"></p>
 </li>
 </ul>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul>
-<li>建库<br>利用 <strong>SQLiteStudio</strong> 新建一个数据库。 Database –&gt; Add a database :<br><img src= "/img/loading.gif" data-lazy-src="6.png"><br>1 是新建，2是打开。 新建的时候，选好文件夹，然后输入数据库的名称就行了。因为我之前建立了，就直接选择打开。<br><img src= "/img/loading.gif" data-lazy-src="7.png"><br>点击测试连接，出现绿色对号。说明连接正常。然后点击 OK。<br><img src= "/img/loading.gif" data-lazy-src="8.png"></li>
+<li>建库<br>利用 <strong>SQLiteStudio</strong> 新建一个数据库。 Database –&gt; Add a database :<br><img src="6.png"><br>1 是新建，2是打开。 新建的时候，选好文件夹，然后输入数据库的名称就行了。因为我之前建立了，就直接选择打开。<br><img src="7.png"><br>点击测试连接，出现绿色对号。说明连接正常。然后点击 OK。<br><img src="8.png"></li>
 <li>建表<br>在 <strong>test.db</strong> 里面，我已经建好了一个 <strong>user</strong> 表格，有 <strong>id</strong> 、<strong>name</strong> 、 <strong>password</strong> 还有 <strong>create_time</strong> 四个字段。你可以用工具创建，也<br>可以手动创建。表的SQL语句：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE TABLE user (</span><br><span class="line">    id          STRING (256) PRIMARY KEY</span><br><span class="line">                             UNIQUE</span><br><span class="line">                             NOT NULL,</span><br><span class="line">    name        STRING (64)  NOT NULL,</span><br><span class="line">    password    STRING (128) NOT NULL,</span><br><span class="line">    create_time DATETIME     NOT NULL</span><br><span class="line">                             DEFAULT (datetime(&#x27;now&#x27;, &#x27;localtime&#x27;) ) </span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 </li>
@@ -518,9 +518,9 @@
 </li>
 <li><p>安装依赖<br>用的基础的 <strong>express</strong> 创建 Server, 然后用 <strong>sqlite3</strong>库来操作数据库。用 <strong>uuid</strong> 来生成随机的id。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i express sqlite3 uuid --save</span><br></pre></td></tr></table></figure>
-<p>package.json内容如下：<br><img src= "/img/loading.gif" data-lazy-src="9.png"> </p>
+<p>package.json内容如下：<br><img src="9.png"> </p>
 </li>
-<li><p>代码使用 sqlite3<br>api 简介：<br><img src= "/img/loading.gif" data-lazy-src="10.png"></p>
+<li><p>代码使用 sqlite3<br>api 简介：<br><img src="10.png"></p>
 <ol>
 <li><p>代码打开数据库</p>
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sqlite3 = <span class="built_in">require</span>(<span class="string">&quot;sqlite3&quot;</span>).verbose()</span><br><span class="line"><span class="comment">// sqlites数据库地址</span></span><br><span class="line"><span class="keyword">let</span> sqliteDbPath = <span class="string">&quot;D:\\01_Software\\Program File\\sqlite3\\DB\\test.db&quot;</span></span><br><span class="line"><span class="comment">// 打开sqlites数据库</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> sqlite3.Database(sqliteDbPath)</span><br></pre></td></tr></table></figure>
@@ -534,15 +534,15 @@
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> bodyParse = <span class="built_in">require</span>(<span class="string">&#x27;body-parser&#x27;</span>)</span><br><span class="line"><span class="comment">// 创建 express 应用</span></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line">app.use(bodyParse.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;));<span class="comment">//添加通用的JSON和URL编码的解析器作为顶级中间件，该中间件将解析所有传入请求的主体。</span></span><br><span class="line">app.use(bodyParse.json());</span><br></pre></td></tr></table></figure>
 <p> 新增用户的代码</p>
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新增接口</span></span><br><span class="line"><span class="keyword">const</span> addUser = <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> param =  req.body;</span><br><span class="line">    <span class="keyword">const</span> name = param.name;</span><br><span class="line">    <span class="keyword">const</span> password = param.password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> uid = uuid()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> add_sql = <span class="string">`insert into user (id , name ,password ) values(?,?,?)`</span></span><br><span class="line">    db.run(add_sql,[uid,name,password],<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;插入失败&#x27;</span>,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        res.send(&#123;</span><br><span class="line">            <span class="attr">code</span>:<span class="number">200</span>,</span><br><span class="line">            <span class="attr">msg</span>:<span class="string">&#x27;插入成功&#x27;</span>,</span><br><span class="line">            <span class="attr">ret</span>:<span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-<p> 上述代码是从 <strong>request.body</strong> 获取提交的用户名 <strong>name</strong> 和密码 <strong>password</strong>，然后利用 <strong>uuid</strong> 生成一个 <strong>id</strong>，之后写了一个插入的sql<br> 语句 <strong>add_sql</strong>。 然后用到了 <strong>sqlite3</strong> 的 <strong>run</strong> 方法来执行sql语句。代码很简单都是基本的插入语句。<br> 启动应用，利用<strong>postman</strong> 测试一下：<br> <img src= "/img/loading.gif" data-lazy-src="11.png"><br> 结果返回插入成功，同时刷新数据库，能看到插入的最新的一条数据。</p>
+<p> 上述代码是从 <strong>request.body</strong> 获取提交的用户名 <strong>name</strong> 和密码 <strong>password</strong>，然后利用 <strong>uuid</strong> 生成一个 <strong>id</strong>，之后写了一个插入的sql<br> 语句 <strong>add_sql</strong>。 然后用到了 <strong>sqlite3</strong> 的 <strong>run</strong> 方法来执行sql语句。代码很简单都是基本的插入语句。<br> 启动应用，利用<strong>postman</strong> 测试一下：<br> <img src="11.png"><br> 结果返回插入成功，同时刷新数据库，能看到插入的最新的一条数据。</p>
 </li>
 <li><p>修改用户<br> 修改的逻辑是根据用户的 <strong>id</strong> 对用户名和密码进行修改。</p>
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//更新</span></span><br><span class="line"><span class="keyword">const</span> updateUser = <span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> param =  req.body;</span><br><span class="line">    <span class="keyword">const</span> password = param.password;</span><br><span class="line">    <span class="keyword">const</span> name = param.name;</span><br><span class="line">    <span class="keyword">const</span> id = param.id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> update_sql = <span class="string">`update user set name=?, password = ? where id = ?`</span>;</span><br><span class="line">    db.run(update_sql,[name,password,id],<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;更新失败&#x27;</span>,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span>  data = &#123;</span><br><span class="line">            <span class="attr">code</span>:<span class="number">200</span>,</span><br><span class="line">            <span class="attr">ret</span>:<span class="literal">true</span>,</span><br><span class="line">            <span class="attr">msg</span>:<span class="string">&#x27;更新成功&#x27;</span></span><br><span class="line">        &#125; ;</span><br><span class="line"></span><br><span class="line">        res.send(data)</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 测试结果如下：<br> <img src= "/img/loading.gif" data-lazy-src="12.png"></p>
+<p> 测试结果如下：<br> <img src="12.png"></p>
 </li>
 <li><p>查询用户<br>查询全部数据</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//查询全部数据</span></span><br><span class="line"><span class="keyword">const</span> getAll = <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">    db.all(<span class="string">`select * from user order by create_time desc  `</span>,<span class="function"><span class="keyword">function</span> (<span class="params">err,row</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.send(&#123;</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;查询失败&#x27;</span>,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">false</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> data = &#123;</span><br><span class="line">                <span class="attr">code</span>:<span class="number">200</span>,</span><br><span class="line">                <span class="attr">data</span>:row,</span><br><span class="line">                <span class="attr">ret</span>:<span class="literal">true</span>,</span><br><span class="line">                <span class="attr">msg</span>:<span class="string">&#x27;查询成功&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// console.log(data)</span></span><br><span class="line">        res.send(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="13.png"></p>
+<p>结果如下：<br><img src="13.png"></p>
 </li>
 <li><p>删除用户<br>根据用户 <strong>id</strong> 删除用户。</p>
 <pre><code class="js">    //删除
@@ -566,7 +566,7 @@
         &#125;)
     &#125;
 </code></pre>
-<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="14.png"> </p>
+<p>结果如下：<br><img src="14.png"> </p>
 </li>
 </ol>
 </li>
@@ -574,12 +574,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/node-sqlite3-server-demo' target="_blank" >node-sqlite3-server-demo</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  总体实现还是挺简单的，也没什么复杂的 SQL 语句。部署的时候，可以把 <strong>Node</strong> 安装为 window服务，就不用担心客户那边服务器关机了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-biHlaeYn" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-syEtKhBc" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-biHlaeYn"),
+            element: document.getElementById("aplayer-syEtKhBc"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -611,8 +611,8 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium点线面缓冲区实现"><a href="#Cesium点线面缓冲区实现" class="headerlink" title="Cesium点线面缓冲区实现"></a><center>Cesium点线面缓冲区实现<center/></h2><p>上篇文章主要展示了我最近封装的一些常用工具，接下来几篇文章主要介绍相关功能的实现。这篇文章就介绍一下关于三维缓冲区的实现原理。</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>其实从事 Webgis 相关的道友都用过或者听过 <strong>turf.js</strong> 这个前端 <strong>GIS</strong> <strong>javascript</strong>分析库 (什么？没听过？ 道友，最近游戏红尘了吧，哈哈<br>~), <a href='https://turfjs.fenxianglu.cn/category/' target="_blank" >中文文档地址</a>。<strong>turf.js</strong>  提供了很多分析方法，具体我就不展开说了，一个是我了解的也不是很清楚，另一个就是人家写的很详细<br>了，就不班门弄斧了。<br>三维缓冲区和二维缓冲区实现方式是一样的，都是基于 <strong>turf.js</strong> 的 <strong>buffer</strong> 方法，传入相关的参数，然后将生成的 <strong>Feature</strong> 展示就行了。</p>
 <ul>
-<li>buffer 方法<br><img src= "/img/loading.gif" data-lazy-src="1.png"></li>
-<li>buffer 使用示例<br><img src= "/img/loading.gif" data-lazy-src="2.png"></li>
+<li>buffer 方法<br><img src="1.png"></li>
+<li>buffer 使用示例<br><img src="2.png"></li>
 </ul>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>参数很简单，一个是要缓冲的基础几何对象，一个是缓冲半径，默认是千米。基本的绘制交互就不说了，核心的代码如下：</p>
 <ul>
@@ -624,16 +624,16 @@
 
 </li>
 </ul>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>  <img src= "/img/loading.gif" data-lazy-src="3.png"></p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>  <img src="3.png"></p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>缓冲区实现的过程很简单，没什么可多说的，需要注意的是二维三维坐标的转换，二维面的坐标数组要闭合。其他的就是正常的实现就行了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-bjuunHee" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ogYnIxXu" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-bjuunHee"),
+            element: document.getElementById("aplayer-ogYnIxXu"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -722,7 +722,7 @@
 </li>
 <li><p>使用<br>混入的对象以及属性的内容是和 <code>Vue</code> 组件一致，可以混入数据，方法，甚至是生命周期。而对于同名的属性和方法，<code>Vue</code> 会进行合并，后出现的属性会覆盖之前的属性和方法。  全局混入会影响每一个之后创建的 <code>Vue</code> 实例。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">MyPlugin.install = <span class="function"><span class="keyword">function</span>(<span class="params">vue</span>) </span>&#123;</span><br><span class="line">    vue.mixin(&#123;</span><br><span class="line">    <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;<span class="attr">globalMixinData</span>: <span class="string">&#x27;这是 mixin 混入数据&#x27;</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 混入生命周期</span></span><br><span class="line">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>) </span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;I am globalMixin created&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line"> <span class="comment">//使用拆件</span></span><br><span class="line"> Vue.use(MyPlugin)</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">   <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line"> &#125;).$mount(<span class="string">&#x27;#app&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>在 <code>main.js</code> 中引入 <code>MyPlugin</code> 然后在 <code>App.vue</code> 中引用 <code>&#123;&#123;globalMixinData&#125;&#125;</code> 即可看到<br><img src= "/img/loading.gif" data-lazy-src="1.png"><br>图中执行两次 <code>console.log(I am globalMixin created)</code>  是因为 <code>new Vue</code> 和 <code>App.vue</code> 都会执行一次生命周期。 通过 <code>console.log(this)</code> 是能看到哪个执行的生命周期。</p>
+<p>在 <code>main.js</code> 中引入 <code>MyPlugin</code> 然后在 <code>App.vue</code> 中引用 <code>&#123;&#123;globalMixinData&#125;&#125;</code> 即可看到<br><img src="1.png"><br>图中执行两次 <code>console.log(I am globalMixin created)</code>  是因为 <code>new Vue</code> 和 <code>App.vue</code> 都会执行一次生命周期。 通过 <code>console.log(this)</code> 是能看到哪个执行的生命周期。</p>
 <h4 id="渲染函数-h-createElement"><a href="#渲染函数-h-createElement" class="headerlink" title="渲染函数 (h == createElement)"></a>渲染函数 (h == createElement)</h4></li>
 <li><p>简介</p>
 <p>渲染函数的由来是因为 <code>Vue</code> 使用了 <strong>虚拟DOM</strong>，更新操作 <strong>虚拟DOM</strong> 比操作真正的 <code>DOM</code> 要更快，而且更节省资源。 渲染函数  <a href='https://cn.vuejs.org/v2/guide/render-function.html#createElement-%E5%8F%82%E6%95%B0' target="_blank" >createElement</a>  实际上返回的是一个 <code>VNode</code> 虚拟节点，最后 <code>Vue</code> 再生成真实的 <code>DOM</code> 显示在页面上。</p>
@@ -735,7 +735,7 @@
 </li>
 <li><p>示例<br>比如创建一个全局组件 <code>viewer</code> 里面的内容为 <code>&lt;div id=&#39;viewers&#39;&gt;我是div&lt;/div&gt;</code>, 在 <code>main.js</code> 中添加代码如下：</p>
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.component(<span class="string">&#x27;viewer&#x27;</span>,&#123;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params">h</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> tag = <span class="string">&#x27;div&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> config = &#123;<span class="attr">attrs</span>:&#123;<span class="attr">id</span>:<span class="string">&#x27;viewers&#x27;</span>&#125;&#125;</span><br><span class="line">    <span class="keyword">return</span> h(tag,config,<span class="string">&#x27;我是div&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>结果如下<br><img src= "/img/loading.gif" data-lazy-src="2.png"></p>
+<p>结果如下<br><img src="2.png"></p>
 <h3 id="基础版实现"><a href="#基础版实现" class="headerlink" title="基础版实现"></a>基础版实现</h3><p>了解前面的知识之后，就能真正开始写了。</p>
 </li>
 <li><p>history 路径监听类<br>因为 <code>VueRouter</code> 是分 <code>hash</code> 和 <code>history</code> 两种模式，那么我们分别创建两种类：<br><code>HashHistory</code> </p>
@@ -750,7 +750,7 @@
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 添加install属性，用来执行插件</span></span><br><span class="line">CustomRouter.install = <span class="function"><span class="keyword">function</span> (<span class="params">vue</span>) </span>&#123;</span><br><span class="line">  vue.mixin(&#123;</span><br><span class="line">    <span class="function"><span class="title">beforeCreate</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="comment">// 获取new Vue时传入的参数</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.$options &amp;&amp; <span class="built_in">this</span>.$options.router) &#123;</span><br><span class="line">        <span class="built_in">this</span>._root = <span class="built_in">this</span>;</span><br><span class="line">        <span class="built_in">this</span>._router = <span class="built_in">this</span>.$options.router;</span><br><span class="line">        <span class="comment">// 监听current, defineReactive(obj, key, val)不传第三个参数，第三个参数默认是obj[key]</span></span><br><span class="line">        <span class="comment">// 第三个参数传了也会被监听，效果相当于，第一个参数的子级</span></span><br><span class="line">        vue.util.defineReactive(<span class="built_in">this</span>, <span class="string">&#x27;current&#x27;</span>, <span class="built_in">this</span>._router.history);</span><br><span class="line">        <span class="comment">// vue.set(this, &#x27;current&#x27;, this._router.history);</span></span><br><span class="line"></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果不是根组件，就往上找</span></span><br><span class="line">        <span class="built_in">this</span>._root = <span class="built_in">this</span>.$parent &amp;&amp;  <span class="built_in">this</span>.$parent._root || <span class="built_in">this</span> ;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 暴露一个只读的$router</span></span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(<span class="built_in">this</span>, <span class="string">&#x27;$router&#x27;</span>, &#123;</span><br><span class="line">        <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">this</span>._root._router;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注册 router-link组件，进行路由跳转</span></span><br><span class="line">  vue.component(<span class="string">&#x27;router-link&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">props</span>:[<span class="string">&#x27;to&#x27;</span>],</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params">h</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> tag = <span class="string">&#x27;a&#x27;</span> <span class="comment">// a 标签</span></span><br><span class="line">      <span class="keyword">const</span> config = &#123;</span><br><span class="line">        <span class="attr">attrs</span>:&#123;</span><br><span class="line">          <span class="attr">href</span>:<span class="built_in">this</span>._self._root._router.mode ==<span class="string">&#x27;hash&#x27;</span>? <span class="string">&#x27;#&#x27;</span>+<span class="built_in">this</span>.to: <span class="built_in">this</span>.to  <span class="comment">// 根据路由mode 设置不同的 href 属性</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> h(tag,config,<span class="built_in">this</span>.$slots.default);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 注册router-view组件，这个组件根据current不同会render不同的组件</span></span><br><span class="line">  vue.component(<span class="string">&#x27;router-view&#x27;</span>, &#123;</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params">h</span>)</span> &#123;</span><br><span class="line">      <span class="comment">//获取当前的path路径</span></span><br><span class="line">      <span class="keyword">const</span> current = <span class="built_in">this</span>._self._root._router.history.current;</span><br><span class="line">      <span class="comment">//获取转换后的路由对象 &#123;`path`:`component`&#125; 组合</span></span><br><span class="line">      <span class="keyword">const</span> routesMap = <span class="built_in">this</span>._self._root._router.routesMap;</span><br><span class="line">      <span class="comment">//根据path 获取对应的组件</span></span><br><span class="line">      <span class="keyword">const</span> component = routesMap[current];</span><br><span class="line">      <span class="comment">//渲染组件</span></span><br><span class="line">      <span class="keyword">return</span> h(component);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> 代码中使用了 <code>Vue.mixin</code> 在生命周期 <code>beforeCreate</code> 来混入路由对象，同时暴露出一个 <code>$router</code> 来获取路由对象，然后利用了 <strong>渲染函数</strong> 注册了两个全局组件 <code>router-view</code> 和 <code>router-link</code></p>
 <blockquote>
-<p>有同学会注意到有个 <code>vue.util.defineReactive(this, &#39;current&#39;, this._router.history);</code> 。这行代码主要是让 <code>current</code> 属性为响应式。 <code>Vue.util</code> 是没有在文档写出的。源码中可以看到定义<br> <img src= "/img/loading.gif" data-lazy-src="3.png"></p>
+<p>有同学会注意到有个 <code>vue.util.defineReactive(this, &#39;current&#39;, this._router.history);</code> 。这行代码主要是让 <code>current</code> 属性为响应式。 <code>Vue.util</code> 是没有在文档写出的。源码中可以看到定义<br> <img src="3.png"></p>
 </blockquote>
 <h3 id="Demo使用"><a href="#Demo使用" class="headerlink" title="Demo使用"></a>Demo使用</h3><p>有了自定义路由之后，就可以使用了。</p>
 </li>
@@ -759,17 +759,17 @@
 </li>
 <li><p>在 <code>main.js</code> 引用，然后在 <code>App.vue</code> 使用</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">alt</span>=<span class="string">&quot;Vue logo&quot;</span> <span class="attr">src</span>=<span class="string">&quot;./assets/logo.png&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;router-link-box&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/home&quot;</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/test&quot;</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p><code>hash</code> 模式结果：<br> <img src= "/img/loading.gif" data-lazy-src="router1.gif"></p>
+<li><p><code>hash</code> 模式结果：<br> <img src="router1.gif"></p>
 </li>
-<li><p><code>history</code> 模式结果：<br> <img src= "/img/loading.gif" data-lazy-src="router2.gif"></p>
+<li><p><code>history</code> 模式结果：<br> <img src="router2.gif"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>OK，总算是写完了。 <code>VueRouter</code> 的核心原理如果仔细看完上面的，应该是明白的。上面的代码可以在 <strong>github</strong> 获取。<a href='https://github.com/JerckyLY/VueCustomRouterDemo' target="_blank" >地址</a> 。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-RTdApnvV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-lZnJdFBw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-RTdApnvV"),
+            element: document.getElementById("aplayer-lZnJdFBw"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -803,7 +803,7 @@
 <h2 id="Vue2"><a href="#Vue2" class="headerlink" title="Vue2"></a>Vue2</h2><p> 响应式或者说数据驱动视图的关键点在于我们如何知道数据发生了变化，即数据什么时候被读取或者被修改了。而这些， <code>JavaScript</code> 提供了 <a href='https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty' target="_blank" >Object.defineProperty</a>   方法，改方法能很轻松的达到观察数据变化的目的。</p>
 <h3 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h3><ul>
 <li>让 <code>Object</code> 类型数据变得可观测<br> 借助 <code>Object.defineProperty</code> 很容易实现，代码如下： <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> apple = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> val = <span class="number">5</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(apple, <span class="string">&#x27;price&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;price属性被读取了&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> val</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">newVal</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;price属性被修改了&#x27;</span>)</span><br><span class="line">    val = newVal</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;price属性修改后的值为&#x27;</span>,newVal)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(apple.price)  <span class="comment">// get 获取</span></span><br><span class="line">apple.price = <span class="number">8</span>           <span class="comment">// set 修改</span></span><br></pre></td></tr></table></figure>
- 代码中定义了一个 <code>apple</code> 对象，通过 <code>Object.defineProperty</code> 定义了一个 <code>price</code> 属性，然后对该属性的 <code>get</code> , <code>set</code> 方法进行拦截。运行结果如下：<br> <img src= "/img/loading.gif" data-lazy-src="1.png"><br> 可以看到 <code>apple</code> 对象的读写操作都主动告知了我们，那这个 <code>apple</code> 对象就是可观测的。</li>
+ 代码中定义了一个 <code>apple</code> 对象，通过 <code>Object.defineProperty</code> 定义了一个 <code>price</code> 属性，然后对该属性的 <code>get</code> , <code>set</code> 方法进行拦截。运行结果如下：<br> <img src="1.png"><br> 可以看到 <code>apple</code> 对象的读写操作都主动告知了我们，那这个 <code>apple</code> 对象就是可观测的。</li>
 <li>不足<br>由于 Vue 会在初始化实例时对 property 执行 getter/setter 转化，所以 property 必须在 <code>data</code> 对象上存在才能让 Vue 将它转换为响应式的。    <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  <span class="attr">data</span>:&#123;</span><br><span class="line">    <span class="attr">a</span>:<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// `vm.a` 是响应式的</span></span><br><span class="line"></span><br><span class="line">vm.b = <span class="number">2</span></span><br><span class="line"><span class="comment">// `vm.b` 是非响应式的</span></span><br></pre></td></tr></table></figure>
  对于已经创建的实例，Vue 不允许动态添加根级别的响应式 property。但是，可以使用 <code>Vue.set(object, propertyName, value)</code> 方法向嵌套对象添加响应式 property。例如： <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.set(vm.someObject, <span class="string">&#x27;b&#x27;</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 
@@ -817,17 +817,17 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">data ()&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">arr</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>所以，对于 <code>getter</code> 我们想要获取 <code>arr</code> 必须是先在 <code>data</code> 这个 <code>Object</code>类型的数据获取，那就必定触发 <code>arr</code> 的 <code>getter</code> 。因此 <code>Array</code> 类型的数据读取操作还是从 <code>getter</code> 中发出。</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> data = &#123;</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> vals = data[<span class="string">&#x27;arr&#x27;</span>]</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(data, <span class="string">&#x27;arr&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;arr属性被读取了 data&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> vals</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function"><span class="title">set</span>(<span class="params">newVal</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;arr属性被修改了 data&#x27;</span>)</span><br><span class="line">    vals = newVal</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(data.arr[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="3.png"></p>
+<p>结果如下：<br><img src="3.png"></p>
 </li>
 <li><p>setter<br>对于 <code>Object</code> 数据类型，数据的操作可以从 <code>setter</code> 中得知，但是 <code>Array</code> 是没有的。不过 <code>Array</code> 提供了一些方法来操作 <code>Array</code>。 操作了 <code>Array</code> 那数据就一定是发生了变化的，那我们可以把数组的几个操作方法都重新写一遍，在不改变原有功能的基础上，增加一些其他的操作，不就可以达到目的了。这个操作可以称为数组拦截器。 </p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">arr.push(<span class="number">5</span>)</span><br><span class="line"><span class="built_in">Array</span>.prototype.newPush = <span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;arr被修改了&#x27;</span>)</span><br><span class="line">  <span class="built_in">this</span>.push(val)</span><br><span class="line">&#125;</span><br><span class="line">arr.newPush(<span class="number">5</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>这是尤大在 <code>Vue</code> 中处理数组监听修改操作的方式，是不是很厉害。数组修改拦截器：<br><img src= "/img/loading.gif" data-lazy-src="2.png"><br>在 <code>Array</code> 原型中能改变数组内容的方法有7个，分别是 <code>pop</code> , <code>push</code>, <code>shift</code>, <code>unshift</code>, <code>splice</code>, <code>sort</code>, <code>reverse</code>。源码中的拦截器：</p>
+<p>这是尤大在 <code>Vue</code> 中处理数组监听修改操作的方式，是不是很厉害。数组修改拦截器：<br><img src="2.png"><br>在 <code>Array</code> 原型中能改变数组内容的方法有7个，分别是 <code>pop</code> , <code>push</code>, <code>shift</code>, <code>unshift</code>, <code>splice</code>, <code>sort</code>, <code>reverse</code>。源码中的拦截器：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arrayProto = <span class="built_in">Array</span>.prototype</span><br><span class="line"><span class="keyword">const</span> arrayMethods = <span class="built_in">Object</span>.create(arrayProto)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> methodsToPatch = [</span><br><span class="line">  <span class="string">&#x27;push&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;pop&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;shift&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;unshift&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;splice&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;sort&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;reverse&#x27;</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Intercept mutating methods and emit events</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">methodsToPatch.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">method</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// cache original method</span></span><br><span class="line">  <span class="keyword">const</span> original = arrayProto[method]</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(arrayMethods, method, &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="function"><span class="keyword">function</span> <span class="title">mutator</span>(<span class="params">...args</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> result = original.apply(<span class="built_in">this</span>, args)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;arr属性被修改了&#x27;</span>, method)</span><br><span class="line">      <span class="keyword">return</span> result</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>写好了操作拦截器之后，还需要在数组对象和 <code>Array.Prototype</code> 之间挂载，使拦截器生效。</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">protoAugment</span> (<span class="params">target, src</span>) </span>&#123;</span><br><span class="line">  target.__proto__ = src</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Augment a target Object or Array by defining</span></span><br><span class="line"><span class="comment"> * hidden properties.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/* istanbul ignore next */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyAugment</span> (<span class="params">target, src, keys</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = keys.length; i &lt; l; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> key = keys[i]</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(target,key,&#123;</span><br><span class="line">      <span class="attr">value</span>:src[key],</span><br><span class="line">      <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">configurable</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">writable</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="comment">//拦截器挂载</span></span><br><span class="line"><span class="keyword">const</span> arrayKeys = <span class="built_in">Object</span>.getOwnPropertyNames(arrayMethods)</span><br><span class="line"><span class="keyword">if</span>(<span class="string">&#x27;__proto__&#x27;</span> <span class="keyword">in</span> &#123;&#125;)&#123;  <span class="comment">// 浏览器是否支持 __proto__</span></span><br><span class="line">  protoAugment(arr, arrayMethods)</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  copyAugment(arr, arrayMethods, arrayKeys)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr.push(<span class="number">0</span>)</span><br><span class="line">arr.pop(<span class="number">0</span>)</span><br><span class="line">arr.shift(-<span class="number">1</span>)</span><br><span class="line">arr.unshift(-<span class="number">1</span>)</span><br><span class="line">arr.splice(<span class="number">0</span>,<span class="number">3</span>)</span><br><span class="line">arr.sort()    </span><br><span class="line">arr.reverse()</span><br><span class="line"><span class="built_in">console</span>.log(arr)</span><br></pre></td></tr></table></figure>
-<p>代码中 <code>&#39;__proto__&#39; in &#123;&#125;</code> 这个是用来判断浏览器是否支持 <code>__proto__</code> 属性，如果支持就直接使用，不支持就循环定义几种操作方法。<br><img src= "/img/loading.gif" data-lazy-src="4.png"></p>
+<p>代码中 <code>&#39;__proto__&#39; in &#123;&#125;</code> 这个是用来判断浏览器是否支持 <code>__proto__</code> 属性，如果支持就直接使用，不支持就循环定义几种操作方法。<br><img src="4.png"></p>
 <p>这样我们就可以得知 <code>Array</code>数据在什么时候改变了。</p>
 </li>
 <li><p>不足<br> 当我们利用索引直接操作一个数组项 <code>vm.items[indexOfItem] = newValue</code> 或者 修改数组的长度时 <code>vm.items.length = newLength</code> 都是无法达到监测的。<br> 不过可以使用 <code>Vue.set</code> 和 <code>Array.splice</code> 实现监测功能。</p>
@@ -837,19 +837,19 @@
 <ul>
 <li><p><code>Object</code> 类型</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">let</span> data = &#123;</span><br><span class="line">   <span class="attr">name</span>: <span class="string">&#x27;小明&#x27;</span>,</span><br><span class="line">   <span class="attr">age</span>: <span class="number">20</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">let</span> state = <span class="keyword">new</span> <span class="built_in">Proxy</span>(data,&#123;</span><br><span class="line">   <span class="function"><span class="title">get</span>(<span class="params">obj,key</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;data &#x27;</span>+key+<span class="string">&#x27;属性被获取了&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> obj[key]</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="function"><span class="title">set</span>(<span class="params">obj,key,newVal</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;data &#x27;</span>+key+<span class="string">&#x27;属性被修改了&#x27;</span>)</span><br><span class="line">     obj[key] = newVal</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(state.name)</span><br><span class="line">state.age = <span class="number">21</span> </span><br></pre></td></tr></table></figure>
-<p>结果如下：<br><img src= "/img/loading.gif" data-lazy-src="5.png"></p>
+<p>结果如下：<br><img src="5.png"></p>
 </li>
 <li><p><code>Array</code> 类型</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [-<span class="number">1</span>,-<span class="number">2</span>,-<span class="number">3</span>,-<span class="number">4</span>,-<span class="number">5</span>]</span><br><span class="line"> <span class="keyword">let</span> state = <span class="keyword">new</span> <span class="built_in">Proxy</span>(arr,&#123;</span><br><span class="line">   <span class="function"><span class="title">get</span>(<span class="params">obj,key</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;arr &#x27;</span>+key+<span class="string">&#x27;被获取了&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> obj[key]</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="function"><span class="title">set</span>(<span class="params">obj,key,newVal</span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">&#x27;arr &#x27;</span>+key+<span class="string">&#x27;被修改了&#x27;</span>)</span><br><span class="line">     obj[key] = newVal</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(state[<span class="number">0</span>])</span><br><span class="line">state.push(-<span class="number">6</span>)</span><br><span class="line">state[<span class="number">7</span>] = <span class="number">0</span></span><br><span class="line">state.splice(-<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"><span class="built_in">console</span>.log(state)</span><br></pre></td></tr></table></figure>
-<p><img src= "/img/loading.gif" data-lazy-src="6.png"><br>使用 <code>state[7] = 0</code> 这种方式也能直接变成响应式了。是不是很强！</p>
+<p><img src="6.png"><br>使用 <code>state[7] = 0</code> 这种方式也能直接变成响应式了。是不是很强！</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-eLtacPcQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-igZvXZzb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-eLtacPcQ"),
+            element: document.getElementById("aplayer-igZvXZzb"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -882,13 +882,13 @@
 <p>对于好的开源项目，大家都是会想了解它的原理是什么，它的代码是什么样的。哪些地方值我们学习。今天就详细介绍一下怎么编译和调试源码。</p>
 <h2 id="包的分类"><a href="#包的分类" class="headerlink" title="包的分类"></a>包的分类</h2><ul>
 <li><p><code>预编译包</code> 也就是我们在官网上看的js包 <a href='https://cesium.com/cesiumjs/' target="_blank" >下载地址</a></p>
-<p><img src= "/img/loading.gif" data-lazy-src="1.png"></p>
+<p><img src="1.png"></p>
 <p>这里面提供了打包之后的js库和示例以及文档。在这里面调试，打包会编译失败。</p>
 </li>
 <li><p><code>源码包</code> 源码包打包之后是可以得到预编译包。如果想修改源码，就使用这个包。获取方式有两种。</p>
 <ul>
 <li><code>git</code> 安装<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/CesiumGS/cesium.git</span></span><br></pre></td></tr></table></figure></li>
-<li>zip包下载  <a href='https://github.com/CesiumGS/cesium/releases' target="_blank" >下载地址</a><br><img src= "/img/loading.gif" data-lazy-src="2.png"></li>
+<li>zip包下载  <a href='https://github.com/CesiumGS/cesium/releases' target="_blank" >下载地址</a><br><img src="2.png"></li>
 </ul>
 </li>
 </ul>
@@ -896,30 +896,30 @@
 <ul>
 <li><p>编译命令</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    </span><br><span class="line">npm run release <span class="comment">// [最完整的打包]</span></span><br><span class="line"><span class="comment">// 打包到Build 目录下，包括上线的运行版本，调试版本 和API文档</span></span><br><span class="line"> </span><br><span class="line">npm run makeZipFile <span class="comment">// [生成分发zip包]</span></span><br><span class="line"><span class="comment">// 打包到根目录下的 Cesium-&lt;版本号&gt;.zip ,删除不必要的开发文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//打包到Build目录下的Cesium目录</span></span><br><span class="line">npm run minifyRelease <span class="comment">//[线上运行打包]</span></span><br><span class="line">npm run minify [线上运行留Debug信息打包]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打包到Build目录下的CesiumUnminified目录</span></span><br><span class="line">npm run combine <span class="comment">//[不压缩并留Debug信息打包]</span></span><br><span class="line">npm run combineRelease <span class="comment">// [不压缩且不保留Debug信息打包]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行本地帮助文档，示例代码服务</span></span><br><span class="line">npm start  &lt;--port 可选端口&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行局域网内帮助文档，示例代码服务</span></span><br><span class="line">npm startPublic</span><br></pre></td></tr></table></figure></li>
-<li><p>本地运行<br>在运行之前，需要先运行一下 <code>npm run minify</code> 或者上面的几个打包命令（都是比较慢3分钟左右）。因为源码包里面最初是没有 <code>Build</code> 目录的，运行这个目录是先生成一个 <code>Build</code> 目录。便于后续的本地启动。<br>然后运行 <code>npm run start</code> , 默认地址为<a href="http://localhost:8080/">http://localhost:8080/</a><br><img src= "/img/loading.gif" data-lazy-src="3.png"><br>点击 <code>Sandcastle</code> 就能看到内置的Demo了<br><img src= "/img/loading.gif" data-lazy-src="4.png"></p>
+<li><p>本地运行<br>在运行之前，需要先运行一下 <code>npm run minify</code> 或者上面的几个打包命令（都是比较慢3分钟左右）。因为源码包里面最初是没有 <code>Build</code> 目录的，运行这个目录是先生成一个 <code>Build</code> 目录。便于后续的本地启动。<br>然后运行 <code>npm run start</code> , 默认地址为<a href="http://localhost:8080/">http://localhost:8080/</a><br><img src="3.png"><br>点击 <code>Sandcastle</code> 就能看到内置的Demo了<br><img src="4.png"></p>
 <h2 id="调试运行"><a href="#调试运行" class="headerlink" title="调试运行"></a>调试运行</h2><p>源码的文件都是在 <code>Source</code> 目录下的，所以我们在调试的时候，当然是引用 <code>Source</code> 目录下的文件来实时运行调试了。因为 <code>ES6</code> 很流行了，所以调试的方式基于 <code>ES6</code> import 导入</p>
 </li>
 </ul>
 <ol>
-<li><p>准备<br>首先在源码的根目录下建立一个文件夹 <code>Demo</code> ，然后里面建立两个文件 <code>demo.html</code> 和 <code>demo.js</code><br><img src= "/img/loading.gif" data-lazy-src="5.png"></p>
+<li><p>准备<br>首先在源码的根目录下建立一个文件夹 <code>Demo</code> ，然后里面建立两个文件 <code>demo.html</code> 和 <code>demo.js</code><br><img src="5.png"></p>
 </li>
 <li><p>编写<br><code>demo.html</code>的内容如下</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">/*</span><br><span class="line"> * @Author: Jercky </span><br><span class="line"> * @Date: 2020-12-10 11:44:14 </span><br><span class="line"> * @Last Modified by:   Jercky </span><br><span class="line"> * @Last Modified time: 2020-12-10 11:44:14 </span><br><span class="line"> */</span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Use correct character set. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Tell IE to use the latest, best version. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Make the application on mobile take up the full browser screen and disable user scaling. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>源码调试<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- &lt;link rel=&quot;stylesheet&quot; href=&quot;../Source/Widgets/widgets.css&quot;&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css">    <span class="keyword">@import</span> url(../Source/Widgets/widgets.css);</span></span><br><span class="line"><span class="css">    <span class="selector-tag">html</span>, <span class="selector-tag">body</span>, <span class="selector-id">#cesiumContainer</span> &#123;</span></span><br><span class="line"><span class="css">      <span class="attribute">width</span>: <span class="number">100%</span>; <span class="attribute">height</span>: <span class="number">100%</span>; <span class="attribute">margin</span>: <span class="number">0</span>; <span class="attribute">padding</span>: <span class="number">0</span>; <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="css">    &#125;</span></span><br><span class="line"><span class="css">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;cesiumContainer&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.CESIUM_BASE_URL = <span class="string">&#x27;../Source&#x27;</span></span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;demo.js&quot;</span> &gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><code>demo.js</code>的内容如下</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @Author: Jercky </span></span><br><span class="line"><span class="comment"> * @Date: 2020-12-10 11:44:14 </span></span><br><span class="line"><span class="comment"> * @Last Modified by: Jercky</span></span><br><span class="line"><span class="comment"> * @Last Modified time: 2020-12-10 11:45:09</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Cesium <span class="keyword">from</span> <span class="string">&#x27;../../Source/Cesium.js&#x27;</span></span><br><span class="line"><span class="keyword">const</span> viewer = <span class="keyword">new</span> Cesium.Viewer(<span class="string">&#x27;cesiumContainer&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p>运行<br>我用的是 <code>VsCode</code> 调试工具，有个插件 <code>Live Server</code> 很好用。 用插件打开 <code>demo.html</code> 即可在浏览器查看了<br><img src= "/img/loading.gif" data-lazy-src="6.png"></p>
+<li><p>运行<br>我用的是 <code>VsCode</code> 调试工具，有个插件 <code>Live Server</code> 很好用。 用插件打开 <code>demo.html</code> 即可在浏览器查看了<br><img src="6.png"></p>
 </li>
-<li><p>修改源码实时运行<br>这里面只是做一个简单的演示。在 <code>Source/Scene/View.js</code> 中 增加打印输出。<code>console.log(&#39;new Cesium View -------------Jercky&#39;)</code><br><img src= "/img/loading.gif" data-lazy-src="7.png"><br>运行结果：<br><img src= "/img/loading.gif" data-lazy-src="8.png"></p>
+<li><p>修改源码实时运行<br>这里面只是做一个简单的演示。在 <code>Source/Scene/View.js</code> 中 增加打印输出。<code>console.log(&#39;new Cesium View -------------Jercky&#39;)</code><br><img src="7.png"><br>运行结果：<br><img src="8.png"></p>
 <h2 id="打包使用"><a href="#打包使用" class="headerlink" title="打包使用"></a>打包使用</h2><p>当自己的源码修改完成之后，运行 <code>npm run makeZipFile</code> 就能生成和官网一样的 预编译包了。这里就不再演示了。</p>
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-lQYNBibp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-bNGvtsyP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-lQYNBibp"),
+            element: document.getElementById("aplayer-bNGvtsyP"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -947,9 +947,9 @@
     <title>Cesium系列(4)--自定义Popup框</title>
     <url>/2020/10/22/Cesium%E5%85%A5%E9%97%A8-4/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium自定义Popup框"><a href="#Cesium自定义Popup框" class="headerlink" title="Cesium自定义Popup框"></a><center>Cesium自定义Popup框<center/></h2><p>在习惯了二维的Popup框之后，也想在三维里面有个。但是Cesium并没有封装过Popup框，有的只是一个悬浮固定位置的信息框，就是这样的：</p>
-<p><img src= "/img/loading.gif" data-lazy-src="1.png"></p>
+<p><img src="1.png"></p>
 <p>显然这种框框展示，并不能满足狂拽酷炫diao炸天的特效，既然没有，那就照着二维的地图框架，自己整一个吧。先上图:</p>
-<p><img src= "/img/loading.gif" data-lazy-src="top_img.png"></p>
+<p><img src="top_img.png"></p>
 <p>来个动的：</p>
 <p><video src='1.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>在做三维之前，那时候用的最多的是 <strong>MapBoxGL</strong>，所以我就以 <strong>MapBoxGL</strong> 的 <a href='https://docs.mapbox.com/mapbox-gl-js/api/markers/#popup' target="_blank" ><strong>Popup</strong></a>   为基础原型进行的封装。先说一下思路</p>
@@ -992,12 +992,12 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2>完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-gGRbISKx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-cKhxtsdr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-gGRbISKx"),
+            element: document.getElementById("aplayer-cKhxtsdr"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1027,7 +1027,7 @@
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium的全景漫游-室内漫游-第一视角跟随"><a href="#Cesium的全景漫游-室内漫游-第一视角跟随" class="headerlink" title="Cesium的全景漫游(室内漫游)第一视角跟随"></a><center>Cesium的全景漫游(室内漫游)第一视角跟随<center/></h2><blockquote>
 <p>Cesium的示例中是有漫游的示例。但是角度并不是第一视角。如下图：   </p>
 </blockquote>
-<p><img src= "/img/loading.gif" data-lazy-src="1.png"></p>
+<p><img src="1.png"></p>
 <p>在对于特殊的需求中，比如室内漫游。如果不是第一视角，漫游的过程中会被室内其他物体遮挡，效果不好，也不切实际。因此需要在此基础上进行修改，以达到好的效果。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ol>
 <li><p>在实际应用中，漫游的路线是规划好的。也就是一系列的坐标点，然后根据坐标点插值计算，平滑运动。获取的方式很多种，看实际项目需求。我是事先选取好的点。</p>
@@ -1066,12 +1066,12 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-gAatKmgl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-pJeTldUb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-gAatKmgl"),
+            element: document.getElementById("aplayer-pJeTldUb"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1098,8 +1098,8 @@
     <title>Cesium系列(2)--绘制图片文字标注</title>
     <url>/2020/07/21/Cesium%E5%85%A5%E9%97%A8-2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="基于Cesium-Billboard的图文标注"><a href="#基于Cesium-Billboard的图文标注" class="headerlink" title="基于Cesium Billboard的图文标注"></a><center>基于Cesium Billboard的图文标注<center/></h2><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>  项目需求：在模型上方添加文字标注，背景是一张图片。<br>  如果只是加文字的话，<strong>Cesium</strong> 直接加一个<strong>label</strong>就行了，或者只加一个图片，<strong>Cesium</strong> 直接加一个 <strong>billboard</strong> 也是可以的。如果是两者结合是需要另外处理的。</p>
-<h2 id="单独文字"><a href="#单独文字" class="headerlink" title="单独文字"></a>单独文字</h2><p>  单独加文字可以直接用 <strong>label</strong>, 伪代码如下：<br>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">viewer.entities.add(&#123;</span><br><span class="line">    <span class="attr">position</span>: Cesium.Cartesian3.fromDegrees(-<span class="number">75.1641667</span>, <span class="number">39.9522222</span>),</span><br><span class="line">    <span class="attr">label</span>: &#123;</span><br><span class="line">      <span class="attr">text</span>: <span class="string">&quot;Philadelphia&quot;</span>,</span><br><span class="line">      <span class="attr">font</span>: <span class="string">&quot;24px Helvetica&quot;</span>,</span><br><span class="line">      <span class="attr">fillColor</span>: Cesium.Color.SKYBLUE,</span><br><span class="line">      <span class="attr">outlineColor</span>: Cesium.Color.BLACK,</span><br><span class="line">      <span class="attr">outlineWidth</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">style</span>: Cesium.LabelStyle.FILL_AND_OUTLINE,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><br>  效果：<br>  <img src= "/img/loading.gif" data-lazy-src="2.png"></p>
-<h2 id="单独加图片"><a href="#单独加图片" class="headerlink" title="单独加图片"></a>单独加图片</h2><p>  单独显示图片使用 <strong>billboard</strong>, 伪代码如下：<br>   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">viewer.entities.add(&#123;</span><br><span class="line">   <span class="attr">position</span>: Cesium.Cartesian3.fromDegrees(-<span class="number">75.59777</span>, <span class="number">40.03883</span>),</span><br><span class="line">   <span class="attr">billboard</span>: &#123;</span><br><span class="line">     <span class="attr">image</span>: <span class="string">&quot;../images/Cesium_Logo_overlay.png&quot;</span>,</span><br><span class="line">   &#125;,</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure><br>  效果：<br>  <img src= "/img/loading.gif" data-lazy-src="img.png"></p>
+<h2 id="单独文字"><a href="#单独文字" class="headerlink" title="单独文字"></a>单独文字</h2><p>  单独加文字可以直接用 <strong>label</strong>, 伪代码如下：<br>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">viewer.entities.add(&#123;</span><br><span class="line">    <span class="attr">position</span>: Cesium.Cartesian3.fromDegrees(-<span class="number">75.1641667</span>, <span class="number">39.9522222</span>),</span><br><span class="line">    <span class="attr">label</span>: &#123;</span><br><span class="line">      <span class="attr">text</span>: <span class="string">&quot;Philadelphia&quot;</span>,</span><br><span class="line">      <span class="attr">font</span>: <span class="string">&quot;24px Helvetica&quot;</span>,</span><br><span class="line">      <span class="attr">fillColor</span>: Cesium.Color.SKYBLUE,</span><br><span class="line">      <span class="attr">outlineColor</span>: Cesium.Color.BLACK,</span><br><span class="line">      <span class="attr">outlineWidth</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">style</span>: Cesium.LabelStyle.FILL_AND_OUTLINE,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure><br>  效果：<br>  <img src="2.png"></p>
+<h2 id="单独加图片"><a href="#单独加图片" class="headerlink" title="单独加图片"></a>单独加图片</h2><p>  单独显示图片使用 <strong>billboard</strong>, 伪代码如下：<br>   <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">viewer.entities.add(&#123;</span><br><span class="line">   <span class="attr">position</span>: Cesium.Cartesian3.fromDegrees(-<span class="number">75.59777</span>, <span class="number">40.03883</span>),</span><br><span class="line">   <span class="attr">billboard</span>: &#123;</span><br><span class="line">     <span class="attr">image</span>: <span class="string">&quot;../images/Cesium_Logo_overlay.png&quot;</span>,</span><br><span class="line">   &#125;,</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure><br>  效果：<br>  <img src="img.png"></p>
 <h2 id="图文结合"><a href="#图文结合" class="headerlink" title="图文结合"></a>图文结合</h2><ol>
 <li><p>思路：根据原始添加图片的过程，再结合 <strong>billboard</strong> 文档的查看其中的 <strong>image</strong> 定义：  </p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">image : StringScene/Billboard.js 910</span><br><span class="line">Gets or sets the image to be used for this billboard. If a texture has already been created for the given image, the existing texture is used.</span><br><span class="line">This property can be set to a loaded Image, a URL which will be loaded as an Image automatically, a canvas, or another billboard&#x27;s image property (from the same billboard collection).</span><br></pre></td></tr></table></figure>
@@ -1114,14 +1114,14 @@
 <ul>
 <li><p>绘制图文方法  </p>
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">      <span class="comment">//根据图片和文字绘制canvas  ratio参数 是放大倍数</span></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">drawCanvas</span>(<span class="params">img, text, ratio</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// width height</span></span><br><span class="line">        <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">&#x27;canvas&#x27;</span>); <span class="comment">//创建canvas标签</span></span><br><span class="line">        <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">var</span> width = ctx.measureText(text).width + <span class="number">8</span>,</span><br><span class="line">          height = <span class="number">20</span>; <span class="comment">//高度我这里是定死的，可以作为参数参入</span></span><br><span class="line">    </span><br><span class="line">        canvas.style.opacity = <span class="number">1</span>;</span><br><span class="line">        canvas.width = width * ratio;</span><br><span class="line">        canvas.height = height * ratio;</span><br><span class="line">        canvas.style.width = width + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">        canvas.style.height = height + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//然后将画布缩放，将图像放大ratio倍画到画布上 目的 使图片文字更加清晰</span></span><br><span class="line">        ctx.scale(ratio, ratio);</span><br><span class="line">        <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.src = img;</span><br><span class="line">         <span class="comment">// 图片创建是异步操作，需要在图片完成之后，再写入文字，能保证文字在图片上方。</span></span><br><span class="line">         <span class="comment">// 如果不在里面，会出现图片覆盖文字</span></span><br><span class="line">        image.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          ctx.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">          <span class="comment">// 名称文字</span></span><br><span class="line">          ctx.fillStyle = <span class="string">&#x27;#ff0000&#x27;</span>;</span><br><span class="line">          ctx.font = <span class="string">&#x27;8px 宋体&#x27;</span>;</span><br><span class="line">          ctx.fillText(text, <span class="number">8</span>, height / <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> canvas;</span><br><span class="line">      &#125;</span><br><span class="line">   <span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">+ 加载到Cesium中 </span></span><br><span class="line"><span class="string">   `</span><span class="string">``</span>js</span><br><span class="line">      viewer.entities.add(&#123;</span><br><span class="line">           <span class="attr">position</span>: Cesium.Cartesian3.fromDegrees(</span><br><span class="line">             <span class="number">109.05830792532525</span>,</span><br><span class="line">             <span class="number">37.44105749283626</span>,</span><br><span class="line">             <span class="number">16</span></span><br><span class="line">           ),</span><br><span class="line">           <span class="attr">billboard</span>: &#123;</span><br><span class="line">             <span class="attr">image</span>: drawCanvas(<span class="string">&#x27;./source/images/bg.png&#x27;</span>, <span class="string">&#x27;Hello World 你好 Cesium!&#x27;</span>, <span class="number">3</span>),</span><br><span class="line">             <span class="attr">sizeInMeters</span>: <span class="literal">true</span>,</span><br><span class="line">             <span class="attr">scale</span>: <span class="number">0.1</span>,</span><br><span class="line">           &#125;,</span><br><span class="line">         &#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p>效果：<br><img src= "/img/loading.gif" data-lazy-src="3.png"></p>
+<li><p>效果：<br><img src="3.png"></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-mKArkIrg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-VeonXbxa" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-mKArkIrg"),
+            element: document.getElementById("aplayer-VeonXbxa"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1180,12 +1180,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ZsREPRFr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-TOAdiWSL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ZsREPRFr"),
+            element: document.getElementById("aplayer-TOAdiWSL"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1256,8 +1256,8 @@
 <li>cdn 访问地址预览</li>
 </ol>
 <ul>
-<li>发布之后可以在<a href='https://unpkg.com' target="_blank" >unpkg</a>查看 查看方式 <a href="https://unpkg.com//:package@:version/:file">https://unpkg.com//:package@:version/:file</a> , 比如查看mapboxgl-print-tool中文件<br> <a href="https://unpkg.com/browse/mapboxgl-print-tool@1.0.5/">https://unpkg.com/browse/mapboxgl-print-tool@1.0.5/</a><br> <img src= "/img/loading.gif" data-lazy-src="view01.png"></li>
-<li>cdn查看 我使用的是<a href='https://www.jsdelivr.com/' target="_blank" >jsDelivr</a> 查看方式 <a href="https://cdn.jsdelivr.net/npm/package@version/file">https://cdn.jsdelivr.net/npm/package@version/file</a> , 例如：<a href="https://cdn.jsdelivr.net/npm/mapboxgl-print-tool@1.0.5/">https://cdn.jsdelivr.net/npm/mapboxgl-print-tool@1.0.5/</a><br> <img src= "/img/loading.gif" data-lazy-src="view02.png"></li>
+<li>发布之后可以在<a href='https://unpkg.com' target="_blank" >unpkg</a>查看 查看方式 <a href="https://unpkg.com//:package@:version/:file">https://unpkg.com//:package@:version/:file</a> , 比如查看mapboxgl-print-tool中文件<br> <a href="https://unpkg.com/browse/mapboxgl-print-tool@1.0.5/">https://unpkg.com/browse/mapboxgl-print-tool@1.0.5/</a><br> <img src="view01.png"></li>
+<li>cdn查看 我使用的是<a href='https://www.jsdelivr.com/' target="_blank" >jsDelivr</a> 查看方式 <a href="https://cdn.jsdelivr.net/npm/package@version/file">https://cdn.jsdelivr.net/npm/package@version/file</a> , 例如：<a href="https://cdn.jsdelivr.net/npm/mapboxgl-print-tool@1.0.5/">https://cdn.jsdelivr.net/npm/mapboxgl-print-tool@1.0.5/</a><br> <img src="view02.png"></li>
 </ul>
 <h2 id="mapboxgl-print-tool工具框选要点"><a href="#mapboxgl-print-tool工具框选要点" class="headerlink" title="mapboxgl-print-tool工具框选要点"></a>mapboxgl-print-tool工具框选要点</h2><blockquote>
 <p>因为mapboxgl使用的是webgl渲染，所以它渲染的比较快。而在对webgl裁剪时，不能像canvas的二维那来操作，这里我是参照<a href='https://segmentfault.com/a/1190000021230396?utm_source=tag-newest' target="_blank" >webgl 读取canvas 像素</a>来实现的</p>
@@ -1272,8 +1272,8 @@
 <li><p>翻转处理。不知道什么原因，前3步得出来的结果，像素值是倒立的。所以需要对得到的结果进行竖向翻转。   </p>
 <p>处理代码:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要竖向翻转</span></span><br><span class="line"><span class="keyword">let</span> newData = oCtx.createImageData(width,height)</span><br><span class="line"><span class="keyword">let</span> soureData = oCtx.getImageData(<span class="number">0</span>,<span class="number">0</span>,width,height)</span><br><span class="line"><span class="keyword">const</span> turnNewData =  <span class="built_in">this</span>.imageDataVRevert(soureData,newData)</span><br><span class="line"><span class="comment">// 翻转之后放入canvas中</span></span><br><span class="line">oCtx.putImageData( turnNewData, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 由于裁剪的内容是倒立的 因此需要翻转像素</span></span><br><span class="line"><span class="comment"> *  canvas像素竖向翻转</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">sourceData</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="variable">newData</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;*&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">imageDataVRevert (sourceData,newData) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>,h=sourceData.height;i&lt;h;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>,w=sourceData.width;j&lt;w;j++)&#123;</span><br><span class="line">            newData.data[i*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">0</span>] = sourceData.data[(h-i)*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">0</span>];</span><br><span class="line">            newData.data[i*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">1</span>] = sourceData.data[(h-i)*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">1</span>];</span><br><span class="line">            newData.data[i*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">2</span>] = sourceData.data[(h-i)*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">2</span>];</span><br><span class="line">            newData.data[i*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">3</span>] = sourceData.data[(h-i)*w*<span class="number">4</span>+j*<span class="number">4</span>+<span class="number">3</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newData;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>未做处理之前:<br><img src= "/img/loading.gif" data-lazy-src="view03.png" alt="未处理">   </p>
-<p>处理之后:<br><img src= "/img/loading.gif" data-lazy-src="view04.png" alt="已处理">   </p>
+<p>未做处理之前:<br><img src="view03.png" alt="未处理">   </p>
+<p>处理之后:<br><img src="view04.png" alt="已处理">   </p>
 </li>
 <li><p>最后根据处理之后的canvas，转成图片打印输出</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">saveAsIMG (canvas) &#123;</span><br><span class="line">     <span class="keyword">if</span> (navigator.msSaveBlob) &#123;</span><br><span class="line">         navigator.msSaveBlob(canvas.msToBlob(),  <span class="built_in">this</span>.options.fileName);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         canvas.toBlob(<span class="function">(<span class="params">blob</span>) =&gt;</span> &#123;</span><br><span class="line">             saveAs(blob, <span class="built_in">this</span>.options.fileName);</span><br><span class="line">         &#125;);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
@@ -1327,12 +1327,12 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-MbNwabeM" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-eTPdGZXA" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-MbNwabeM"),
+            element: document.getElementById("aplayer-eTPdGZXA"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1403,22 +1403,22 @@
 </li>
 </ul>
 <h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><ul>
-<li><p>界面<br><img src= "/img/loading.gif" data-lazy-src="fullmap.png"></p>
+<li><p>界面<br><img src="fullmap.png"></p>
 </li>
-<li><p>全图打印<br><img src= "/img/loading.gif" data-lazy-src="fullprint.jpg"></p>
+<li><p>全图打印<br><img src="fullprint.jpg"></p>
 </li>
-<li><p>框选打印<br><img src= "/img/loading.gif" data-lazy-src="pariprint.jpg"></p>
+<li><p>框选打印<br><img src="pariprint.jpg"></p>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2></li>
 <li><p>github: <a href='https://github.com/JerckyLY/mapboxgl-print-tool' target="_blank" >mapboxgl-print-tool</a>  </p>
 </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-QBDHOTnb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-UrWbHAZq" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-QBDHOTnb"),
+            element: document.getElementById("aplayer-UrWbHAZq"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1459,20 +1459,20 @@
 </li>
 <li><p>注意： <strong>避免出现测量图层被其他业务图层遮盖，需要在其他业务图层添加之后，再实例化测量控件</strong></p>
 <h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2></li>
-<li><p>测距:<br><img src= "/img/loading.gif" data-lazy-src="line.png"></p>
+<li><p>测距:<br><img src="line.png"></p>
 </li>
-<li><p>测面：<br><img src= "/img/loading.gif" data-lazy-src="area.png"></p>
+<li><p>测面：<br><img src="area.png"></p>
 </li>
 </ul>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
 <li><p>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-ZREqSusT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ksyqDKYV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ZREqSusT"),
+            element: document.getElementById("aplayer-ksyqDKYV"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1538,19 +1538,19 @@
 <li>总之，做的时候很难的，几度是想要放弃的。刚开是一点头绪都没有。最后还是啃了下来，由于时间紧迫，编辑中移动整个标绘对象的功能没有完成。而且打包压缩，我是整个把ol的源码压缩进入的，所以js文件是比较大的。打包工具我也没有换，还是用的gulpfile打包工具。</li>
 </ul>
 <h2 id="成果"><a href="#成果" class="headerlink" title="成果"></a>成果</h2><ul>
-<li>展示一下成果：<br><img src= "/img/loading.gif" data-lazy-src="mapbox-plot.png" alt="image"></li>
+<li>展示一下成果：<br><img src="mapbox-plot.png" alt="image"></li>
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><ul>
 <li>GitHub上有地址： <a href='https://github.com/JerckyLY/mapbox-plot' target="_blank" ><strong><code>mapbox-gl-plot</code></strong></a></li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-RnjCrKoT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-izgihgHM" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-RnjCrKoT"),
+            element: document.getElementById("aplayer-izgihgHM"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1601,12 +1601,12 @@
 </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-XdbICaeO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-QtpJliuj" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-XdbICaeO"),
+            element: document.getElementById("aplayer-QtpJliuj"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1657,11 +1657,11 @@
 </li>
 <li><p>postgis中的ST_AsMVT和ST_AsMVTGeom   </p>
 <ul>
-<li><a href="http://postgis.net/docs/ST_AsMVT.html" target="_blank">ST_AsMVT</a> 是postgis提供的空间函数，能够返回矢量切片，它和<a href="http://postgis.net/docs/ST_AsMVTGeom.html" target="_blank">ST_AsMVTGeom</a>是同时使用的。<br><img src= "/img/loading.gif" data-lazy-src="02.png" alt="st_AsMVT"><center>ST_AsMVT</center>   
+<li><a href="http://postgis.net/docs/ST_AsMVT.html" target="_blank">ST_AsMVT</a> 是postgis提供的空间函数，能够返回矢量切片，它和<a href="http://postgis.net/docs/ST_AsMVTGeom.html" target="_blank">ST_AsMVTGeom</a>是同时使用的。<br><img src="02.png" alt="st_AsMVT"><center>ST_AsMVT</center>   
 
 </li>
 </ul>
-<p><img src= "/img/loading.gif" data-lazy-src="01.png" alt="st_AsMVTGeom"></p>
+<p><img src="01.png" alt="st_AsMVTGeom"></p>
 <center>ST_AsMVTGeom</center>   
  
 - ST_AsMVTGeom能够对给定范围查询出来的矢量，并转换为屏幕坐标，然后ST_AsMVT对数据进行压缩，返回.mvt格式。
@@ -1678,14 +1678,14 @@
 </ul>
 <h2 id="加载效果"><a href="#加载效果" class="headerlink" title="加载效果"></a>加载效果</h2><ul>
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
-<li>结果展示：数据是随机生成的50万个点数据<br><img src= "/img/loading.gif" data-lazy-src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
+<li>结果展示：数据是随机生成的50万个点数据<br><img src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-VCvPfewp" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-lFJDQRqg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-VCvPfewp"),
+            element: document.getElementById("aplayer-lFJDQRqg"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1724,7 +1724,7 @@
 </ul>
 </li>
 <li>金字塔切片规则：<ul>
-<li>刚才提到在服务器端对影像做切片处理，方法就是影像金字塔切图：<br><img src= "/img/loading.gif" data-lazy-src="02.png" alt="模型"><br><img src= "/img/loading.gif" data-lazy-src="01.png" alt="金字塔">  </li>
+<li>刚才提到在服务器端对影像做切片处理，方法就是影像金字塔切图：<br><img src="02.png" alt="模型"><br><img src="01.png" alt="金字塔">  </li>
 <li>地理范围不变，层级不同或者说分辨率不同，地图的切片数量不同。</li>
 </ul>
 </li>
@@ -1746,7 +1746,7 @@
 <h2 id="实际运用计算行列号原理"><a href="#实际运用计算行列号原理" class="headerlink" title="实际运用计算行列号原理"></a>实际运用计算行列号原理</h2></li>
 <li><p>在实际运用计算行列号进行地图下载时，我们需要知道地理范围的bound（经纬度表示），即左上角的地理坐标(minLon,maxLat)，和右下角的地理坐标(maxLon,minLat)</p>
 </li>
-<li><p>bound的获取方式，我一般都是用天地图的行政区查询接口<br><a href='http://lbs.tianditu.gov.cn/server/administrative.html' target="_blank" >天地图行政查询接口</a><br><img src= "/img/loading.gif" data-lazy-src="03.png" alt="bound">   </p>
+<li><p>bound的获取方式，我一般都是用天地图的行政区查询接口<br><a href='http://lbs.tianditu.gov.cn/server/administrative.html' target="_blank" >天地图行政查询接口</a><br><img src="03.png" alt="bound">   </p>
 </li>
 <li><p>结果中的’bound’即为要获取的值 </p>
 </li>
@@ -1764,12 +1764,12 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-mVFdNIqV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-fxpYWILy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-mVFdNIqV"),
+            element: document.getElementById("aplayer-fxpYWILy"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1812,29 +1812,29 @@ href="https://segmentfault.com/a/1190000011276788"
 target="_blank">这里</a> 目前我接触到主流的切片生成工具是：arcgis,geoserver。它们各自都有一套自己的切片目录规则。</p>
 <span id="more"></span>
 <p>geoserver切片目录规则(图片是网上copy的):</p>
-<p><img src= "/img/loading.gif" data-lazy-src="geoservertile.png" alt="geoserver"></p>
+<p><img src="geoservertile.png" alt="geoserver"></p>
 <ul>
 <li><p>其中’EPSG_900913_05’中的05代表等级，’24_17.png’中的24代表列号即 x, 17代表的是行号 即 y</p>
 <p>arcgis切片目录规则(图片是网上copy的)：</p>
 </li>
 </ul>
-<p><img src= "/img/loading.gif" data-lazy-src="arcgisTile.png" alt="arcgis"></p>
+<p><img src="arcgisTile.png" alt="arcgis"></p>
 <ul>
 <li>其中’L03’代表等级为3，”R00000002”中的’R’是行即 y,’00000002’为行号是16进制的数值。’C00000001’中的’C’是列即 x,’00000001’为列号，16进制数值</li>
 </ul>
-<p>tms目录规则(图片是网上copy的)：<br><img src= "/img/loading.gif" data-lazy-src="tma.png" alt="tms"></p>
+<p>tms目录规则(图片是网上copy的)：<br><img src="tma.png" alt="tms"></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;通过图片，能看到三种的目录规则是不一样的，那么当我们想要离线部署时就不方便了。因此,把geoserver或者arcgis的切片目录规则转成google–tms或者标准的tms(这两个区别主要是切片源点不一样，google–tms源点是在左上角，标准的tms源点是在左下角)<br>然后用<a href='http://nginx.org/en/' target="_blank" />Nginx</a>代理一下，就能很容易实现离线部署。</p>
 <h2 id="代码资源"><a href="#代码资源" class="headerlink" title="代码资源"></a>代码资源</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;关于这两种的转换，我已经写好了，放到了github中，其中geoserver是针对3857坐标系的.pbf文件，其他的目录结构请适当修改即可。</p>
 <p>1、 <a href="https://github.com/JerckyLY/geoserverToTMS" target="_blank">geoserver</a> </p>
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-PtAGKzuY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-PPADrCDJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-PtAGKzuY"),
+            element: document.getElementById("aplayer-PPADrCDJ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -1868,12 +1868,12 @@ target="_blank">arcgis</a></p>
 
 <span id="more"></span>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-cdAkrPIJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-rfNfECGx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-cdAkrPIJ"),
+            element: document.getElementById("aplayer-rfNfECGx"),
             narrow: false,
             autoplay: false,
             showlrc: false,
