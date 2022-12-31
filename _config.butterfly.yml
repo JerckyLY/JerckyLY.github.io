@@ -344,7 +344,7 @@ valine:
 # waline - A simple comment system with backend support fork from Valine
 # https://waline.js.org/
 waline:
-  serverURL: https://8c05q9.deta.dev/ # Waline server address url
+  serverURL: https://67kbhj.deta.dev/ # Waline server address url https://8c05q9.deta.dev/
   bg: # waline background
   pageview: false
   option:
