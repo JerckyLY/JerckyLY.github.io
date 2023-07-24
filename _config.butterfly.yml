@@ -342,9 +342,9 @@ valine:
 
 
 # waline - A simple comment system with backend support fork from Valine
-# https://waline.js.org/
+# https://waline.js.org/  https://waline-1-m0227750.deta.app/
 waline:
-  serverURL: https://waline-jercky.zeabur.app/  # https://67kbhj.deta.dev/ Waline server address url https://8c05q9.deta.dev/  https://waline-vercel-sigma.vercel.app/
+  serverURL: https://waline-1-m0227750.deta.app/  # https://waline-1-m0227750.deta.app/ https://67kbhj.deta.dev/ Waline server address url https://8c05q9.deta.dev/  https://waline-vercel-sigma.vercel.app/
   bg: # waline background
   pageview: false
   option:
