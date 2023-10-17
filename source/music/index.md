@@ -167,6 +167,12 @@ date: 2019-05-09 21:09:45
              "author": "Beyond",
              "url": "https://freetyst.nf.migu.cn/public/product9th/product45/2022/05/1014/2020%E5%B9%B410%E6%9C%8816%E6%97%A510%E7%82%B930%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%AD%A3%E4%B8%9C17%E9%A6%96743598/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005662UB4Z141429.mp3?Key=77051d53bfd02254&Tim=1659880446344&channelid=00&msisdn=4d4e45507bc14cbc99fb45a830a04b92&CI=6005662UB4Z2600919000001639921&F=000009",
              "pic": "https://cdnmusic.migu.cn/picture/2021/0429/0842/AS81c13bb15d01485d32032f3380a3e78e.jpg"
+          }  ,
+           {
+             "title": "人生态度",
+             "author": "王七七",
+             "url": "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/vlDdpvNO4pAfLCh3DjIQ6lgs1HS7Jnxe/%E4%BA%BA%E7%94%9F%E6%80%81%E5%BA%A6-%E7%8E%8B%E4%B8%83%E4%B8%83.mp3",
+             "pic": "https://cdnmusic.migu.cn/picture/2023/0816/0249/AM154e63fe6318c9e243fda53acfdab593.jpg"
           } 
     ]
 }
