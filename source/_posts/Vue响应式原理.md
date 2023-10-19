@@ -256,4 +256,4 @@ description: Vue系列
 内容稍微有点长，`Vue2`的响应式原理核心是用到了 `Objeck.defineProperty` 来对 `Object`类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。`Vue3` 是用 `Proxy` 来达到监听。这方面看来是 `Vue3` 是更加方便且更强大了。
    
 ## 音乐小憩
-{% aplayer "暗里着迷" "吉他的天空" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/ee1dac131f1f1efe73c0.mp3/%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA-%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7.mp3" "https://imgessl.kugou.com/stdmusic/20200605/20200605154230691765.jpg"  %}
+{% aplayer "暗里着迷" "吉他的天空" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/ee1dac131f1f1efe73c0.mp3/%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA-%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7.mp3" "https://imgessl.kugou.com/stdmusic/20200605/20200605154230691765.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/NPyafl6OHDUGaFGSJ10JvThN7JHRXTR9/%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7%20-%20%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA.lrc" %}

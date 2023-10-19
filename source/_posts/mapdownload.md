@@ -73,7 +73,7 @@ categories: GIS
   - 实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！
 
 ## 音乐小憩
-{% aplayer "太傻" "巫启贤" "//freetyst.nf.migu.cn/public/product5th/product32/2019/05/1422/2018%E5%B9%B411%E6%9C%8808%E6%97%A520%E7%82%B930%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E5%8D%8E%E7%BA%B35%E9%A6%96-7/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005751JBR6.mp3?key=8b4c5ca40d1b5f1b&Tim=1597926985398&channelid=00&msisdn=fcfdb6a577e14af687b7c1a246ef5fef&CI=6005751JBR62600910000009066508&F=000009" "https://cdnmusic.migu.cn/picture/2020/0815/0316/ASc842ff40d93ed16c3db4496bc8ab4f05.jpg"  %}
+{% aplayer "太傻" "巫启贤" "//freetyst.nf.migu.cn/public/product5th/product32/2019/05/1422/2018%E5%B9%B411%E6%9C%8808%E6%97%A520%E7%82%B930%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E5%8D%8E%E7%BA%B35%E9%A6%96-7/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005751JBR6.mp3?key=8b4c5ca40d1b5f1b&Tim=1597926985398&channelid=00&msisdn=fcfdb6a577e14af687b7c1a246ef5fef&CI=6005751JBR62600910000009066508&F=000009" "https://cdnmusic.migu.cn/picture/2020/0815/0316/ASc842ff40d93ed16c3db4496bc8ab4f05.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/CBBtBU43SgSpydy7c0TsNyyReus7RhaF/%E5%A4%AA%E5%82%BB%20-%20%E5%B7%AB%E5%90%AF%E8%B4%A4.lrc" %}
 
 
 
@@ -82,4 +82,3 @@ categories: GIS
 
 
 
-    

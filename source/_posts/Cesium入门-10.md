@@ -112,4 +112,4 @@ top_img: 1.png
 请忽略录制效果￣□￣｜｜
 
 ## 音乐小憩
-{% aplayer "你的眼神" "蔡琴" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/yatJ97AitORttQkDK1pi9UcpOWmCItYQ/%E8%94%A1%E7%90%B4-%E4%BD%A0%E7%9A%84%E7%9C%BC%E7%A5%9E.mp3" "https://imgessl.kugou.com/stdmusic/20191224/20191224110806951564.jpg"  %}
+{% aplayer "你的眼神" "蔡琴" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/yatJ97AitORttQkDK1pi9UcpOWmCItYQ/%E8%94%A1%E7%90%B4-%E4%BD%A0%E7%9A%84%E7%9C%BC%E7%A5%9E.mp3" "https://imgessl.kugou.com/stdmusic/20191224/20191224110806951564.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/6fQpw0yWdTj6vBaCclrl8rvu52jKUCxk/%E4%BD%A0%E7%9A%84%E7%9C%BC%E7%A5%9E%20-%20%E8%94%A1%E7%90%B4.lrc" %}

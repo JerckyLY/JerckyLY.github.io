@@ -71,4 +71,4 @@ categories: GIS
 ## 番外篇
  - 本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！
 ## 音乐小憩
-{% aplayer "当年情" "张国荣" "//freetyst.nf.migu.cn/public/product5th/product34/2019/07/1822/2006%E5%B9%B412%E6%9C%8820%E6%97%A5%E6%AD%A3%E4%B8%9C/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60056614211.mp3?key=048aa2220146a2da&Tim=1597927135476&channelid=00&msisdn=f1851c26e5ba48dfb34ffc25aec2531a&CI=600566142112600902000005385368&F=000009" "https://cdnmusic.migu.cn/picture/2020/0401/1742/AS83409569fe0825a25faa0d3cafdd94bf.jpg"  %}
+{% aplayer "当年情" "张国荣" "//freetyst.nf.migu.cn/public/product5th/product34/2019/07/1822/2006%E5%B9%B412%E6%9C%8820%E6%97%A5%E6%AD%A3%E4%B8%9C/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60056614211.mp3?key=048aa2220146a2da&Tim=1597927135476&channelid=00&msisdn=f1851c26e5ba48dfb34ffc25aec2531a&CI=600566142112600902000005385368&F=000009" "https://cdnmusic.migu.cn/picture/2020/0401/1742/AS83409569fe0825a25faa0d3cafdd94bf.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/wEW5oNHp8s3TLdYdtrqtgPYk2lEBj6OF/%E5%BD%93%E5%B9%B4%E6%83%85%20-%20%E5%BC%A0%E5%9B%BD%E8%8D%A3.lrc" %}

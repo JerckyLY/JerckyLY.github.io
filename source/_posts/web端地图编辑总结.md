@@ -172,4 +172,4 @@ PotreeConverter.exe <input> -o <outputDir>
 这两种模式，不能说谁比谁好，一个是为了快速完成交付，一个是为了高质量使用。都体验一下，感觉还不错。哈哈哈
 
 ## 音乐小憩
-{% aplayer "人生态度" "王七七" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/vlDdpvNO4pAfLCh3DjIQ6lgs1HS7Jnxe/%E4%BA%BA%E7%94%9F%E6%80%81%E5%BA%A6-%E7%8E%8B%E4%B8%83%E4%B8%83.mp3" "https://cdnmusic.migu.cn/picture/2023/0816/0249/AM154e63fe6318c9e243fda53acfdab593.jpg"  %}
+{% aplayer "人生态度" "王七七" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/vlDdpvNO4pAfLCh3DjIQ6lgs1HS7Jnxe/%E4%BA%BA%E7%94%9F%E6%80%81%E5%BA%A6-%E7%8E%8B%E4%B8%83%E4%B8%83.mp3" "https://cdnmusic.migu.cn/picture/2023/0816/0249/AM154e63fe6318c9e243fda53acfdab593.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/Bn5rHlVFF6mE6AzYBpAGuQEhCXUe7lst/%E4%BA%BA%E7%94%9F%E6%80%81%E5%BA%A6%20-%20%E7%8E%8B%E4%B8%83%E4%B8%83.lrc" %}

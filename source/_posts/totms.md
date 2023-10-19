@@ -44,7 +44,7 @@ tms目录规则(图片是网上copy的)：
 target="_blank">arcgis</a>
 
 ## 音乐小憩
-{% aplayer "无人之岛" "任然" "//freetyst.nf.migu.cn/public/product9th/product41/2020/08/1013/2019%E5%B9%B409%E6%9C%8820%E6%97%A516%E7%82%B913%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%83%E5%92%8C%E4%B8%96%E7%BA%AA999%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/64043202509132526.mp3?key=602a54c7b2327b55&Tim=1597927310330&channelid=00&msisdn=3e322494369e46648f1bdcf6cd39ba64&CI=640432025092600913000006682591&F=000009" "https://cdnmusic.migu.cn/picture/2019/0523/0842/AS8de7410174e84a96a668aaf4882af9f0.jpg"  %}
+{% aplayer "无人之岛" "任然" "//freetyst.nf.migu.cn/public/product9th/product41/2020/08/1013/2019%E5%B9%B409%E6%9C%8820%E6%97%A516%E7%82%B913%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%83%E5%92%8C%E4%B8%96%E7%BA%AA999%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/64043202509132526.mp3?key=602a54c7b2327b55&Tim=1597927310330&channelid=00&msisdn=3e322494369e46648f1bdcf6cd39ba64&CI=640432025092600913000006682591&F=000009" "https://cdnmusic.migu.cn/picture/2019/0523/0842/AS8de7410174e84a96a668aaf4882af9f0.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/GnjNRk6O9OP2KGo1BEDNOyyPJhvkWI7n/%E6%97%A0%E4%BA%BA%E4%B9%8B%E5%B2%9B%20-%20%E4%BB%BB%E7%84%B6.lrc" %}
 
 
 

@@ -98,5 +98,5 @@ top_img: 1.png
   完整代码都放到 **github** 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  
 
 ## 音乐小憩
-{% aplayer "一生所爱" "卢冠廷" "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/1212/2018%E5%B9%B411%E6%9C%8810%E6%97%A517%E7%82%B915%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E6%AD%A3%E4%B8%9C96%E9%A6%96-14/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005661L4UR120847.mp3?key=630618d18d18efbe&Tim=1616756337808&channelid=00&msisdn=815357fdc13c49918109ab2a83bcbf1c&CI=6005661L4UR2600910000009386457&F=000009" "https://cdnmusic.migu.cn/picture/2020/0727/1400/AS281933668a3d761be7a02ce37b24e5a2.jpg"  %}
+{% aplayer "一生所爱" "卢冠廷" "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/1212/2018%E5%B9%B411%E6%9C%8810%E6%97%A517%E7%82%B915%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E6%AD%A3%E4%B8%9C96%E9%A6%96-14/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005661L4UR120847.mp3?key=630618d18d18efbe&Tim=1616756337808&channelid=00&msisdn=815357fdc13c49918109ab2a83bcbf1c&CI=6005661L4UR2600910000009386457&F=000009" "https://cdnmusic.migu.cn/picture/2020/0727/1400/AS281933668a3d761be7a02ce37b24e5a2.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/7lyw2De1lpFPxbEpl2DI512tOFocSNYs/%E4%B8%80%E7%94%9F%E6%89%80%E7%88%B1%20-%20%E5%8D%A2%E5%86%A0%E5%BB%B7.lrc" %}
 
