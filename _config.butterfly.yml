@@ -896,7 +896,7 @@ CDN:
   third_party_provider: jsdelivr
 
   # Add version number to CDN, true or false
-  version: false
+  version: true
 
   # Custom format
   # For example: https://cdn.staticfile.org/${cdnjs_name}/${version}/${min_cdnjs_file}
@@ -919,8 +919,8 @@ CDN:
   # disqusjs:
   # disqusjs_css:
   # twikoo:
-  # waline_js:
-  # waline_css:
+   waline_js: https://cdn.jsdelivr.net/npm/@waline/client@2/dist/waline.min.js
+   waline_css: https://cdn.jsdelivr.net/npm/@waline/client@2/dist/waline.min.css
   # sharejs:
   # sharejs_css:
   # mathjax:
