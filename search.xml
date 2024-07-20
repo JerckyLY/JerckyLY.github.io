@@ -1,6 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Cesium工具封装展示</title>
+    <url>/2024/07/20/Cesium%E5%B7%A5%E5%85%B7%E5%B0%81%E8%A3%85%E5%B1%95%E7%A4%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium基本工具封装展示"><a href="#Cesium基本工具封装展示" class="headerlink" title="Cesium基本工具封装展示"></a><center>Cesium基本工具封装展示<center/></h2><p>很久没更新博客了，最近一段时间主要是忙着整理之前项目中实现的 Cesium 相关功能，结合 Vue 对这些工具进行封装，提供一个管理的工具条组件。能按照配置文件加载需要显示的工具，以及工具间的激活互斥。同时创建 <strong>Viewer</strong> 的时候，添加了一些辅助和美化。说了再多都没用，直接上链接 <a href='http://jerckly.gitee.io/cesium-view/#/' target="_blank" >演示地址</a></p>
+ <div class="note danger flat"><blockquote>
+<p>演示中的模型是在群文件里面下载的，如有侵权请联系我，及时修改！
+    </p>
+</blockquote>
+</div> 
+
+<h2 id="功能总览"><a href="#功能总览" class="headerlink" title="功能总览"></a>功能总览</h2> <div class="note info flat"><blockquote>
+<p>先说一哈，视频很多，道友的流量记得备足！(视频的比gif还小，我用视频了)
+    </p>
+</blockquote>
+</div> 
+
+<ul>
+<li>整体界面<br><img src="1.png"><br>界面上能到到，近地天空图我换成了蓝天白云（照片也是网上找的，很粗糙 O.o）。右下角添加了经纬度坐标以及当前的帧率显示。同时美化了鼠标操作以及修改了默认的操作按键顺序（右键《==》中键）。<br><video src='1.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>雪效果<br><video src='2.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>雨效果<br><video src='3.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>空间测距<br> <video src='4.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>贴地测距<br> <video src='5.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>空间测面<br> <video src='6.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>贴地测面<br> <video src='7.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>高程测量<br> <video src='8.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>方位角测量<br> <video src='9.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>土方量测量<br>   <video src='10.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>可视域分析<br>   <video src='11.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>通视分析<br>   <video src='12.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>缓冲区分析<br>   <video src='13.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>日照分析<br>   <video src='14.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>多边形视频融合<br>  <video src='15.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+<li>第一人称路径漫游<br>  <video src='16.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的功能很多都是按照 火星科技 里面的案例为原型来实现。还有一部分功能没有加上去，后续会添加。比如标绘，二三维联动等等。在封装的过程中，因为是结合 Vue 来实现的，由于Vue 的监听机制原因，所以三维里面很多定义的变量是不能放到 <strong>data</strong> 里面去的， 切记 <strong>props</strong> 也不行。当然知道和去真正实现还是有差距的，前面就是因为吃过这个亏，所以每次激活功能的时候，帧率就会下降。也是调了半天才发现的。在这里当作反面教材给大家提醒一下，切记！！！<br> <div class="note danger flat"><blockquote>
+<p>实例化的 Cesium.Viewer() 不能放到 Vue 中的 <strong>data</strong> 和 <strong>props</strong>中。不然会很卡顿！！！
+    </p>
+</blockquote>
+</div> </p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-jsOmiBBl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-jsOmiBBl"),
+            narrow: false,
+            autoplay: false,
+            showlrc: 3,
+            music: {
+              title: "你应该很快乐",
+              author: "虎二",
+              url: "https://freetyst.nf.migu.cn/public/product5th/product35/2019/11/1310/2019%E5%B9%B411%E6%9C%8811%E6%97%A514%E7%82%B915%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103486.mp3?key=179ebe1b401a1026&Tim=1616140847963&channelid=00&msisdn=b2a5086abb09405c82b502bc446b1e97&CI=632541034862600913000007296966&F=000009",
+              pic: "https://cdnmusic.migu.cn/picture/2020/0802/0246/AS6e9ed85020aa374dbc96a3125eabf4f2.jpg",
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/mGrvnW8ABaJdBtQ3qDXG0GmYNHdkajPj/%E4%BD%A0%E5%BA%94%E8%AF%A5%E5%BE%88%E5%BF%AB%E4%B9%90%20-%20%E8%99%8E%E4%BA%8C.lrc"
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>Cesium</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Web端地图在线编辑总结</title>
+    <url>/2023/10/16/web%E7%AB%AF%E5%9C%B0%E5%9B%BE%E7%BC%96%E8%BE%91%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Web端地图在线编辑总结"><a href="#Web端地图在线编辑总结" class="headerlink" title="Web端地图在线编辑总结"></a><center>Web端地图在线编辑总结<center/></h2><p>最近一年多一直在做高精地图在线编辑工具相关功能开发，较之前的地图数据应用展示方向，对我来说也算是一个新的开始。之前也只<br>是知道编辑流程，但是没有真正实操过。加上博客也很久很久没更新了，趁着新版本提测后的空档期，总结一下在地图数据编辑方面所用的技术和一些注意点。</p>
+<h2 id="相关技术"><a href="#相关技术" class="headerlink" title="相关技术"></a>相关技术</h2><h3 id="二维编辑"><a href="#二维编辑" class="headerlink" title="二维编辑"></a>二维编辑</h3><p>在线二维地图编辑的主要技术，各位道友也都了解，主要是：</p>
+<blockquote>
+<ol>
+<li><code>PostgreSql + PostGIS</code> 空间数据库</li>
+<li><code>Geoserver</code> 地图服务系统</li>
+<li><code>WFS</code> 服务类型</li>
+<li><code>OpenLayers</code> 前端地图渲染框架</li>
+<li><code>Turf</code> 前端空间分析库</li>
+</ol>
+</blockquote>
+<ul>
+<li><p><strong>空间数据库</strong><br>空间数据库比关系数据库多了<strong>空间数据类型</strong>，<strong>空间查询</strong>，<strong>空间索引</strong>三个主要特征，除了<code>PostgreSql</code>， <code>Mysql</code>和<code>Oracle</code>也都有<br>对应的空间扩展，具体使用哪个数据库，没有强制。还是根据自己的业务需求和相关技术储备为前提。当然<code>Geoserver</code>默认就自带可以连接<code>PostgreSql</code>数据库，不想麻烦直接使用<code>PostgreSql</code>就好。</p>
+</li>
+<li><p><strong>地图服务系统</strong><br>能够发布 <code>OGC Web</code>标准服务的系统都可以作为地图服务端，比如 开源免费的<code>Geoserver</code>、中地的<code>MapServer</code>、ESRI的<br><code>ArcGISServer</code>、超图的<code>IServer</code>等，如果不想自己造轮子，那开源免费的<code>Geoserver</code>无疑是最好的选择。</p>
+</li>
+<li><p><strong>服务类型</strong><br><code>Web</code>端常用的地图服务主要有 <code>WMTS</code>、<code>WMS</code>、<code>WFS</code>、<code>TMS</code>以及<code>矢量切片</code>服务，不同的服务满足不同的需求场景。</p>
+<ol>
+<li>需要快速的渲染，首先 <code>WMTS</code> 或者 <code>TMS</code></li>
+<li>需要实现图形编辑，只能是 <code>WFS</code></li>
+<li>需要快速渲染，并且可以自定义样式，选 <code>矢量切片</code></li>
+<li>需要实时渲染，选 <code>WMS</code></li>
+</ol>
+</li>
+<li><p><strong>前端地图渲染框架</strong><br>当前主流的开源地图渲染框架主要有：<code>OpenLayers</code>、<code>MapboxGL</code>、<code>Leaflet</code>等，当然也有<code>Cesium</code>这种三维GIS渲染框架。框架<br>的选取还是根据业务需求为前提，由于地图数据编辑涉及到各种交互：绘制，捕捉，框选，单选，拖拽等。那么着重渲染的<br><code>MapboxGL</code>就不太合适，<code>Leaflet</code>虽然也有各种插件库还支撑它完成可以交互，但是毕竟是插件库，难以保障及时维护。<br><code>OpenLayers</code>虽然较为重，但是它内置了各种交互，完全不用自己再去造轮子。</p>
+</li>
+<li><p><strong>空间分析库</strong><br><code>OpenLayers</code>本质还是一个注重可视化的GIS库，基本不具备空间分析运算能力。比如：</p>
+<ol>
+<li>判断是否相交</li>
+<li>判断是否自相交</li>
+<li>点是否在线上<br>等一些空间分析。目前 <code>jsts</code>、<code>turf</code>这两个是常用的空间分析库，我常用的还是<code>turf</code>库。也有道友做过两个库的对比<a href='https://blog.csdn.net/u012413551/article/details/116233450' target="_blank" >原文</a>，仅供参考：<br><img src="1.png"><br>按照那位道友的代码我也自己也试了一下，结果如下：<table>
+<thead>
+<tr>
+<th align="center">库</th>
+<th align="center">1000次</th>
+<th align="center">1000000次</th>
+<th align="center">10000000次</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">jsts</td>
+<td align="center">7</td>
+<td align="center">112</td>
+<td align="center">3456</td>
+</tr>
+<tr>
+<td align="center">turf</td>
+<td align="center">2</td>
+<td align="center">63</td>
+<td align="center">689</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p>具体时间不一样，但是整体还是 <code>turf</code> 效率较快些。代码如下，有兴趣的道友可以自己试一下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/jsts/dist/jsts.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/@turf/turf/turf.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> count = <span class="number">10000000</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">testJsts</span>(<span class="params">count</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> reader = <span class="keyword">new</span> jsts.io.WKTReader()</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> jstsPolygon = reader.read(<span class="string">&#x27;POLYGON ((1 1, 35 1, 35 84, 1 84, 1 1))&#x27;</span>)</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> jstsPoints = []</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> i = <span class="number">0</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">while</span> (i &lt; count) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> x = <span class="built_in">Math</span>.random() * <span class="number">100</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> y = <span class="built_in">Math</span>.random() * <span class="number">100</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> jstsPoint = reader.read(<span class="string">`POINT (<span class="subst">$&#123;x&#125;</span> <span class="subst">$&#123;y&#125;</span>)`</span>)</span></span><br><span class="line"><span class="javascript">        jstsPoints.push(jstsPoint)</span></span><br><span class="line"><span class="javascript">        i++</span></span><br><span class="line"><span class="javascript">      &#125;</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> time1 = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span></span><br><span class="line"><span class="javascript">      jstsPoints.forEach(<span class="function">(<span class="params">p</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> r = jsts.operation.relate.RelateOp.contains(jstsPolygon, p)</span></span><br><span class="line"><span class="javascript">      &#125;)</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> time2 = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">`jsts test done, <span class="subst">$&#123;time2 - time1&#125;</span>ms`</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">    testJsts(count)</span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">testTurf</span>(<span class="params">count</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> turfPoints = []</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> polygon = turf.polygon([[</span></span><br><span class="line"><span class="javascript">        [<span class="number">1</span>, <span class="number">1</span>],</span></span><br><span class="line"><span class="javascript">        [<span class="number">35</span>, <span class="number">1</span>],</span></span><br><span class="line"><span class="javascript">        [<span class="number">35</span>, <span class="number">84</span>],</span></span><br><span class="line"><span class="javascript">        [<span class="number">1</span>, <span class="number">84</span>],</span></span><br><span class="line"><span class="javascript">        [<span class="number">1</span>, <span class="number">1</span>]</span></span><br><span class="line"><span class="javascript">      ]])</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> i = <span class="number">0</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">while</span> (i &lt; count) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> x = <span class="built_in">Math</span>.random() * <span class="number">100</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> y = <span class="built_in">Math</span>.random() * <span class="number">100</span></span></span><br><span class="line"><span class="javascript">        turfPoints.push(turf.point([x, y]))</span></span><br><span class="line"><span class="javascript">        i++</span></span><br><span class="line"><span class="javascript">      &#125;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> time1 = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span></span><br><span class="line"><span class="javascript">      turfPoints.forEach(<span class="function">(<span class="params">p</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        turf.booleanContains(polygon, p)</span></span><br><span class="line"><span class="javascript">      &#125;)</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> time2 = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">`turf test done, <span class="subst">$&#123;time2 - time1&#125;</span>ms`</span>)</span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">    testTurf(count)</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="三维编辑"><a href="#三维编辑" class="headerlink" title="三维编辑"></a>三维编辑</h3><p>对于三维编辑，我最开始的想法是用 <code>Cesium</code> 来做（主要是我熟悉些），在我来公司之前，同事已经初步定过方案使用 <code>Potree</code>。后面<br>实际开发，感觉<code>Potree</code>更合适些。因为矿区无人驾驶，需要的是三维小场景的快速地图制作和更新，而且数据类型是车辆通过雷达采<br>集生成的点云数据。<code>Cesium</code>更适合大场景的GIS数据渲染，而<code>Potree</code>是专门做点云数据渲染。<br><code>Potree</code> 主要是两部分组成，一个是数据加载 <code>Potree</code>，一个是数据处理 <code>PotreeConvert</code></p>
+<ul>
+<li><p><strong><code>Potree</code> 简介</strong><br>Potree 是基于 WebGL（threejs） 的开源大规模点云渲染器。其由维也纳工业大学计算机图形与算法研究中心开发。根据相关论文<br>以及展示的介绍，其支持 Billion （10亿）级别点云数据的渲染。<br>github地址：<br><a href="https://github.com/potree/potree/">https://github.com/potree/potree/</a><br>官网示例：<br><a href="https://potree.org/potree/examples/page.html">https://potree.org/potree/examples/page.html</a><br><img src="2.png"></p>
+</li>
+<li><p><strong><code>PotreeConvert</code> 简介</strong><br>PotreeConverter 将点云数据整理和转换生成八叉树 LOD 结构，用于大规模点云的流式传输和实时渲染。支持点云格式：.las .laz .ply .xyz .pts 等<br>github地址：<br><a href="https://github.com/potree/PotreeConverter">https://github.com/potree/PotreeConverter</a><br>转换命令：</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">PotreeConverter.exe &lt;input&gt; -o &lt;outputDir&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<blockquote>
+<p><code>Potree</code>不支持Npm 安装，如需集成到现有vue项目中，需要在index.html中引入相关js和css文件</p>
+</blockquote>
+<p>看一下成果：<br><img src="3.png"></p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>在实际开发中，遇到了不少坑，这里总结整理一下：</p>
+<ol>
+<li>数据库的空间字段类型需要设置支持高程<ul>
+<li>点：pointz</li>
+<li>线：linestringz</li>
+<li>面：polygonz</li>
+</ul>
+</li>
+<li>在线上点击点时，可能拾取的点不在线上，可以使用 <code>turf.nearestPointOnLine</code>来保证点击的坐标，一定在线上。</li>
+<li>在使用 <code>turf.lineSplit</code> 切割线段时，切割处两条线的端点高程会丢失，需要处理一下</li>
+<li>在使用 <code>turf.simplify</code> 抽稀时，高程会丢失，三维数组直接变成二维数组。我是直接把源码拿出来改造了一下。很简单，就是返回值加个<code>Z</code>值。</li>
+<li>使用 <code>OpenLayers</code>的拖拽功能时，如果拖拽新增点，新增的点高程值都为0，也需要处理。</li>
+<li><code>Potree</code>本身是基于<code>Threejs</code>写的，在判断是否选中物体时，默认是判断物体的中心是否在框内部。但是业务需要框选边的时候就<br>要判定为选中，我也是把那部分代码给拿出来单独改造。</li>
+<li>三维里面的打断，延伸，合并线段功能，本质我还是使用turf处理，只是要着重关注高程值。</li>
+</ol>
+<p>还有很多小细节就不再多叙述，总的来说，注意一下高程的情况。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>相较于之前的做项目，最近一直做产品感觉差别还是挺大的。之前项目开发，了解一下任务，看看UI图就直接开干了。中间有问题再来<br>回改。做产品，有更多的流程规范。产品出完需求，有需求评审。开发之前，需要完成概要设计编写和评审。然后才进行代码开发，然<br>后有调测报告，测试用例评审，测试分Alpha,Bate两轮。<br>这两种模式，不能说谁比谁好，一个是为了快速完成交付，一个是为了高质量使用。都体验一下，感觉还不错。哈哈哈</p>
+<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
+        <div id="aplayer-RpftXcQX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-RpftXcQX"),
+            narrow: false,
+            autoplay: false,
+            showlrc: 3,
+            music: {
+              title: "人生态度",
+              author: "王七七",
+              url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/vlDdpvNO4pAfLCh3DjIQ6lgs1HS7Jnxe/%E4%BA%BA%E7%94%9F%E6%80%81%E5%BA%A6-%E7%8E%8B%E4%B8%83%E4%B8%83.mp3",
+              pic: "https://cdnmusic.migu.cn/picture/2023/0816/0249/AM154e63fe6318c9e243fda53acfdab593.jpg",
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/Bn5rHlVFF6mE6AzYBpAGuQEhCXUe7lst/%E4%BA%BA%E7%94%9F%E6%80%81%E5%BA%A6%20-%20%E7%8E%8B%E4%B8%83%E4%B8%83.lrc"
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+]]></content>
+      <categories>
+        <category>mapEdit</category>
+      </categories>
+      <tags>
+        <tag>OpenLayers</tag>
+        <tag>Potree</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>评论系统的变更</title>
     <url>/2022/08/07/valine%E5%88%87%E6%8D%A2waline%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="valine更改为waline评论系统"><a href="#valine更改为waline评论系统" class="headerlink" title="valine更改为waline评论系统"></a><center>valine更改为waline评论系统<center/></h2><p>在7月份的时候收到了一份邮件，是<strong>LeanCloud</strong>发来的，内容如下：<br><img src="1.png"><br>而这个调整带来的后果就是 <strong>Valine + LeanCloud</strong> 搭建的评论系统以及相关的评论内容管理系统和邮件通知就无<br>法使用了。就像这样的：<br><img src="2.png"><br>本来想着等着网上有大佬发相关的解决方案，可能是我的搜索姿势不对，搜索结果还是之前的<strong>Valine +<br>LeanCloud</strong> 搭建的评论系统教程，针对最新的问题并没有解决，所幸昨天换了一个搜索姿势，然后就看到了这个： （<a href="https://github.com/walinejs/waline/discussions/1203?sort=old" >原文地址</a>）<br><img src="3.png"></p>
@@ -23,21 +210,21 @@
 <li>看下评论后台管理<br><img src="8.png"></li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-HIhnjcjh" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-goswKJMi" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-HIhnjcjh"),
+            element: document.getElementById("aplayer-goswKJMi"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "灰色轨迹",
               author: "Beyond",
               url: "https://freetyst.nf.migu.cn/public/product9th/product45/2022/05/1014/2020%E5%B9%B410%E6%9C%8816%E6%97%A510%E7%82%B930%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%AD%A3%E4%B8%9C17%E9%A6%96743598/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005662UB4Z141429.mp3?Key=77051d53bfd02254&Tim=1659880446344&channelid=00&msisdn=4d4e45507bc14cbc99fb45a830a04b92&CI=6005662UB4Z2600919000001639921&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2021/0429/0842/AS81c13bb15d01485d32032f3380a3e78e.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/qQNskh2JIu3mbYVaaCbKnSRG32CAzc6O/%E7%81%B0%E8%89%B2%E8%BD%A8%E8%BF%B9%20-%20Beyond.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -105,21 +292,21 @@
 <p>今天是五一，祝大家五一节日快乐！北京这几天正是疫情严重的时候，现在去公共场所都是需要48小时的核酸阴性证明。原本带媳妇去<br>故宫的计划也泡汤了。老老实实在家呆着就好了，待会还得去做小区全员核酸了。 </p>
 <p><strong><code>希望疫情早点消失，回到那个不用人人核酸，不用人人戴口罩，可以到处去旅游的时代</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-eMwCztZu" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-GyWyKuLV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-eMwCztZu"),
+            element: document.getElementById("aplayer-GyWyKuLV"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "无名的人",
               author: "毛不易",
               url: "https://freetyst.nf.migu.cn/public/product9th/product45/2022/03/0409/2021%E5%B9%B412%E6%9C%8817%E6%97%A517%E7%82%B902%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E9%9F%B3%E4%B9%8B%E9%82%A61%E9%A6%96740373/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60071702603095528.mp3?Key=2c627a1186d4d16d&Tim=1650100755693&channelid=00&msisdn=c31a97c1aedd4918a5ae5fcfc45be443&CI=600717026032600919000005498542&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2021/1214/1656/AS7cd46d7fced5bd51e7406deda3cfd77b.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/SB7HOstVkzEdtmIXJ3Liy3kJ6D3awERI/%E6%97%A0%E5%90%8D%E7%9A%84%E4%BA%BA%20-%20%E6%AF%9B%E4%B8%8D%E6%98%93.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -182,21 +369,21 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的功能基本是能满足项目的需求，这里只是介绍基本实现，具体 <strong>Viewer</strong> 里面展示的内容，根据项目实际需求来丰富内容即可。根<br>据核心代码基本就能自己完成功能了，就不再上传源码啦。</p>
 <h2 id="题外分享"><a href="#题外分享" class="headerlink" title="题外分享"></a>题外分享</h2><p>之前看了一个有趣的小工具 <strong>RunCat</strong> , 在 Windows 任务栏，随 CPU 越跑越快的猫 <a href='https://www.appinn.com/runcat-for-windows/' target="_blank" >介绍</a>。自己就下载安装了一下，还挺好玩。<br>  <img src='1.gif' /><br>请忽略录制效果￣□￣｜｜</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-qvzhjmvf" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-NYielXfY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-qvzhjmvf"),
+            element: document.getElementById("aplayer-NYielXfY"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "你的眼神",
               author: "蔡琴",
               url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/yatJ97AitORttQkDK1pi9UcpOWmCItYQ/%E8%94%A1%E7%90%B4-%E4%BD%A0%E7%9A%84%E7%9C%BC%E7%A5%9E.mp3",
               pic: "https://imgessl.kugou.com/stdmusic/20191224/20191224110806951564.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/6fQpw0yWdTj6vBaCclrl8rvu52jKUCxk/%E4%BD%A0%E7%9A%84%E7%9C%BC%E7%A5%9E%20-%20%E8%94%A1%E7%90%B4.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -207,74 +394,9 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Cesium工具封装展示</title>
-    <url>/2021/11/06/Cesium%E5%B7%A5%E5%85%B7%E5%B0%81%E8%A3%85%E5%B1%95%E7%A4%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Cesium基本工具封装展示"><a href="#Cesium基本工具封装展示" class="headerlink" title="Cesium基本工具封装展示"></a><center>Cesium基本工具封装展示<center/></h2><p>很久没更新博客了，最近一段时间主要是忙着整理之前项目中实现的 Cesium 相关功能，结合 Vue 对这些工具进行封装，提供一个管理的工具条组件。能按照配置文件加载需要显示的工具，以及工具间的激活互斥。同时创建 <strong>Viewer</strong> 的时候，添加了一些辅助和美化。说了再多都没用，直接上链接 <a href='http://jerckly.gitee.io/cesium-view/#/' target="_blank" >演示地址</a></p>
- <div class="note danger flat"><blockquote>
-<p>演示中的模型是在群文件里面下载的，如有侵权请联系我，及时修改！
-    </p>
-</blockquote>
-</div> 
-
-<h2 id="功能总览"><a href="#功能总览" class="headerlink" title="功能总览"></a>功能总览</h2> <div class="note info flat"><blockquote>
-<p>先说一哈，视频很多，道友的流量记得备足！(视频的比gif还小，我用视频了)
-    </p>
-</blockquote>
-</div> 
-
-<ul>
-<li>整体界面<br><img src="1.png"><br>界面上能到到，近地天空图我换成了蓝天白云（照片也是网上找的，很粗糙 O.o）。右下角添加了经纬度坐标以及当前的帧率显示。同时美化了鼠标操作以及修改了默认的操作按键顺序（右键《==》中键）。<br><video src='1.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>雪效果<br><video src='2.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>雨效果<br><video src='3.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>空间测距<br> <video src='4.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>贴地测距<br> <video src='5.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>空间测面<br> <video src='6.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>贴地测面<br> <video src='7.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>高程测量<br> <video src='8.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>方位角测量<br> <video src='9.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>土方量测量<br>   <video src='10.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>可视域分析<br>   <video src='11.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>通视分析<br>   <video src='12.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>缓冲区分析<br>   <video src='13.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>日照分析<br>   <video src='14.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>多边形视频融合<br>  <video src='15.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-<li>第一人称路径漫游<br>  <video src='16.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'></video></li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上面的功能很多都是按照 火星科技 里面的案例为原型来实现。还有一部分功能没有加上去，后续会添加。比如标绘，二三维联动等等。在封装的过程中，因为是结合 Vue 来实现的，由于Vue 的监听机制原因，所以三维里面很多定义的变量是不能放到 <strong>data</strong> 里面去的， 切记 <strong>props</strong> 也不行。当然知道和去真正实现还是有差距的，前面就是因为吃过这个亏，所以每次激活功能的时候，帧率就会下降。也是调了半天才发现的。在这里当作反面教材给大家提醒一下，切记！！！<br> <div class="note danger flat"><blockquote>
-<p>实例化的 Cesium.Viewer() 不能放到 Vue 中的 <strong>data</strong> 和 <strong>props</strong>中。不然会很卡顿！！！
-    </p>
-</blockquote>
-</div> </p>
-<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-DbtbSskd" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
-            <pre class="aplayer-lrc-content"></pre>
-        </div>
-        <script>
-          var ap = new APlayer({
-            element: document.getElementById("aplayer-DbtbSskd"),
-            narrow: false,
-            autoplay: false,
-            showlrc: false,
-            music: {
-              title: "你应该很快乐",
-              author: "虎二",
-              url: "https://freetyst.nf.migu.cn/public/product5th/product35/2019/11/1310/2019%E5%B9%B411%E6%9C%8811%E6%97%A514%E7%82%B915%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103486.mp3?key=179ebe1b401a1026&Tim=1616140847963&channelid=00&msisdn=b2a5086abb09405c82b502bc446b1e97&CI=632541034862600913000007296966&F=000009",
-              pic: "https://cdnmusic.migu.cn/picture/2020/0802/0246/AS6e9ed85020aa374dbc96a3125eabf4f2.jpg",
-              lrc: ""
-            }
-          });
-          window.aplayers || (window.aplayers = []);
-          window.aplayers.push(ap);
-        </script>
-]]></content>
-      <categories>
-        <category>Cesium</category>
-      </categories>
   </entry>
   <entry>
     <title>Cesium系列(9)--二三维联动</title>
@@ -331,21 +453,21 @@
 </ol>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-NgUqGZxt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-CpQhDFKU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-NgUqGZxt"),
+            element: document.getElementById("aplayer-CpQhDFKU"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "道道道",
               author: "国语",
               url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/UuHgt2XXkgrCo2MuTJ3Jamu0yKVEOqQp/%E5%9B%BD%E8%AF%AD-%E9%81%93%E9%81%93%E9%81%93.mp3",
               pic: "https://imgessl.kugou.com/stdmusic/20150718/20150718141335609634.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/by7ValYqDDRwL0CWncWwRPtackvFIEEE/%E9%81%93%E9%81%93%E9%81%93%28%E5%9B%BD%E8%AF%AD%E7%89%88%29%20-%20%E9%BB%84%E9%9C%91.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -356,8 +478,8 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -396,21 +518,21 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-lDaJCORs" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ngNBDCEg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-lDaJCORs"),
+            element: document.getElementById("aplayer-ngNBDCEg"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "光明",
               author: "谭艳",
               url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/8RbBFGccu3ci0lH0LqAl6O8WUBlLXNC8/%E8%B0%AD%E8%89%B3%20-%20%E5%85%89%E6%98%8E.mp3",
               pic: "https://imgessl.kugou.com/stdmusic/20210113/20210113211448850090.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/L8EnKo6Vegf2SAYsUWQkgv942HHIDqRj/%E5%85%89%E6%98%8E%20-%20%E8%B0%AD%E8%8C%9C.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -421,8 +543,8 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -462,21 +584,21 @@
 <p>虽然有不少的遗憾，但是都是满满的回忆。正因为不完美，而更令人记忆深刻，更加的美好。</p>
 <p><strong><code>我相信，未来会越来越好</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-eGTvLJCu" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-cEEbgAwy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-eGTvLJCu"),
+            element: document.getElementById("aplayer-cEEbgAwy"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "你就是我想要的丫头",
               author: "赵照",
               url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/XeRkJhB3eGQuQFhF77UpWOV3GcaCLd1L/%E4%BD%A0%E5%B0%B1%E6%98%AF%E6%88%91%E6%83%B3%E8%A6%81%E7%9A%84%E4%B8%AB%E5%A4%B4-%E8%B5%B5%E7%85%A7.mp3",
               pic: "https://imgessl.kugou.com/stdmusic/20200909/20200909105356271665.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/4acorUC5Nyuimre37JDmJ1XxBRHH2bbV/%E4%BD%A0%E5%B0%B1%E6%98%AF%E6%88%91%E6%9C%80%E6%83%B3%E8%A6%81%E7%9A%84%E4%B8%AB%E5%A4%B4%20-%20%E8%B5%B5%E7%85%A7.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -517,21 +639,21 @@
 <p><strong><code>天不生我李淳罡，剑道万古如长夜</code></strong></p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-HeisvkiX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ItBsquiz" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-HeisvkiX"),
+            element: document.getElementById("aplayer-ItBsquiz"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "一生所爱",
               author: "卢冠廷",
               url: "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/1212/2018%E5%B9%B411%E6%9C%8810%E6%97%A517%E7%82%B915%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E6%AD%A3%E4%B8%9C96%E9%A6%96-14/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005661L4UR120847.mp3?key=630618d18d18efbe&Tim=1616756337808&channelid=00&msisdn=815357fdc13c49918109ab2a83bcbf1c&CI=6005661L4UR2600910000009386457&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0727/1400/AS281933668a3d761be7a02ce37b24e5a2.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/7lyw2De1lpFPxbEpl2DI512tOFocSNYs/%E4%B8%80%E7%94%9F%E6%89%80%E7%88%B1%20-%20%E5%8D%A2%E5%86%A0%E5%BB%B7.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -543,8 +665,8 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -626,21 +748,21 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/node-sqlite3-server-demo' target="_blank" >node-sqlite3-server-demo</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  总体实现还是挺简单的，也没什么复杂的 SQL 语句。部署的时候，可以把 <strong>Node</strong> 安装为 window服务，就不用担心客户那边服务器关机了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-HMqvCMjE" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-IRhkZvTW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-HMqvCMjE"),
+            element: document.getElementById("aplayer-IRhkZvTW"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "大鱼",
               author: "周深/郭沁",
               url: "https://freetyst.nf.migu.cn/public/product5th/product27/2018/12/21/2018%E5%B9%B410%E6%9C%8819%E6%97%A516%E7%82%B923%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%A2%A6%E5%93%8D%E5%BC%BA%E9%9F%B3186%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6404689Z0HE.mp3?key=b74e16bf79b5983a&Tim=1616640844447&channelid=00&msisdn=b30efb370c4f44fdb04710eaad359cd9&CI=6404689Z0HE2600913000000634056&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0216/1135/AM9e357dde4ae7a59634b1ea6ba2c077ab.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/n0f4bqbhIesXfsNwl4tIx9lrjoFzzfsj/%E5%A4%A7%E9%B1%BC%EF%BC%88Live%EF%BC%89%20-%20%E9%83%8E%E6%9C%97%2C%E5%91%A8%E6%B7%B1.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -680,21 +802,21 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>缓冲区实现的过程很简单，没什么可多说的，需要注意的是二维三维坐标的转换，二维面的坐标数组要闭合。其他的就是正常的实现就行了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-kTBUWjAW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-nSaEQIlw" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-kTBUWjAW"),
+            element: document.getElementById("aplayer-nSaEQIlw"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "明天会更好",
               author: "群星",
               url: "https://freetyst.nf.migu.cn/public/product4th/product36/2019/09/1617/2019%E5%B9%B409%E6%9C%8802%E6%97%A516%E7%82%B940%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%BB%9A%E7%9F%B3%E5%94%B1%E7%89%87%E8%AF%8D%E6%9B%B2%E9%A2%84%E7%95%991%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63480216478.mp3?key=ee020ad0d1687cc2&Tim=1616494755978&channelid=00&msisdn=37b679460fd043d3825ba69cf3f19009&CI=634802164782600913000006049674&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/1017/1021/AS8c9ff20208cb76c25a4362d74bec3ec0.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/lo1oaxBYjc5xG2h4ag9L1wVIiJ8fwlux/%E6%98%8E%E5%A4%A9%E4%BC%9A%E6%9B%B4%E5%A5%BD%20-%20%E4%BD%99%E5%A4%A9%2C%E6%9D%8E%E5%BB%BA%E5%A4%8D%2C%E6%B4%AA%E8%8D%A3%E5%AE%8F%2C%E7%8E%8B%E6%A2%A6%E9%BA%9F%2C%E8%B4%B9%E7%8E%89%E6%B8%85%2C%E9%BD%90%E7%A7%A6%2C%E8%94%A1%E7%90%B4%2C%E8%8B%8F%E8%8A%AE%2C%E6%BD%98%E8%B6%8A%E4%BA%91%2C%E7%94%84%E5%A6%AE%2C%E6%9E%97%E6%85%A7%E8%90%8D%2C%E7%8E%8B%E8%8A%B7%E8%95%BE%2C%E9%BB%84%E8%8E%BA%E8%8E%BA%2C%E9%99%88%E6%B7%91%E6%A1%A6%2C%E5%A8%83%E5%A8%83%2C%E6%9D%8E%E7%8F%AE%E8%8F%81%2C%E9%BD%90%E8%B1%AB%2C%E9%83%91%E6%80%A1%2C%E6%B1%9F%E8%95%99%2C%E6%9D%A8%E6%9E%97.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -705,8 +827,8 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -816,21 +938,21 @@
 <li><p><code>history</code> 模式结果：<br> <img src="router2.gif"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>OK，总算是写完了。 <code>VueRouter</code> 的核心原理如果仔细看完上面的，应该是明白的。上面的代码可以在 <strong>github</strong> 获取。<a href='https://github.com/JerckyLY/VueCustomRouterDemo' target="_blank" >地址</a> 。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-uWzJeLNj" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-HGurOaxx" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-uWzJeLNj"),
+            element: document.getElementById("aplayer-HGurOaxx"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "海底",
               author: "一支榴莲",
               url: "https:////freetyst.nf.migu.cn/public/product9th/product41/2020/08/1910/2020%E5%B9%B408%E6%9C%8818%E6%97%A512%E7%82%B945%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%92%8C%E8%A3%95%E7%BD%91%E7%BB%9C1%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/69535601315104001.mp3?key=c75dd0ba83980f82&Tim=1608360823894&channelid=00&msisdn=2d41260208a347d9a9f986db9a16f12f&CI=695356013152600919000000720371&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0922/1821/AS49bf94679ae7c0d49ea304e7f18e4cf3.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/4pExReU82QI2xYo7Mq2LcDIMYEwCmbFN/%E6%B5%B7%E5%BA%95%20-%20%E4%B8%80%E6%94%AF%E6%A6%B4%E8%8E%B2.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -896,21 +1018,21 @@
 <p><img src="6.png"><br>使用 <code>state[7] = 0</code> 这种方式也能直接变成响应式了。是不是很强！</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>内容稍微有点长，<code>Vue2</code>的响应式原理核心是用到了 <code>Objeck.defineProperty</code> 来对 <code>Object</code>类型数据监听。重写了数组中的7个操作数组本身内容的方法来监听。<code>Vue3</code> 是用 <code>Proxy</code> 来达到监听。这方面看来是 <code>Vue3</code> 是更加方便且更强大了。</p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-bvhotckT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-oFmPluVc" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-bvhotckT"),
+            element: document.getElementById("aplayer-oFmPluVc"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "暗里着迷",
               author: "吉他的天空",
               url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/ee1dac131f1f1efe73c0.mp3/%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA-%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7.mp3",
               pic: "https://imgessl.kugou.com/stdmusic/20200605/20200605154230691765.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/NPyafl6OHDUGaFGSJ10JvThN7JHRXTR9/%E6%9A%97%E9%87%8C%E7%9D%80%E8%BF%B7%20-%20%E5%90%89%E4%BB%96%E7%9A%84%E5%A4%A9%E7%A9%BA.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -966,21 +1088,21 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-aPFuyXBl" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-GVXThEEL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-aPFuyXBl"),
+            element: document.getElementById("aplayer-GVXThEEL"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "我很好(吉他版)",
               author: "刘大壮",
               url: "https://freetyst.nf.migu.cn/public/product9th/product42/2020/11/2615/2020%E5%B9%B411%E6%9C%8809%E6%97%A517%E7%82%B949%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%90%91%E5%8D%97%E9%87%8C1%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/69921000078150841.mp3?key=54728fc3313d849a&Tim=1607569228683&channelid=00&msisdn=ebaea03448fb4d1b8bb3f811e55e85e6&CI=699210000782600919000002105660&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/1207/1049/ASc97eb9599afa7f95a65cf4b576a0ffbc.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/iWz2AGJmfjsVLPYXpI2SSQhUBKHILNXQ/%E6%88%91%E5%BE%88%E5%A5%BD%EF%BC%88%E5%90%89%E4%BB%96%E7%89%88%EF%BC%89%20-%20%E5%88%98%E5%A4%A7%E5%A3%AE.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -991,8 +1113,8 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -1044,21 +1166,21 @@
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2>完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-YlxhNnkS" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-TMocqbuU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-YlxhNnkS"),
+            element: document.getElementById("aplayer-TMocqbuU"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "海阔天空",
               author: "信乐团",
               url: "https://freetyst.nf.migu.cn/public/product9th/product41/2020/07/0210/2020%E5%B9%B406%E6%9C%8830%E6%97%A515%E7%82%B941%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%92%AA%E5%92%95AVEX42805%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/69962300606104019.mp3?key=5afb7e45a203a847&Tim=1603341081880&channelid=00&msisdn=46aaa7bcb7f9449d851bf4f92767a358&CI=699623006062600913000009976326&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0703/1114/ASc15a1b45cb0c61577f2afa47ea9ce0b0.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/gcL7tf8Bdzv8pP4B4jEhBTsySncj4RfD/%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA%20-%20%E4%BF%A1%E4%B9%90%E5%9B%A2.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1069,8 +1191,8 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -1118,32 +1240,33 @@
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  完整代码都放到 <strong>github</strong> 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-GtqfJNES" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ZujujLvm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-GtqfJNES"),
+            element: document.getElementById("aplayer-ZujujLvm"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "等我先说",
               author: "夏天Alex",
               url: "//freetyst.nf.migu.cn/public/productBe/productB01/2019/08/0715/2013%E5%B9%B405%E6%9C%8814%E6%97%A5%E7%BE%8E%E5%8A%9B%E6%98%9F%E7%A9%BA%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A51%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60066801295.mp3?key=1d5649e633106758&Tim=1603352822023&channelid=00&msisdn=6adb56a5e32741a08e14c0776ca4bf9f&CI=600668012952600902000007984502&F=000009",
               pic: "https://p3fx.kgimg.com/stdmusic/20160907/20160907201949745191.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/9ko0PPFHUkbIABgM27KWdjzna2sH2xGq/%E7%AD%89%E6%88%91%E5%85%88%E8%AF%B4%20-%20%E5%A4%8F%E5%A4%A9Alex.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
           window.aplayers.push(ap);
-        </script>]]></content>
+        </script>
+]]></content>
       <categories>
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -1168,34 +1291,35 @@
  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">      <span class="comment">//根据图片和文字绘制canvas  ratio参数 是放大倍数</span></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">drawCanvas</span>(<span class="params">img, text, ratio</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// width height</span></span><br><span class="line">        <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">&#x27;canvas&#x27;</span>); <span class="comment">//创建canvas标签</span></span><br><span class="line">        <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">var</span> width = ctx.measureText(text).width + <span class="number">8</span>,</span><br><span class="line">          height = <span class="number">20</span>; <span class="comment">//高度我这里是定死的，可以作为参数参入</span></span><br><span class="line">    </span><br><span class="line">        canvas.style.opacity = <span class="number">1</span>;</span><br><span class="line">        canvas.width = width * ratio;</span><br><span class="line">        canvas.height = height * ratio;</span><br><span class="line">        canvas.style.width = width + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">        canvas.style.height = height + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//然后将画布缩放，将图像放大ratio倍画到画布上 目的 使图片文字更加清晰</span></span><br><span class="line">        ctx.scale(ratio, ratio);</span><br><span class="line">        <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.src = img;</span><br><span class="line">         <span class="comment">// 图片创建是异步操作，需要在图片完成之后，再写入文字，能保证文字在图片上方。</span></span><br><span class="line">         <span class="comment">// 如果不在里面，会出现图片覆盖文字</span></span><br><span class="line">        image.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          ctx.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">          <span class="comment">// 名称文字</span></span><br><span class="line">          ctx.fillStyle = <span class="string">&#x27;#ff0000&#x27;</span>;</span><br><span class="line">          ctx.font = <span class="string">&#x27;8px 宋体&#x27;</span>;</span><br><span class="line">          ctx.fillText(text, <span class="number">8</span>, height / <span class="number">2</span> + <span class="number">2</span>);</span><br><span class="line">        &#125;;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> canvas;</span><br><span class="line">      &#125;</span><br><span class="line">   <span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">+ 加载到Cesium中 </span></span><br><span class="line"><span class="string">   `</span><span class="string">``</span>js</span><br><span class="line">      viewer.entities.add(&#123;</span><br><span class="line">           <span class="attr">position</span>: Cesium.Cartesian3.fromDegrees(</span><br><span class="line">             <span class="number">109.05830792532525</span>,</span><br><span class="line">             <span class="number">37.44105749283626</span>,</span><br><span class="line">             <span class="number">16</span></span><br><span class="line">           ),</span><br><span class="line">           <span class="attr">billboard</span>: &#123;</span><br><span class="line">             <span class="attr">image</span>: drawCanvas(<span class="string">&#x27;./source/images/bg.png&#x27;</span>, <span class="string">&#x27;Hello World 你好 Cesium!&#x27;</span>, <span class="number">3</span>),</span><br><span class="line">             <span class="attr">sizeInMeters</span>: <span class="literal">true</span>,</span><br><span class="line">             <span class="attr">scale</span>: <span class="number">0.1</span>,</span><br><span class="line">           &#125;,</span><br><span class="line">         &#125;);</span><br></pre></td></tr></table></figure></li>
 <li><p>效果：<br><img src="3.png"></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-YwAqrMON" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-mQxQAqvh" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-YwAqrMON"),
+            element: document.getElementById("aplayer-mQxQAqvh"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "渡口",
               author: "蔡琴",
               url: "//freetyst.nf.migu.cn/public/product8th/product38/2020/03/1620/2018%E5%B9%B409%E6%9C%8814%E6%97%A515%E7%82%B953%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E7%BA%B3999%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005751EW9N.mp3?key=e72e077e1e66d0f6&Tim=1597915021839&channelid=00&msisdn=f040f3f4e9c0474db35d5c03e22cc5dd&CI=6005751EW9N2600908000009874924&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2019/0708/0828/ASad0c2272b87e4adda1785884fe48f6e7.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/xXlvmhpPI1HfmEEjeoVzjxdjuVky7fOc/%E6%B8%A1%E5%8F%A3%20-%20%E8%94%A1%E7%90%B4.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
           window.aplayers.push(ap);
-        </script></li>
+        </script>
+</li>
 </ul>
 ]]></content>
       <categories>
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -1232,21 +1356,21 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-NDSEjMbu" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-LuhONEUz" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-NDSEjMbu"),
+            element: document.getElementById("aplayer-LuhONEUz"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "我曾",
               author: "隔壁老樊",
               url: "//freetyst.nf.migu.cn/public/productBe/productB01/2019/08/0717/2019%E5%B9%B403%E6%9C%8801%E6%97%A516%E7%82%B937%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103405.mp3?key=f5f6bf49ae541152&Tim=1597915519527&channelid=00&msisdn=7189f4cfa3ba4332ab8ddd058a1fb038&CI=632541034052600913000002629846&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0801/0249/ASf1b833147de26840e610c45b96643885.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/KN5MLl4Gc4ff5x9uqOk8xjvWTiERAN24/%E6%88%91%E6%9B%BE%20-%20%E9%9A%94%E5%A3%81%E8%80%81%E6%A8%8A.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1257,8 +1381,8 @@
         <category>Cesium</category>
       </categories>
       <tags>
-        <tag>webgis</tag>
         <tag>cesium</tag>
+        <tag>webgis</tag>
       </tags>
   </entry>
   <entry>
@@ -1379,21 +1503,21 @@
 </li>
 </ol>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-rBtLekYs" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-nHuzXubC" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-rBtLekYs"),
+            element: document.getElementById("aplayer-nHuzXubC"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "过火",
               author: "张信哲",
               url: "//freetyst.nf.migu.cn/public/product14/2018/08/17/2017%E5%B9%B411%E6%9C%8809%E6%97%A514%E7%82%B902%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E7%89%88%E6%9D%83%E5%BC%95%E5%85%A52228%E9%A6%96-1/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/%E8%BF%87%E7%81%AB-%E5%BC%A0%E4%BF%A1%E5%93%B2.mp3?key=c2d03ae71e95ebfb&Tim=1597926925899&channelid=00&msisdn=57715f1e611c4222846f8ac437bc1f4f&CI=699121008852600909000008245692&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2019/0520/1828/AS1609221019195527.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/KHHGk6zIXQp8HBq9hYsPILRGEQ0cgHX8/%E8%BF%87%E7%81%AB%20-%20%E5%BC%A0%E4%BF%A1%E5%93%B2.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1465,21 +1589,21 @@
 </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-kmuZSNoX" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-zoFgmqfe" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-kmuZSNoX"),
+            element: document.getElementById("aplayer-zoFgmqfe"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "别怕我伤心",
               author: "张信哲",
               url: "//freetyst.nf.migu.cn/public/product7th/productB16/2020/07/0219/2020%E5%B9%B406%E6%9C%8830%E6%97%A515%E7%82%B948%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E5%92%AA%E5%92%95Believe1238%E9%A6%96-1/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6993169X14T194000.mp3?key=fe249bf145d568a1&Tim=1597926843131&channelid=00&msisdn=e2718a9072794ba2b5ea4020539d9337&CI=6993169X14T2600918000000654481&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2019/0520/1828/AS1609221019195527.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/SEzhvcEuTyd1EbOlRIxtbrvlixEMfztA/%E5%88%AB%E6%80%95%E6%88%91%E4%BC%A4%E5%BF%83%20-%20%E5%BC%A0%E4%BF%A1%E5%93%B2.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1491,8 +1615,8 @@
       </categories>
       <tags>
         <tag>mapboxgl</tag>
-        <tag>gis</tag>
         <tag>printTool</tag>
+        <tag>gis</tag>
       </tags>
   </entry>
   <entry>
@@ -1519,21 +1643,21 @@
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><ul>
 <li><p>github: <a href='https://github.com/JerckyLY/mapboxgl-measure-tools' target="_blank" >mapboxgl-measure-tool</a>  </p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-HEVhsdDA" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-OXojJtlV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-HEVhsdDA"),
+            element: document.getElementById("aplayer-OXojJtlV"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "多想在平庸的生活拥抱你",
               author: "隔壁老樊",
               url: "//freetyst.nf.migu.cn/public/product5th/product33/2019/05/2317/2019%E5%B9%B404%E6%9C%8809%E6%97%A513%E7%82%B938%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%88%90%E9%83%BD%E4%BA%91%E4%B9%8B%E7%91%B61%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63364900301.mp3?key=1d2ced2b0053e5c9&Tim=1597926726720&channelid=00&msisdn=41604790a76444cab1a45930899ca62f&CI=633649003012600913000003421149&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0801/0249/ASf1b833147de26840e610c45b96643885.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/zA8oxKkm3lFWIRXyWP5yb89V32cGYbOO/%E5%A4%9A%E6%83%B3%E5%9C%A8%E5%B9%B3%E5%BA%B8%E7%9A%84%E7%94%9F%E6%B4%BB%E6%8B%A5%E6%8A%B1%E4%BD%A0%20-%20%E9%9A%94%E5%A3%81%E8%80%81%E6%A8%8A.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1547,8 +1671,8 @@
       </categories>
       <tags>
         <tag>mapboxgl</tag>
-        <tag>measureIcontrol</tag>
         <tag>gis</tag>
+        <tag>measureIcontrol</tag>
       </tags>
   </entry>
   <entry>
@@ -1597,21 +1721,21 @@
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  <strong><code>让过去的就过去吧，不是自己的，强求是真的换不来。命里有时终须有，命里无时莫强求。-----共勉</code></strong></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-rjZjQmHV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-wtjHmERb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-rjZjQmHV"),
+            element: document.getElementById("aplayer-wtjHmERb"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "四块五",
               author: "隔壁老樊",
               url: "//freetyst.nf.migu.cn/public/product8th/product38/2019/12/2618/2019%E5%B9%B405%E6%9C%8821%E6%97%A515%E7%82%B943%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%8E%E5%A4%8F%E5%8A%A8%E5%A3%B01%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63254103458.mp3?key=1339a141fd8db01a&Tim=1597921389241&channelid=00&msisdn=fa22ea77b488448b8e514de8a00dba34&CI=632541034582600913000003733019&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0801/0249/ASf1b833147de26840e610c45b96643885.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/Y5io3AHr4X2iA9Q79NDzbWS59emRfJyv/%E5%9B%9B%E5%9D%97%E4%BA%94%20-%20%E9%9A%94%E5%A3%81%E8%80%81%E6%A8%8A.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1653,21 +1777,21 @@
 </li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-jBvGuSjg" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ZCaauhpj" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-jBvGuSjg"),
+            element: document.getElementById("aplayer-ZCaauhpj"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "我配不上你",
               author: "夏天Alex",
               url: "//freetyst.nf.migu.cn/public/product5th/product27/2018/12/21/2018%E5%B9%B411%E6%9C%8819%E6%97%A517%E7%82%B919%E5%88%86%E7%B4%A7%E6%80%A5%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E9%9F%B3%E5%B0%9A%E5%BE%8B%E5%8A%A81%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/63296001988.mp3?key=7b49b216730fe578&Tim=1597921241112&channelid=00&msisdn=e3a8626df15349e0809797954aa4fe69&CI=632960019882600913000001401663&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2019/1031/0125/ASe08be7a32d20472eac2f083c4311aba8.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/AW8CsE3CaBrNBDxOlr5kKKyxzyiJ30UT/%E6%88%91%E9%85%8D%E4%B8%8D%E4%B8%8A%E4%BD%A0%20-%20%E5%A4%8F%E5%A4%A9Alex.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1732,21 +1856,21 @@
 <li>前端框架使用的是mapbox，这个框架相较于openlayers，leaflet来说，api接口是很少的，这个相对来说是注重于渲染展示层。但是它的样式渲染表达式，直接手写的话也不好调试，不过官方提供的mapbox studio可以进行相关的渲染，然后得到表达式。具体直接去访问官网 <a href="。https://docs.mapbox.com/mapbox-gl-js/api/" target="_blank">MapBoxGL</a>去查看即可。后续会介绍mapboxgl相关的基础。</li>
 <li>结果展示：数据是随机生成的50万个点数据<br><img src="result.gif" alt="mapbox"><h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2></li>
 <li>本来是打算月初就写好的，结果自己电脑突然抽风，系统崩溃，然后重装系统。然后网线光猫又坏了。。。。各种杂事推迟了。果然计划赶不上变化，但结果终归是好的。共勉！<h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-bhfKATJG" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-sbqNkzTQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-bhfKATJG"),
+            element: document.getElementById("aplayer-sbqNkzTQ"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "当年情",
               author: "张国荣",
               url: "//freetyst.nf.migu.cn/public/product5th/product34/2019/07/1822/2006%E5%B9%B412%E6%9C%8820%E6%97%A5%E6%AD%A3%E4%B8%9C/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/60056614211.mp3?key=048aa2220146a2da&Tim=1597927135476&channelid=00&msisdn=f1851c26e5ba48dfb34ffc25aec2531a&CI=600566142112600902000005385368&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0401/1742/AS83409569fe0825a25faa0d3cafdd94bf.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/wEW5oNHp8s3TLdYdtrqtgPYk2lEBj6OF/%E5%BD%93%E5%B9%B4%E6%83%85%20-%20%E5%BC%A0%E5%9B%BD%E8%8D%A3.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1816,21 +1940,21 @@
 <li>实际切片的原理不止这些。本文介绍的只是其中的一部分，还有很多基础原理没有介绍。我也没有具体掌握好就不再卖弄了。等我真正掌握了再后续补上。祝各位大小朋友，节日快乐！</li>
 </ul>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-lUcIvkyY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-ygYXOugz" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-lUcIvkyY"),
+            element: document.getElementById("aplayer-ygYXOugz"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "太傻",
               author: "巫启贤",
               url: "//freetyst.nf.migu.cn/public/product5th/product32/2019/05/1422/2018%E5%B9%B411%E6%9C%8808%E6%97%A520%E7%82%B930%E5%88%86%E6%89%B9%E9%87%8F%E9%A1%B9%E7%9B%AE%E5%8D%8E%E7%BA%B35%E9%A6%96-7/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6005751JBR6.mp3?key=8b4c5ca40d1b5f1b&Tim=1597926985398&channelid=00&msisdn=fcfdb6a577e14af687b7c1a246ef5fef&CI=6005751JBR62600910000009066508&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2020/0815/0316/ASc842ff40d93ed16c3db4496bc8ab4f05.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/CBBtBU43SgSpydy7c0TsNyyReus7RhaF/%E5%A4%AA%E5%82%BB%20-%20%E5%B7%AB%E5%90%AF%E8%B4%A4.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1881,21 +2005,21 @@ target="_blank">这里</a> 目前我接触到主流的切片生成工具是：ar
 <p>2、 <a href="https://github.com/JerckyLY/arcgisToTMS"
 target="_blank">arcgis</a></p>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-dZeIBomt" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-tKEhtiVk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-dZeIBomt"),
+            element: document.getElementById("aplayer-tKEhtiVk"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "无人之岛",
               author: "任然",
               url: "//freetyst.nf.migu.cn/public/product9th/product41/2020/08/1013/2019%E5%B9%B409%E6%9C%8820%E6%97%A516%E7%82%B913%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E5%8D%83%E5%92%8C%E4%B8%96%E7%BA%AA999%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/64043202509132526.mp3?key=602a54c7b2327b55&Tim=1597927310330&channelid=00&msisdn=3e322494369e46648f1bdcf6cd39ba64&CI=640432025092600913000006682591&F=000009",
               pic: "https://cdnmusic.migu.cn/picture/2019/0523/0842/AS8de7410174e84a96a668aaf4882af9f0.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/GnjNRk6O9OP2KGo1BEDNOyyPJhvkWI7n/%E6%97%A0%E4%BA%BA%E4%B9%8B%E5%B2%9B%20-%20%E4%BB%BB%E7%84%B6.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
@@ -1920,21 +2044,21 @@ target="_blank">arcgis</a></p>
 
 <span id="more"></span>
 <h2 id="音乐小憩"><a href="#音乐小憩" class="headerlink" title="音乐小憩"></a>音乐小憩</h2>
-        <div id="aplayer-WUpanWln" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-SXrORHmy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-WUpanWln"),
+            element: document.getElementById("aplayer-SXrORHmy"),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 3,
             music: {
               title: "故梦",
               author: "双笙",
               url: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/c37686f6927aa2efc686.mp3/%E5%8F%8C%E7%AC%99-%E6%95%85%E6%A2%A6.mp3",
               pic: "https://p3fx.kgimg.com/stdmusic/20161031/20161031031155638803.jpg",
-              lrc: ""
+              lrc: "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/VDdA7ipAiJ78BwIt6thpLdLbAaUP9JJE/%E6%95%85%E6%A2%A6%20-%20%E5%8F%8C%E7%AC%99%20%28%E9%99%88%E5%85%83%E6%B1%90%29.lrc"
             }
           });
           window.aplayers || (window.aplayers = []);
