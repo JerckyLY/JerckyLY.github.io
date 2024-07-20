@@ -195,4 +195,4 @@ top_img: 1.png
   完整代码都放到 **github** 上，需要的移步<a href='https://github.com/JerckyLY/cesium-demo-view' target="_blank" >Cesium-demo-view</a>  
 
 ## 音乐小憩
-{% aplayer "道道道" "国语" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/UuHgt2XXkgrCo2MuTJ3Jamu0yKVEOqQp/%E5%9B%BD%E8%AF%AD-%E9%81%93%E9%81%93%E9%81%93.mp3" "https://imgessl.kugou.com/stdmusic/20150718/20150718141335609634.jpg"  %}
+{% aplayer "道道道" "国语" "https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/UuHgt2XXkgrCo2MuTJ3Jamu0yKVEOqQp/%E5%9B%BD%E8%AF%AD-%E9%81%93%E9%81%93%E9%81%93.mp3" "https://imgessl.kugou.com/stdmusic/20150718/20150718141335609634.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/by7ValYqDDRwL0CWncWwRPtackvFIEEE/%E9%81%93%E9%81%93%E9%81%93%28%E5%9B%BD%E8%AF%AD%E7%89%88%29%20-%20%E9%BB%84%E9%9C%91.lrc" %}

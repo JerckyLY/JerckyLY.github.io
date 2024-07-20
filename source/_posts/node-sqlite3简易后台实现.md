@@ -242,6 +242,6 @@ categories: Node
   总体实现还是挺简单的，也没什么复杂的 SQL 语句。部署的时候，可以把 **Node** 安装为 window服务，就不用担心客户那边服务器关机了。
   
 ## 音乐小憩
-{% aplayer "大鱼" "周深/郭沁" "https://freetyst.nf.migu.cn/public/product5th/product27/2018/12/21/2018%E5%B9%B410%E6%9C%8819%E6%97%A516%E7%82%B923%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%A2%A6%E5%93%8D%E5%BC%BA%E9%9F%B3186%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6404689Z0HE.mp3?key=b74e16bf79b5983a&Tim=1616640844447&channelid=00&msisdn=b30efb370c4f44fdb04710eaad359cd9&CI=6404689Z0HE2600913000000634056&F=000009" "https://cdnmusic.migu.cn/picture/2020/0216/1135/AM9e357dde4ae7a59634b1ea6ba2c077ab.jpg"  %}
+{% aplayer "大鱼" "周深/郭沁" "https://freetyst.nf.migu.cn/public/product5th/product27/2018/12/21/2018%E5%B9%B410%E6%9C%8819%E6%97%A516%E7%82%B923%E5%88%86%E5%86%85%E5%AE%B9%E5%87%86%E5%85%A5%E6%A2%A6%E5%93%8D%E5%BC%BA%E9%9F%B3186%E9%A6%96/%E6%AD%8C%E6%9B%B2%E4%B8%8B%E8%BD%BD/MP3_40_16_Stero/6404689Z0HE.mp3?key=b74e16bf79b5983a&Tim=1616640844447&channelid=00&msisdn=b30efb370c4f44fdb04710eaad359cd9&CI=6404689Z0HE2600913000000634056&F=000009" "https://cdnmusic.migu.cn/picture/2020/0216/1135/AM9e357dde4ae7a59634b1ea6ba2c077ab.jpg" "lrc:https://lc-gluttony.s3.amazonaws.com/LJltQYKflcAs/n0f4bqbhIesXfsNwl4tIx9lrjoFzzfsj/%E5%A4%A7%E9%B1%BC%EF%BC%88Live%EF%BC%89%20-%20%E9%83%8E%E6%9C%97%2C%E5%91%A8%E6%B7%B1.lrc" %}
 
 
